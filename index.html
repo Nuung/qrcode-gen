@@ -141,22 +141,25 @@
       <h1 class="hero-title">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="36"
-          height="36"
+          width="64"
+          height="64"
           viewBox="0 0 64 64"
           style="vertical-align: middle; margin: 12px"
         >
+          <!-- 흰색 원 + 검정 테두리 -->
           <circle
             cx="32"
             cy="32"
-            r="32"
+            r="30"
             fill="#ffffff"
             stroke="#000000"
-            stroke-width="2"
+            stroke-width="4"
           />
-          <rect x="12" y="12" width="16" height="16" fill="#000000" rx="2" />
-          <rect x="36" y="12" width="16" height="16" fill="#000000" rx="2" />
-          <rect x="12" y="36" width="16" height="16" fill="#000000" rx="2" />
+
+          <!-- 좌상단, 우상단, 좌하단 사각형 -->
+          <rect x="14" y="14" width="14" height="14" fill="#000000" rx="2" />
+          <rect x="36" y="14" width="14" height="14" fill="#000000" rx="2" />
+          <rect x="14" y="36" width="14" height="14" fill="#000000" rx="2" />
         </svg>
         Super Easy QR Code Generator
       </h1>
@@ -205,6 +208,22 @@
               />
             </svg>
             Design Options
+          </button>
+          <button
+            class="tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="download-tab"
+            onclick="switchTab('download')"
+          >
+            <svg
+              class="icon"
+              style="width: 16px; height: 16px; margin-right: 0.5rem"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+            </svg>
+            Download Options
           </button>
         </div>
 
@@ -528,7 +547,7 @@
                   type="range"
                   id="margin"
                   class="range-input"
-                  min="8"
+                  min="0"
                   max="32"
                   value="20"
                   oninput="updateRangeValue('margin'); generateQRCode()"
@@ -661,6 +680,97 @@
           </div>
         </div>
 
+        <div
+          id="download-tab"
+          class="tab-content"
+          role="tabpanel"
+          aria-labelledby="download-tab"
+        >
+          <h2 class="section-title">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+            </svg>
+            Download Configuration
+          </h2>
+
+          <div class="form-group">
+            <label for="downloadResolution" class="form-label">
+              <svg
+                style="width: 16px; height: 16px; margin-right: 0.5rem"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M3,3H21V21H3V3M5,5V19H19V5H5Z" />
+              </svg>
+              Download Resolution
+            </label>
+            <select id="downloadResolution" class="form-input">
+              <option value="300">300 x 300 px (Web Small)</option>
+              <option value="600">600 x 600 px (Web Standard)</option>
+              <option value="900">900 x 900 px (Print Medium)</option>
+              <option value="1200" selected>
+                1200 x 1200 px (Print High Quality)
+              </option>
+            </select>
+            <div class="form-help">
+              Choose resolution based on your intended use case
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <svg
+                style="width: 16px; height: 16px; margin-right: 0.5rem"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"
+                />
+              </svg>
+              File Format Options
+            </label>
+            <div class="format-options">
+              <div class="format-card">
+                <h4>PNG Format</h4>
+                <p>
+                  Best for digital use, social media, and presentations.
+                  Supports transparency and high quality.
+                </p>
+                <button
+                  class="btn btn-primary"
+                  onclick="downloadQR('png')"
+                  id="pngBtn"
+                  disabled
+                >
+                  <svg class="btn-icon" viewBox="0 0 24 24">
+                    <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                  </svg>
+                  Download PNG
+                </button>
+              </div>
+              <div class="format-card">
+                <h4>SVG Format</h4>
+                <p>
+                  Vector format perfect for logos, print materials, and scalable
+                  designs. Infinite resolution.
+                </p>
+                <button
+                  class="btn btn-secondary"
+                  onclick="downloadQR('svg')"
+                  id="svgBtn"
+                  disabled
+                >
+                  <svg class="btn-icon" viewBox="0 0 24 24">
+                    <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                  </svg>
+                  Download SVG
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="requirements">
           <div class="requirements-title">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -732,31 +842,102 @@
             </svg>
             Generate QR Code
           </button>
-          <button
-            class="btn btn-primary"
-            onclick="downloadQR('png')"
-            id="pngBtn"
-            disabled
-          >
-            <svg class="btn-icon" viewBox="0 0 24 24">
-              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
-            </svg>
-            Download PNG
-          </button>
-          <button
-            class="btn btn-secondary"
-            onclick="downloadQR('svg')"
-            id="svgBtn"
-            disabled
-          >
-            <svg class="btn-icon" viewBox="0 0 24 24">
-              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
-            </svg>
-            Download SVG
-          </button>
         </div>
       </div>
     </div>
+
+    <!-- Footer Section -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3 class="footer-title">Super Easy QR Code Generator</h3>
+            <p class="footer-description">
+              Professional QR code generation with UTM tracking and custom
+              branding for marketing campaigns.
+            </p>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-subtitle">Resources</h4>
+            <ul class="footer-links">
+              <li>
+                <a
+                  href="https://github.com/Nuung/qrcode-gen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="footer-link"
+                >
+                  <svg
+                    class="footer-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
+                    />
+                  </svg>
+                  GitHub Repository
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://medium.com/@nuung"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="footer-link"
+                >
+                  <svg
+                    class="footer-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.54,12A6.8,6.8 0 0,1 6.77,5.22A6.8,6.8 0 0,1 13.54,12A6.8,6.8 0 0,1 6.77,18.78A6.8,6.8 0 0,1 13.54,12M20.96,12A3.5,3.5 0 0,1 18.24,8.5A3.5,3.5 0 0,1 20.96,12A3.5,3.5 0 0,1 18.24,15.5A3.5,3.5 0 0,1 20.96,12M22,12A1.21,1.21 0 0,1 21.79,13.21A1.21,1.21 0 0,1 20.58,12A1.21,1.21 0 0,1 21.79,10.79A1.21,1.21 0 0,1 22,12Z"
+                    />
+                  </svg>
+                  Medium Blog
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-subtitle">Contact</h4>
+            <ul class="footer-links">
+              <li>
+                <a href="mailto:hyeon.wo.dev@gmail.com" class="footer-link">
+                  <svg
+                    class="footer-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"
+                    />
+                  </svg>
+                  hyeon.wo.dev@gmail.com
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-divider"></div>
+          <div class="footer-copyright">
+            <p>
+              &copy; 2025 Nuung. Licensed under MIT License. Built with ❤️ for
+              marketers and creators.
+            </p>
+            <p class="footer-tech">
+              No server required • 100% client-side processing • Privacy-first
+              design
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <div id="successMessage" class="success-message">
       <svg

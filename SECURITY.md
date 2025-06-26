@@ -10,7 +10,7 @@
 
 If you discover a security vulnerability, please report it responsibly:
 
-1. **Email**: Send details to security@example.com
+1. **Email**: Send details to hyeon.wo.dev@gmail.com
 2. **Do not** create public GitHub issues for security vulnerabilities
 3. **Include**: Description, steps to reproduce, potential impact
 

@@ -9,8 +9,8 @@
   --error-color: #e53e3e;
   --success-color: #48bb78;
   --text-primary: #1a202c;
-  --text-secondary: #4a5568;
-  --text-muted: #718096;
+  --text-secondary: #2d3748;
+  --text-muted: #4a5568;
   --bg-white: #ffffff;
   --bg-light: #f7fafc;
   --border-light: #e2e8f0;
@@ -46,29 +46,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Animated background */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%);
-  animation: shimmer 4s ease-in-out infinite;
-  pointer-events: none;
-  z-index: -1;
-}
-
-@keyframes shimmer {
-  0%, 100% {
-    transform: translateX(-100%);
-  }
-
-  50% {
-    transform: translateX(100%);
-  }
-}
 
 .hero-section {
   text-align: center;

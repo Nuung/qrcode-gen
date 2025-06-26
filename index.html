@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professional QR Code Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #1a202c;
+        line-height: 1.6;
+      }
+
+      .hero-section {
+        text-align: center;
+        padding: 4rem 2rem 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        letter-spacing: -0.03em;
+      }
+
+      .hero-subtitle {
+        font-size: 1.25rem;
+        color: #4a5568;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        font-weight: 400;
+      }
+
+      .main-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+      }
+
+      .form-panel {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .qr-panel {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        position: sticky;
+        top: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #4a5568;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: rgba(247, 250, 252, 0.8);
+        outline: none;
+      }
+
+      .form-input:focus {
+        border-color: #667eea;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .range-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      .range-input {
+        flex: 1;
+        height: 6px;
+        background: linear-gradient(90deg, #e2e8f0 0%, #667eea 100%);
+        border-radius: 5px;
+        outline: none;
+        appearance: none;
+      }
+
+      .range-input::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #667eea;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      .range-input::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+        background: #5a67d8;
+      }
+
+      .range-value {
+        min-width: 40px;
+        text-align: center;
+        font-weight: 600;
+        color: #667eea;
+        background: rgba(102, 126, 234, 0.1);
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+      }
+
+      .utm-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-help {
+        font-size: 0.75rem;
+        color: #718096;
+        margin-top: 0.25rem;
+        line-height: 1.4;
+      }
+
+      .required-asterisk {
+        color: #e53e3e;
+        margin-right: 0.25rem;
+      }
+
+      .utm-presets {
+        background: rgba(247, 250, 252, 0.5);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .preset-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .preset-btn {
+        padding: 0.5rem 0.75rem;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: #4a5568;
+      }
+
+      .preset-btn:hover {
+        background: #667eea;
+        color: white;
+        border-color: #667eea;
+      }
+
+      .preset-btn:last-child {
+        background: #fed7d7;
+        color: #c53030;
+        border-color: #feb2b2;
+      }
+
+      .preset-btn:last-child:hover {
+        background: #fc8181;
+        color: white;
+        border-color: #fc8181;
+      }
+
+      .upload-area {
+        border: 2px dashed #cbd5e0;
+        border-radius: 16px;
+        padding: 3rem 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: rgba(247, 250, 252, 0.5);
+        margin-bottom: 1.5rem;
+      }
+
+      .upload-area:hover {
+        border-color: #667eea;
+        background: rgba(102, 126, 234, 0.05);
+        transform: translateY(-2px);
+      }
+
+      .upload-area.dragover {
+        border-color: #5a67d8;
+        background: rgba(102, 126, 234, 0.1);
+        transform: scale(1.02);
+      }
+
+      .upload-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 1rem;
+        color: #a0aec0;
+      }
+
+      .upload-text {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+      }
+
+      .upload-subtext {
+        color: #718096;
+        font-size: 0.875rem;
+      }
+
+      .requirements {
+        background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+        border: 1px solid #9ae6b4;
+        border-radius: 12px;
+        padding: 1rem;
+        font-size: 0.875rem;
+        color: #2f855a;
+      }
+
+      .requirements-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .requirements ul {
+        margin-left: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      .requirements li {
+        margin-bottom: 0.25rem;
+      }
+
+      #logoFile {
+        display: none;
+      }
+
+      .preview {
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-top: 1rem;
+      }
+
+      .qr-display {
+        margin-bottom: 2rem;
+      }
+
+      .qr-wrapper {
+        display: inline-block;
+        padding: 3rem;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border: 1px solid #e2e8f0;
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+
+      #qrcode {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .logo-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        background: white;
+        border-radius: 16px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        padding: 12px;
+        border: 3px solid white;
+      }
+
+      .logo-overlay img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 12px;
+      }
+
+      .url-preview {
+        background: rgba(247, 250, 252, 0.8);
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1rem;
+        font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+        font-size: 0.875rem;
+        color: #4a5568;
+        word-break: break-all;
+        text-align: left;
+        margin-bottom: 1.5rem;
+        backdrop-filter: blur(5px);
+      }
+
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 0.875rem 1.5rem;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      }
+
+      .btn-secondary {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+      }
+
+      .btn-secondary:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(72, 187, 120, 0.3);
+      }
+
+      .btn-outline {
+        background: rgba(255, 255, 255, 0.9);
+        color: #667eea;
+        border: 2px solid #667eea;
+        backdrop-filter: blur(10px);
+      }
+
+      .btn-outline:hover:not(:disabled) {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none !important;
+      }
+
+      .btn-icon {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+
+      .color-picker-container {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .color-picker {
+        width: 50px;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+      }
+
+      .color-picker:hover {
+        transform: scale(1.05);
+      }
+
+      .tabs {
+        display: flex;
+        margin-bottom: 1.5rem;
+        background: rgba(247, 250, 252, 0.5);
+        border-radius: 12px;
+        padding: 0.25rem;
+      }
+
+      .tab {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        background: transparent;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        color: #718096;
+      }
+
+      .tab.active {
+        background: white;
+        color: #667eea;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .customization-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      @media (max-width: 1024px) {
+        .main-container {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .qr-panel {
+          position: static;
+        }
+
+        .customization-grid,
+        .utm-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .main-container {
+          padding: 2rem 1rem;
+        }
+
+        .form-panel,
+        .qr-panel {
+          padding: 1.5rem;
+        }
+
+        .button-group {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .color-picker-container {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero-section" role="banner">
+      <h1 class="hero-title">Professional QR Code Generator</h1>
+      <p class="hero-subtitle">
+        Create high-quality, customizable QR codes with logos and UTM tracking
+        for professional marketing campaigns
+      </p>
+    </section>
+
+    <div class="main-container">
+      <div class="form-panel">
+        <div class="tabs" role="tablist" aria-label="QR Code Settings">
+          <button
+            class="tab active"
+            role="tab"
+            aria-selected="true"
+            aria-controls="basic-tab"
+            onclick="switchTab('basic')"
+          >
+            Basic Settings
+          </button>
+          <button
+            class="tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="design-tab"
+            onclick="switchTab('design')"
+          >
+            Design Options
+          </button>
+        </div>
+
+        <div
+          id="basic-tab"
+          class="tab-content active"
+          role="tabpanel"
+          aria-labelledby="basic-tab"
+        >
+          <h2 class="section-title">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+              />
+            </svg>
+            Basic Configuration
+          </h2>
+
+          <div class="form-group">
+            <label for="hostUrl" class="form-label">
+              <span class="required-asterisk">*</span>
+              Landing Page URL
+            </label>
+            <input
+              type="url"
+              id="hostUrl"
+              class="form-input"
+              value="https://searchright.net/request/"
+              placeholder="https://example.com"
+              required
+            />
+            <div class="form-help">
+              Enter your website (landing page) URL for traffic tracking.
+            </div>
+          </div>
+
+          <h3 class="section-title">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z"
+              />
+            </svg>
+            UTM Parameters for Campaign Tracking
+          </h3>
+
+          <div class="utm-grid">
+            <div class="form-group">
+              <label for="utmSource" class="form-label">
+                <span class="required-asterisk">*</span>
+                utm_source (Traffic Source)
+              </label>
+              <input
+                type="text"
+                id="utmSource"
+                class="form-input"
+                value="ebook"
+                placeholder="facebook, google, naver, newsletter, youtube, kakao"
+                required
+              />
+              <div class="form-help">
+                Where will customers discover your landing page?
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="utmMedium" class="form-label">
+                <span class="required-asterisk">*</span>
+                utm_medium (Traffic Medium)
+              </label>
+              <input
+                type="text"
+                id="utmMedium"
+                class="form-input"
+                value="qr"
+                placeholder="email, blog, display, cpc, social, qr, print"
+              />
+              <div class="form-help">
+                What medium brings visitors to your site?
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="utmCampaign" class="form-label"
+                >utm_campaign (Campaign Name)</label
+              >
+              <input
+                type="text"
+                id="utmCampaign"
+                class="form-input"
+                placeholder="2024_black_friday, spring_sale, product_launch"
+              />
+              <div class="form-help">
+                Which campaign brings visitors? (Campaign, service, or product
+                name)
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="utmContent" class="form-label"
+                >utm_content (Ad Content)</label
+              >
+              <input
+                type="text"
+                id="utmContent"
+                class="form-input"
+                placeholder="buy_now_button, red_banner, hero_image"
+              />
+              <div class="form-help">
+                Distinguish different ads/content within the same campaign
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="utmTerm" class="form-label"
+                >utm_term (Target Keywords)</label
+              >
+              <input
+                type="text"
+                id="utmTerm"
+                class="form-input"
+                placeholder="startup, small business, enterprise"
+              />
+              <div class="form-help">
+                Target keywords for search ads (mainly for paid search)
+              </div>
+            </div>
+          </div>
+
+          <div class="utm-presets">
+            <label class="form-label">Quick Presets</label>
+            <div class="preset-buttons">
+              <button
+                type="button"
+                class="preset-btn"
+                onclick="applyPreset('social-facebook')"
+              >
+                Facebook Post
+              </button>
+              <button
+                type="button"
+                class="preset-btn"
+                onclick="applyPreset('email-newsletter')"
+              >
+                Email Newsletter
+              </button>
+              <button
+                type="button"
+                class="preset-btn"
+                onclick="applyPreset('print-brochure')"
+              >
+                Print Brochure
+              </button>
+              <button
+                type="button"
+                class="preset-btn"
+                onclick="applyPreset('youtube-video')"
+              >
+                YouTube Video
+              </button>
+              <button
+                type="button"
+                class="preset-btn"
+                onclick="applyPreset('clear-all')"
+              >
+                Clear All
+              </button>
+            </div>
+          </div>
+
+          <h3 class="section-title">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path
+                d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+              />
+            </svg>
+            Logo Upload
+          </h3>
+
+          <div
+            class="upload-area"
+            onclick="document.getElementById('logoFile').click()"
+            role="button"
+            tabindex="0"
+            aria-label="Upload logo image"
+            onkeydown="if(event.key==='Enter'||event.key===' '){document.getElementById('logoFile').click()}"
+          >
+            <svg class="upload-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"
+              />
+            </svg>
+            <div class="upload-text">Upload Logo Image</div>
+            <div class="upload-subtext">
+              Click or drag to select file (PNG, JPG, SVG)
+            </div>
+            <input
+              type="file"
+              id="logoFile"
+              accept="image/*"
+              onchange="handleLogoUpload(event)"
+              aria-label="Logo file input"
+            />
+            <div id="logoPreview" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div
+          id="design-tab"
+          class="tab-content"
+          role="tabpanel"
+          aria-labelledby="design-tab"
+        >
+          <h2 class="section-title">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4Z"
+              />
+            </svg>
+            Design Customization
+          </h2>
+
+          <div class="customization-grid">
+            <div class="form-group">
+              <label for="cellSize" class="form-label">Cell Size</label>
+              <div class="range-container">
+                <input
+                  type="range"
+                  id="cellSize"
+                  class="range-input"
+                  min="16"
+                  max="48"
+                  value="32"
+                  oninput="updateRangeValue('cellSize'); generateQRCode()"
+                  aria-label="Adjust cell size from 16 to 48 pixels"
+                />
+                <span class="range-value" id="cellSizeValue" aria-live="polite"
+                  >32</span
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="margin" class="form-label">Margin</label>
+              <div class="range-container">
+                <input
+                  type="range"
+                  id="margin"
+                  class="range-input"
+                  min="8"
+                  max="32"
+                  value="20"
+                  oninput="updateRangeValue('margin'); generateQRCode()"
+                />
+                <span class="range-value" id="marginValue">20</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="positionBoost" class="form-label"
+                >Position Pattern Boost</label
+              >
+              <div class="range-container">
+                <input
+                  type="range"
+                  id="positionBoost"
+                  class="range-input"
+                  min="0"
+                  max="20"
+                  value="12"
+                  oninput="updateRangeValue('positionBoost'); generateQRCode()"
+                />
+                <span class="range-value" id="positionBoostValue">12</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="timingBoost" class="form-label"
+                >Timing Pattern Boost</label
+              >
+              <div class="range-container">
+                <input
+                  type="range"
+                  id="timingBoost"
+                  class="range-input"
+                  min="0"
+                  max="16"
+                  value="8"
+                  oninput="updateRangeValue('timingBoost'); generateQRCode()"
+                />
+                <span class="range-value" id="timingBoostValue">8</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">QR Code Colors</label>
+            <div class="color-picker-container">
+              <div>
+                <label for="foregroundColor" class="form-label"
+                  >Foreground</label
+                >
+                <input
+                  type="color"
+                  id="foregroundColor"
+                  class="color-picker"
+                  value="#000000"
+                  onchange="generateQRCode()"
+                />
+              </div>
+              <div>
+                <label for="backgroundColor" class="form-label"
+                  >Background</label
+                >
+                <input
+                  type="color"
+                  id="backgroundColor"
+                  class="color-picker"
+                  value="#ffffff"
+                  onchange="generateQRCode()"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="logoSize" class="form-label">Logo Size (%)</label>
+            <div class="range-container">
+              <input
+                type="range"
+                id="logoSize"
+                class="range-input"
+                min="5"
+                max="20"
+                value="10"
+                oninput="updateRangeValue('logoSize'); generateQRCode()"
+              />
+              <span class="range-value" id="logoSizeValue">10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="requirements">
+          <div class="requirements-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            Recommendations
+          </div>
+          <ul>
+            <li><strong>Aspect Ratio:</strong> 1:1 (square) recommended</li>
+            <li><strong>Resolution:</strong> Minimum 200×200px</li>
+            <li>
+              <strong>Format:</strong> PNG (transparent background), JPG, SVG
+            </li>
+            <li><strong>Design:</strong> Simple and clear logo works best</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qr-panel">
+        <h2 class="section-title">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path
+              d="M3,11H5V13H3V11M11,5H13V9H11V5M9,11H13V15H9V11M15,11H17V13H15V11M19,5H21V9H19V5M5,5H9V9H5V5M3,19H5V21H3V19M5,15H9V19H5V15M19,15H21V19H19V15M9,19H13V21H9V19M15,19H17V21H15V19Z"
+            />
+          </svg>
+          QR Code Preview
+        </h2>
+
+        <div class="qr-display">
+          <div class="qr-wrapper">
+            <div id="qrcode"></div>
+            <div class="logo-overlay" id="logoOverlay">
+              <img id="logoImage" src="" alt="Logo" />
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="url-preview"
+          id="currentUrl"
+          aria-live="polite"
+          aria-label="Generated URL preview"
+        >
+          https://searchright.net/request/?utm_source=ebook&utm_medium=qr
+        </div>
+
+        <div class="button-group">
+          <button class="btn btn-outline" onclick="generateQRCode()">
+            <svg class="btn-icon" viewBox="0 0 24 24">
+              <path
+                d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
+              />
+            </svg>
+            Generate QR Code
+          </button>
+          <button
+            class="btn btn-primary"
+            onclick="downloadQR('png')"
+            id="pngBtn"
+            disabled
+          >
+            <svg class="btn-icon" viewBox="0 0 24 24">
+              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+            </svg>
+            Download PNG
+          </button>
+          <button
+            class="btn btn-secondary"
+            onclick="downloadQR('svg')"
+            id="svgBtn"
+            disabled
+          >
+            <svg class="btn-icon" viewBox="0 0 24 24">
+              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+            </svg>
+            Download SVG
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let logoDataUrl = null;
+      let qrGenerated = false;
+
+      // Tab switching functionality with accessibility
+      function switchTab(tabName) {
+        // Update tab states
+        document.querySelectorAll(".tab").forEach((tab) => {
+          tab.classList.remove("active");
+          tab.setAttribute("aria-selected", "false");
+        });
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((content) => content.classList.remove("active"));
+
+        // Activate selected tab
+        const selectedTab = document.querySelector(
+          `[onclick="switchTab('${tabName}')"]`
+        );
+        const selectedContent = document.getElementById(`${tabName}-tab`);
+
+        selectedTab.classList.add("active");
+        selectedTab.setAttribute("aria-selected", "true");
+        selectedContent.classList.add("active");
+
+        // Announce tab change to screen readers
+        const announcement = `${
+          tabName === "basic" ? "Basic Settings" : "Design Options"
+        } tab selected`;
+        announceToScreenReader(announcement);
+      }
+
+      // Screen reader announcements
+      function announceToScreenReader(message) {
+        const announcement = document.createElement("div");
+        announcement.setAttribute("aria-live", "polite");
+        announcement.setAttribute("aria-atomic", "true");
+        announcement.className = "sr-only";
+        announcement.textContent = message;
+        document.body.appendChild(announcement);
+        setTimeout(() => document.body.removeChild(announcement), 1000);
+      }
+
+      // Range value update
+      function updateRangeValue(id) {
+        const slider = document.getElementById(id);
+        const valueDisplay = document.getElementById(id + "Value");
+        valueDisplay.textContent = slider.value;
+      }
+
+      // Drag and drop functionality
+      const uploadArea = document.querySelector(".upload-area");
+
+      ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+      });
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      ["dragenter", "dragover"].forEach((eventName) => {
+        uploadArea.addEventListener(eventName, () =>
+          uploadArea.classList.add("dragover")
+        );
+      });
+
+      ["dragleave", "drop"].forEach((eventName) => {
+        uploadArea.addEventListener(eventName, () =>
+          uploadArea.classList.remove("dragover")
+        );
+      });
+
+      uploadArea.addEventListener("drop", handleDrop);
+
+      function handleDrop(e) {
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          handleLogoFile(files[0]);
+        }
+      }
+
+      function handleLogoUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+          handleLogoFile(file);
+        }
+      }
+
+      function handleLogoFile(file) {
+        if (!file.type.startsWith("image/")) {
+          const errorMsg =
+            "Please upload an image file only. Supported formats: PNG, JPG, SVG";
+          alert(errorMsg);
+          announceToScreenReader(errorMsg);
+          return;
+        }
+
+        // Check file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          const errorMsg =
+            "File size too large. Please upload an image smaller than 5MB.";
+          alert(errorMsg);
+          announceToScreenReader(errorMsg);
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          logoDataUrl = e.target.result;
+
+          const preview = document.getElementById("logoPreview");
+          preview.innerHTML = `<img src="${logoDataUrl}" class="preview" alt="Logo Preview: ${file.name}">`;
+
+          const logoImage = document.getElementById("logoImage");
+          const logoOverlay = document.getElementById("logoOverlay");
+          logoImage.src = logoDataUrl;
+          logoImage.alt = `Logo: ${file.name}`;
+          logoOverlay.style.display = "flex";
+
+          announceToScreenReader(`Logo uploaded successfully: ${file.name}`);
+
+          if (qrGenerated) {
+            generateQRCode();
+          }
+        };
+
+        reader.onerror = function () {
+          const errorMsg =
+            "Error reading file. Please try again with a different image.";
+          alert(errorMsg);
+          announceToScreenReader(errorMsg);
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+      // UTM presets functionality
+      function applyPreset(presetType) {
+        const presets = {
+          "social-facebook": {
+            source: "facebook",
+            medium: "social",
+            campaign: "facebook_post",
+            content: "qr_code",
+            term: "",
+          },
+          "email-newsletter": {
+            source: "newsletter",
+            medium: "email",
+            campaign: "monthly_newsletter",
+            content: "qr_code",
+            term: "",
+          },
+          "print-brochure": {
+            source: "brochure",
+            medium: "print",
+            campaign: "marketing_brochure",
+            content: "qr_code",
+            term: "",
+          },
+          "youtube-video": {
+            source: "youtube",
+            medium: "video",
+            campaign: "youtube_promotion",
+            content: "qr_code",
+            term: "",
+          },
+          "clear-all": {
+            source: "",
+            medium: "",
+            campaign: "",
+            content: "",
+            term: "",
+          },
+        };
+
+        const preset = presets[presetType];
+        if (preset) {
+          document.getElementById("utmSource").value = preset.source;
+          document.getElementById("utmMedium").value = preset.medium;
+          document.getElementById("utmCampaign").value = preset.campaign;
+          document.getElementById("utmContent").value = preset.content;
+          document.getElementById("utmTerm").value = preset.term;
+
+          // Update URL preview
+          updateURLPreview();
+
+          announceToScreenReader(
+            `UTM preset applied: ${presetType.replace("-", " ")}`
+          );
+        }
+      }
+
+      function generateURL() {
+        const hostUrl = document.getElementById("hostUrl").value.trim();
+        const utmSource = document.getElementById("utmSource").value.trim();
+        const utmMedium = document.getElementById("utmMedium").value.trim();
+        const utmCampaign = document.getElementById("utmCampaign").value.trim();
+        const utmContent = document.getElementById("utmContent").value.trim();
+        const utmTerm = document.getElementById("utmTerm").value.trim();
+
+        if (!hostUrl) {
+          alert("Please enter a host URL.");
+          return null;
+        }
+
+        let url = hostUrl;
+        const params = [];
+
+        if (utmSource)
+          params.push(`utm_source=${encodeURIComponent(utmSource)}`);
+        if (utmMedium)
+          params.push(`utm_medium=${encodeURIComponent(utmMedium)}`);
+        if (utmCampaign)
+          params.push(`utm_campaign=${encodeURIComponent(utmCampaign)}`);
+        if (utmContent)
+          params.push(`utm_content=${encodeURIComponent(utmContent)}`);
+        if (utmTerm) params.push(`utm_term=${encodeURIComponent(utmTerm)}`);
+
+        if (params.length > 0) {
+          url += (url.includes("?") ? "&" : "?") + params.join("&");
+        }
+
+        return url;
+      }
+
+      function updateURLPreview() {
+        const url = generateURL();
+        if (url) {
+          document.getElementById("currentUrl").textContent = url;
+        }
+      }
+
+      function generateQRCode() {
+        const url = generateURL();
+        if (!url) return;
+
+        document.getElementById("currentUrl").textContent = url;
+
+        // Get customization values
+        const cellSize = parseInt(document.getElementById("cellSize").value);
+        const margin = parseInt(document.getElementById("margin").value);
+        const positionBoost = parseInt(
+          document.getElementById("positionBoost").value
+        );
+        const timingBoost = parseInt(
+          document.getElementById("timingBoost").value
+        );
+        const foregroundColor =
+          document.getElementById("foregroundColor").value;
+        const backgroundColor =
+          document.getElementById("backgroundColor").value;
+
+        // Maximum recognition with minimal error correction
+        const qr = qrcode(0, "L"); // L = Low error correction for maximum recognition
+        qr.addData(url);
+        qr.make();
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        const modules = qr.getModuleCount();
+
+        canvas.width = canvas.height =
+          modules * cellSize + margin * 2 * cellSize;
+
+        // Background
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Enhanced pattern recognition
+        ctx.fillStyle = foregroundColor;
+
+        for (let row = 0; row < modules; row++) {
+          for (let col = 0; col < modules; col++) {
+            if (qr.isDark(row, col)) {
+              const x = col * cellSize + margin * cellSize;
+              const y = row * cellSize + margin * cellSize;
+
+              // Position detection patterns (3 corners)
+              const isPositionPattern =
+                (row < 9 && col < 9) || // Top-left
+                (row < 9 && col >= modules - 9) || // Top-right
+                (row >= modules - 9 && col < 9); // Bottom-left
+
+              // Timing patterns (horizontal/vertical center lines)
+              const isTimingPattern = row === 6 || col === 6;
+
+              // Alignment pattern (bottom-right small square)
+              const isAlignmentPattern =
+                row >= modules - 9 && col >= modules - 9;
+
+              if (isPositionPattern) {
+                // Enhanced position patterns for maximum recognition
+                ctx.fillRect(
+                  x - positionBoost / 2,
+                  y - positionBoost / 2,
+                  cellSize + positionBoost,
+                  cellSize + positionBoost
+                );
+              } else if (isTimingPattern) {
+                // Enhanced timing patterns
+                ctx.fillRect(
+                  x - timingBoost / 2,
+                  y - timingBoost / 2,
+                  cellSize + timingBoost,
+                  cellSize + timingBoost
+                );
+              } else if (isAlignmentPattern) {
+                // Enhanced alignment pattern
+                const alignBoost = Math.min(positionBoost, timingBoost);
+                ctx.fillRect(
+                  x - alignBoost / 2,
+                  y - alignBoost / 2,
+                  cellSize + alignBoost,
+                  cellSize + alignBoost
+                );
+              } else {
+                // Standard data modules
+                ctx.fillRect(x, y, cellSize, cellSize);
+              }
+            }
+          }
+        }
+
+        const qrContainer = document.getElementById("qrcode");
+        qrContainer.innerHTML = "";
+
+        // Display with crisp rendering
+        canvas.style.maxWidth = "380px";
+        canvas.style.maxHeight = "380px";
+        canvas.style.imageRendering = "crisp-edges";
+        canvas.style.imageRendering = "pixelated";
+
+        qrContainer.appendChild(canvas);
+
+        qrGenerated = true;
+        document.getElementById("pngBtn").disabled = false;
+        document.getElementById("svgBtn").disabled = false;
+
+        console.log(
+          `QR modules: ${modules}x${modules} (optimized for maximum recognition)`
+        );
+      }
+
+      function downloadQR(format = "png") {
+        if (!qrGenerated) {
+          alert("Please generate a QR code first.");
+          return;
+        }
+
+        if (format === "svg") {
+          downloadSVG();
+        } else {
+          downloadPNG();
+        }
+      }
+
+      function downloadPNG() {
+        const qrCanvas = document.querySelector("#qrcode canvas");
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Ultra high resolution output
+        const outputSize = 1200;
+        canvas.width = outputSize;
+        canvas.height = outputSize;
+
+        const backgroundColor =
+          document.getElementById("backgroundColor").value;
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(0, 0, outputSize, outputSize);
+
+        const qrSize = outputSize * 0.9;
+        const qrX = (outputSize - qrSize) / 2;
+        const qrY = (outputSize - qrSize) / 2;
+
+        // Perfect pixel rendering
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
+
+        if (logoDataUrl) {
+          const logoImg = new Image();
+          logoImg.onload = function () {
+            const logoSizePercent = parseInt(
+              document.getElementById("logoSize").value
+            );
+            const logoSize = outputSize * (logoSizePercent / 100);
+            const logoX = (outputSize - logoSize) / 2;
+            const logoY = (outputSize - logoSize) / 2;
+
+            // Logo background
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(logoX - 12, logoY - 12, logoSize + 24, logoSize + 24);
+
+            ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+
+            const link = document.createElement("a");
+            link.download = "QR_Code_Professional.png";
+            link.href = canvas.toDataURL("image/png");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          };
+          logoImg.src = logoDataUrl;
+        } else {
+          const link = document.createElement("a");
+          link.download = "QR_Code_Professional.png";
+          link.href = canvas.toDataURL("image/png");
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      }
+
+      function downloadSVG() {
+        const url = generateURL();
+        const cellSize = parseInt(document.getElementById("cellSize").value);
+        const margin = parseInt(document.getElementById("margin").value);
+        const positionBoost = parseInt(
+          document.getElementById("positionBoost").value
+        );
+        const timingBoost = parseInt(
+          document.getElementById("timingBoost").value
+        );
+        const foregroundColor =
+          document.getElementById("foregroundColor").value;
+        const backgroundColor =
+          document.getElementById("backgroundColor").value;
+
+        const qr = qrcode(0, "L");
+        qr.addData(url);
+        qr.make();
+
+        const modules = qr.getModuleCount();
+        const qrSize = modules * cellSize + margin * 2 * cellSize;
+        const totalSize = 1200;
+        const qrOffset = (totalSize - qrSize) / 2;
+
+        let svgContent = `<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <rect width="1200" height="1200" fill="${backgroundColor}"/>
+  <g transform="translate(${qrOffset}, ${qrOffset})">`;
+
+        for (let row = 0; row < modules; row++) {
+          for (let col = 0; col < modules; col++) {
+            if (qr.isDark(row, col)) {
+              const x = col * cellSize + margin * cellSize;
+              const y = row * cellSize + margin * cellSize;
+
+              const isPositionPattern =
+                (row < 9 && col < 9) ||
+                (row < 9 && col >= modules - 9) ||
+                (row >= modules - 9 && col < 9);
+
+              const isTimingPattern = row === 6 || col === 6;
+              const isAlignmentPattern =
+                row >= modules - 9 && col >= modules - 9;
+
+              if (isPositionPattern) {
+                svgContent += `\n    <rect x="${x - positionBoost / 2}" y="${
+                  y - positionBoost / 2
+                }" width="${cellSize + positionBoost}" height="${
+                  cellSize + positionBoost
+                }" fill="${foregroundColor}"/>`;
+              } else if (isTimingPattern) {
+                svgContent += `\n    <rect x="${x - timingBoost / 2}" y="${
+                  y - timingBoost / 2
+                }" width="${cellSize + timingBoost}" height="${
+                  cellSize + timingBoost
+                }" fill="${foregroundColor}"/>`;
+              } else if (isAlignmentPattern) {
+                const alignBoost = Math.min(positionBoost, timingBoost);
+                svgContent += `\n    <rect x="${x - alignBoost / 2}" y="${
+                  y - alignBoost / 2
+                }" width="${cellSize + alignBoost}" height="${
+                  cellSize + alignBoost
+                }" fill="${foregroundColor}"/>`;
+              } else {
+                svgContent += `\n    <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${foregroundColor}"/>`;
+              }
+            }
+          }
+        }
+
+        svgContent += `\n  </g>`;
+
+        if (logoDataUrl) {
+          const logoSizePercent = parseInt(
+            document.getElementById("logoSize").value
+          );
+          const logoSize = totalSize * (logoSizePercent / 100);
+          const logoX = (totalSize - logoSize) / 2;
+          const logoY = (totalSize - logoSize) / 2;
+
+          svgContent += `
+  <rect x="${logoX - 12}" y="${logoY - 12}" width="${logoSize + 24}" height="${
+            logoSize + 24
+          }" fill="${backgroundColor}"/>
+  <image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" xlink:href="${logoDataUrl}"/>`;
+        }
+
+        svgContent += `\n</svg>`;
+
+        const blob = new Blob([svgContent], { type: "image/svg+xml" });
+        const url_obj = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.download = "QR_Code_Professional.svg";
+        link.href = url_obj;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url_obj);
+      }
+
+      // Add screen reader only class
+      const screenReaderCSS = `
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+      `;
+      const style = document.createElement("style");
+      style.textContent = screenReaderCSS;
+      document.head.appendChild(style);
+      window.addEventListener("load", function () {
+        // Initialize range value displays
+        [
+          "cellSize",
+          "margin",
+          "positionBoost",
+          "timingBoost",
+          "logoSize",
+        ].forEach((id) => {
+          updateRangeValue(id);
+        });
+
+        generateQRCode();
+      });
+
+      // Real-time URL preview
+      [
+        "hostUrl",
+        "utmSource",
+        "utmMedium",
+        "utmCampaign",
+        "utmContent",
+        "utmTerm",
+      ].forEach((id) => {
+        document.getElementById(id).addEventListener("input", updateURLPreview);
+      });
+    </script>
+  </body>
+</html>

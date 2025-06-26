@@ -1,0 +1,33 @@
+title: Professional QR Code Generator
+description: Create high-quality, customizable QR codes with logos and UTM tracking for professional marketing campaigns
+author: Nuung
+url: https://nuung.github.io
+baseurl: /qrcode-gen
+
+# SEO settings
+twitter:
+  username: nuung
+  card: summary_large_image
+
+social:
+  name: Nuung
+  links:
+    - https://github.com/nuung
+    - https://medium.com/@nuung
+
+# GitHub Pages settings
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Include/exclude files
+include:
+  - _headers
+  - _redirects
+
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+  - LICENSE
+  - node_modules
+  - .git

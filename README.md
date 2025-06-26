@@ -3,7 +3,7 @@
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)  
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-# Professional QR Code Generator
+# Super Easy QR Code Generator
 
 > ***Create branded QR codes with UTM tracking in seconds***
 
@@ -16,7 +16,7 @@
 
 ## Key Features
 
-### 1) Professional Design
+### 1) Super Simple Design
 
 - Custom logos with smart positioning and sizing  
 - Brand colors with real-time color picker  

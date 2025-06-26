@@ -9,6 +9,10 @@
 
 [![Live Demo](https://img.shields.io/badge/Demo-Live-brightgreen)](https://nuung.github.io/qrcode-gen/)
 
+<p align="center">
+    <img src="pre-view.png" alt="QR Code Generator Preview" width="600"/>
+</p>
+
 ## Live Demo
 
 > 👉 **[Try it now](https://nuung.github.io/qrcode-gen/)**  

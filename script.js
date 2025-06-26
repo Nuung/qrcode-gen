@@ -1,4 +1,4 @@
-// Professional QR Code Generator - JavaScript
+// Professional QR Code Generator - Cleaned JavaScript
 
 let logoDataUrl = null;
 let qrGenerated = false;
@@ -12,7 +12,7 @@ function showSuccessMessage(message) {
   setTimeout(() => successEl.classList.remove("show"), 3000);
 }
 
-// Tab switching functionality with accessibility
+// Tab switching functionality
 function switchTab(tabName) {
   document.querySelectorAll(".tab").forEach((tab) => {
     tab.classList.remove("active");
@@ -30,22 +30,6 @@ function switchTab(tabName) {
   selectedTab.classList.add("active");
   selectedTab.setAttribute("aria-selected", "true");
   selectedContent.classList.add("active");
-
-  const announcement = `${
-    tabName === "basic" ? "Basic Settings" : "Design Options"
-  } tab selected`;
-  announceToScreenReader(announcement);
-}
-
-// Screen reader announcements
-function announceToScreenReader(message) {
-  const announcement = document.createElement("div");
-  announcement.setAttribute("aria-live", "polite");
-  announcement.setAttribute("aria-atomic", "true");
-  announcement.className = "sr-only";
-  announcement.textContent = message;
-  document.body.appendChild(announcement);
-  setTimeout(() => document.body.removeChild(announcement), 1000);
 }
 
 // Range value update
@@ -97,18 +81,12 @@ function handleLogoUpload(event) {
 
 function handleLogoFile(file) {
   if (!file.type.startsWith("image/")) {
-    const errorMsg =
-      "Please upload an image file only. Supported formats: PNG, JPG, SVG";
-    alert(errorMsg);
-    announceToScreenReader(errorMsg);
+    alert("Please upload an image file only. Supported formats: PNG, JPG, SVG");
     return;
   }
 
   if (file.size > 5 * 1024 * 1024) {
-    const errorMsg =
-      "File size too large. Please upload an image smaller than 5MB.";
-    alert(errorMsg);
-    announceToScreenReader(errorMsg);
+    alert("File size too large. Please upload an image smaller than 5MB.");
     return;
   }
 
@@ -126,7 +104,6 @@ function handleLogoFile(file) {
     logoOverlay.style.display = "flex";
 
     showSuccessMessage(`Logo uploaded successfully: ${file.name}`);
-    announceToScreenReader(`Logo uploaded successfully: ${file.name}`);
 
     if (qrGenerated) {
       generateQRCode();
@@ -134,10 +111,7 @@ function handleLogoFile(file) {
   };
 
   reader.onerror = function () {
-    const errorMsg =
-      "Error reading file. Please try again with a different image.";
-    alert(errorMsg);
-    announceToScreenReader(errorMsg);
+    alert("Error reading file. Please try again with a different image.");
   };
 
   reader.readAsDataURL(file);
@@ -193,9 +167,6 @@ function applyPreset(presetType) {
 
     updateURLPreview();
     showSuccessMessage(`UTM preset applied: ${presetType.replace("-", " ")}`);
-    announceToScreenReader(
-      `UTM preset applied: ${presetType.replace("-", " ")}`
-    );
   }
 }
 
@@ -240,104 +211,90 @@ function generateQRCode() {
   const url = generateURL();
   if (!url) return;
 
-  // Add loading state
-  const generateBtn = document.querySelector(".btn-outline");
-  generateBtn.classList.add("loading");
-  generateBtn.disabled = true;
+  document.getElementById("currentUrl").textContent = url;
 
-  setTimeout(() => {
-    document.getElementById("currentUrl").textContent = url;
+  const cellSize = parseInt(document.getElementById("cellSize").value);
+  const margin = parseInt(document.getElementById("margin").value);
+  const positionBoost = parseInt(
+    document.getElementById("positionBoost").value
+  );
+  const timingBoost = parseInt(document.getElementById("timingBoost").value);
+  const foregroundColor = document.getElementById("foregroundColor").value;
+  const backgroundColor = document.getElementById("backgroundColor").value;
 
-    const cellSize = parseInt(document.getElementById("cellSize").value);
-    const margin = parseInt(document.getElementById("margin").value);
-    const positionBoost = parseInt(
-      document.getElementById("positionBoost").value
-    );
-    const timingBoost = parseInt(document.getElementById("timingBoost").value);
-    const foregroundColor = document.getElementById("foregroundColor").value;
-    const backgroundColor = document.getElementById("backgroundColor").value;
+  const qr = qrcode(0, "L");
+  qr.addData(url);
+  qr.make();
 
-    const qr = qrcode(0, "L");
-    qr.addData(url);
-    qr.make();
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  const modules = qr.getModuleCount();
 
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const modules = qr.getModuleCount();
+  canvas.width = canvas.height = modules * cellSize + margin * 2 * cellSize;
 
-    canvas.width = canvas.height = modules * cellSize + margin * 2 * cellSize;
+  ctx.fillStyle = backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = backgroundColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = foregroundColor;
 
-    ctx.fillStyle = foregroundColor;
+  for (let row = 0; row < modules; row++) {
+    for (let col = 0; col < modules; col++) {
+      if (qr.isDark(row, col)) {
+        const x = col * cellSize + margin * cellSize;
+        const y = row * cellSize + margin * cellSize;
 
-    for (let row = 0; row < modules; row++) {
-      for (let col = 0; col < modules; col++) {
-        if (qr.isDark(row, col)) {
-          const x = col * cellSize + margin * cellSize;
-          const y = row * cellSize + margin * cellSize;
+        const isPositionPattern =
+          (row < 9 && col < 9) ||
+          (row < 9 && col >= modules - 9) ||
+          (row >= modules - 9 && col < 9);
 
-          const isPositionPattern =
-            (row < 9 && col < 9) ||
-            (row < 9 && col >= modules - 9) ||
-            (row >= modules - 9 && col < 9);
+        const isTimingPattern = row === 6 || col === 6;
+        const isAlignmentPattern = row >= modules - 9 && col >= modules - 9;
 
-          const isTimingPattern = row === 6 || col === 6;
-          const isAlignmentPattern = row >= modules - 9 && col >= modules - 9;
-
-          if (isPositionPattern) {
-            ctx.fillRect(
-              x - positionBoost / 2,
-              y - positionBoost / 2,
-              cellSize + positionBoost,
-              cellSize + positionBoost
-            );
-          } else if (isTimingPattern) {
-            ctx.fillRect(
-              x - timingBoost / 2,
-              y - timingBoost / 2,
-              cellSize + timingBoost,
-              cellSize + timingBoost
-            );
-          } else if (isAlignmentPattern) {
-            const alignBoost = Math.min(positionBoost, timingBoost);
-            ctx.fillRect(
-              x - alignBoost / 2,
-              y - alignBoost / 2,
-              cellSize + alignBoost,
-              cellSize + alignBoost
-            );
-          } else {
-            ctx.fillRect(x, y, cellSize, cellSize);
-          }
+        if (isPositionPattern) {
+          ctx.fillRect(
+            x - positionBoost / 2,
+            y - positionBoost / 2,
+            cellSize + positionBoost,
+            cellSize + positionBoost
+          );
+        } else if (isTimingPattern) {
+          ctx.fillRect(
+            x - timingBoost / 2,
+            y - timingBoost / 2,
+            cellSize + timingBoost,
+            cellSize + timingBoost
+          );
+        } else if (isAlignmentPattern) {
+          const alignBoost = Math.min(positionBoost, timingBoost);
+          ctx.fillRect(
+            x - alignBoost / 2,
+            y - alignBoost / 2,
+            cellSize + alignBoost,
+            cellSize + alignBoost
+          );
+        } else {
+          ctx.fillRect(x, y, cellSize, cellSize);
         }
       }
     }
+  }
 
-    const qrContainer = document.getElementById("qrcode");
-    qrContainer.innerHTML = "";
+  const qrContainer = document.getElementById("qrcode");
+  qrContainer.innerHTML = "";
 
-    canvas.style.maxWidth = "380px";
-    canvas.style.maxHeight = "380px";
-    canvas.style.imageRendering = "crisp-edges";
-    canvas.style.imageRendering = "pixelated";
+  canvas.style.maxWidth = "380px";
+  canvas.style.maxHeight = "380px";
+  canvas.style.imageRendering = "crisp-edges";
+  canvas.style.imageRendering = "pixelated";
 
-    qrContainer.appendChild(canvas);
+  qrContainer.appendChild(canvas);
 
-    qrGenerated = true;
-    document.getElementById("pngBtn").disabled = false;
-    document.getElementById("svgBtn").disabled = false;
+  qrGenerated = true;
+  document.getElementById("pngBtn").disabled = false;
+  document.getElementById("svgBtn").disabled = false;
 
-    // Remove loading state
-    generateBtn.classList.remove("loading");
-    generateBtn.disabled = false;
-
-    showSuccessMessage("QR Code generated successfully!");
-    console.log(
-      `QR modules: ${modules}x${modules} (optimized for maximum recognition)`
-    );
-  }, 500);
+  showSuccessMessage("QR Code generated successfully!");
 }
 
 function downloadQR(format = "png") {
@@ -557,7 +514,7 @@ function debounce(func, wait) {
   };
 }
 
-const debouncedGenerateQR = debounce(generateQRCode, 300);
+const debouncedGenerateQR = debounce(generateQRCode, 200);
 
 // Initialize application
 window.addEventListener("load", function () {

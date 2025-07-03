@@ -466,6 +466,21 @@ body {
   fill: currentColor;
 }
 
+.btn-remove {
+  background: #fed7d7;
+  color: #c53030;
+  border: 1px solid #feb2b2;
+  width: 100%;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.btn-remove:hover:not(:disabled) {
+  background: #c53030;
+  color: white;
+  border-color: #c53030;
+}
+
 .color-picker-container {
   display: flex;
   gap: 1rem;

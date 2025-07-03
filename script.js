@@ -1,4 +1,6 @@
-// Professional QR Code Generator - Enhanced JavaScript
+// ===============================================================
+// functions
+// ===============================================================
 
 let logoDataUrl = null;
 let qrGenerated = false;
@@ -111,6 +113,12 @@ function handleLogoFile(file) {
       logoImage.src = logoDataUrl;
       logoImage.alt = `Logo: ${file.name}`;
       logoOverlay.style.display = "flex";
+    }
+
+    // 제거 버튼 표시 - 이 부분을 추가하세요
+    const removeBtn = document.getElementById("removeLogo");
+    if (removeBtn) {
+      removeBtn.style.display = "inline-flex";
     }
 
     showSuccessMessage(`Logo uploaded successfully: ${file.name}`);
@@ -263,8 +271,9 @@ function generateQRCode() {
     : "#ffffff";
 
   try {
-    // 오류 정정 레벨을 M으로 변경 (15% 복구 가능)
-    const qr = qrcode(0, "M");
+    const errorLevel = getErrorCorrectionLevel();
+    const qr = qrcode(0, errorLevel);
+
     qr.addData(url);
     qr.make();
 
@@ -501,8 +510,8 @@ function downloadSVG() {
     : "#ffffff";
 
   try {
-    // 오류 정정 레벨을 M으로 변경 (15% 복구 가능)
-    const qr = qrcode(0, "M");
+    const errorLevel = getErrorCorrectionLevel();
+    const qr = qrcode(0, errorLevel);
     qr.addData(url);
     qr.make();
 
@@ -658,6 +667,49 @@ function debounce(func, wait) {
 }
 
 const debouncedGenerateQR = debounce(generateQRCode, 200);
+
+function getErrorCorrectionLevel() {
+  const errorCorrectionEl = document.getElementById("errorCorrection");
+  return errorCorrectionEl ? errorCorrectionEl.value : "M";
+}
+
+function removeLogo() {
+  logoDataUrl = null;
+
+  // file input reset
+  const logoFileInput = document.getElementById("logoFile");
+  if (logoFileInput) {
+    logoFileInput.value = "";
+  }
+
+  // remove logo preview
+  const preview = document.getElementById("logoPreview");
+  if (preview) {
+    preview.innerHTML = "";
+  }
+
+  // hide logo overlay
+  const logoOverlay = document.getElementById("logoOverlay");
+  if (logoOverlay) {
+    logoOverlay.style.display = "none";
+  }
+
+  // hide remove button - 이 부분이 잘못되었습니다
+  const removeBtn = document.getElementById("removeLogo");
+  if (removeBtn) {
+    removeBtn.style.display = "none";
+  }
+
+  // regenerate QR code without logo
+  if (qrGenerated) {
+    generateQRCode();
+  }
+  showSuccessMessage("Logo removed successfully!");
+}
+
+// ===============================================================
+// handlers and event listeners
+// ===============================================================
 
 // Responsive logo overlay update
 function handleResize() {

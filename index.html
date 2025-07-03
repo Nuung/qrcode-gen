@@ -507,7 +507,22 @@
               onchange="handleLogoUpload(event)"
               aria-label="Logo file input"
             />
-            <div id="logoPreview" aria-live="polite"></div>
+            <div id="logoPreview" aria-live="polite">
+              <button
+                type="button"
+                id="removeLogo"
+                class="btn btn-remove"
+                onclick="removeLogo()"
+                style="display: none; margin-top: 1rem"
+              >
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                  />
+                </svg>
+                Remove Logo
+              </button>
+            </div>
           </div>
         </div>
 
@@ -527,6 +542,39 @@
           </h2>
 
           <div class="customization-grid">
+            <div class="form-group">
+              <label for="errorCorrection" class="form-label">
+                <svg
+                  style="width: 16px; height: 16px; margin-right: 0.5rem"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,7H13V9H11V7M11,11H13V17H11V11Z"
+                  />
+                </svg>
+                Error Correction Level
+              </label>
+              <select
+                id="errorCorrection"
+                class="form-input"
+                onchange="generateQRCode()"
+              >
+                <option value="L">Low (7% recovery) - Smallest size</option>
+                <option value="M" selected>
+                  Medium (15% recovery) - Balanced
+                </option>
+                <option value="Q">
+                  Quartile (25% recovery) - Good for print
+                </option>
+                <option value="H">
+                  High (30% recovery) - Best for damaged codes
+                </option>
+              </select>
+              <div class="form-help">
+                Higher levels create more robust QR codes but increase size
+              </div>
+            </div>
             <div class="form-group">
               <label for="cellSize" class="form-label">
                 <svg

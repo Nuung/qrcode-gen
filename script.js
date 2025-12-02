@@ -41,7 +41,12 @@ function updateRangeValue(id) {
   const slider = document.getElementById(id);
   const valueDisplay = document.getElementById(id + "Value");
   if (slider && valueDisplay) {
-    valueDisplay.textContent = slider.value;
+    // Special handling for typeNumber to show "Auto" for 0
+    if (id === "typeNumber") {
+      valueDisplay.textContent = slider.value === "0" ? "Auto" : slider.value;
+    } else {
+      valueDisplay.textContent = slider.value;
+    }
   }
 }
 
@@ -256,6 +261,7 @@ function generateQRCode() {
   const marginEl = document.getElementById("margin");
   const foregroundColorEl = document.getElementById("foregroundColor");
   const backgroundColorEl = document.getElementById("backgroundColor");
+  const typeNumberEl = document.getElementById("typeNumber");
 
   const cellSize = cellSizeEl ? parseInt(cellSizeEl.value) : 32;
   const marginModules = marginEl ? parseInt(marginEl.value) : 4;
@@ -265,13 +271,31 @@ function generateQRCode() {
   const backgroundColor = backgroundColorEl
     ? backgroundColorEl.value
     : "#ffffff";
+  const typeNumber = typeNumberEl ? parseInt(typeNumberEl.value) : 0;
 
   try {
     const errorLevel = getErrorCorrectionLevel();
-    const qr = qrcode(0, errorLevel);
+    let finalTypeNumber = typeNumber;
+    let qr = qrcode(finalTypeNumber, errorLevel);
 
-    qr.addData(url);
-    qr.make();
+    try {
+      qr.addData(url);
+      qr.make();
+    } catch (overflowError) {
+      // If data is too long for the selected typeNumber, try auto mode
+      if (overflowError.message && overflowError.message.includes("overflow")) {
+        console.warn(`TypeNumber ${finalTypeNumber} too small for data. Trying auto mode (0)...`);
+        finalTypeNumber = 0;
+        qr = qrcode(finalTypeNumber, errorLevel);
+        qr.addData(url);
+        qr.make();
+
+        // Show helpful message
+        showSuccessMessage(`QR Code generated! (Auto-adjusted to larger version due to URL length)`);
+      } else {
+        throw overflowError;
+      }
+    }
 
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
@@ -324,7 +348,20 @@ function generateQRCode() {
     showSuccessMessage("QR Code generated successfully!");
   } catch (error) {
     console.error("Error generating QR code:", error);
-    alert("Error generating QR code. Please check your inputs and try again.");
+
+    // Provide helpful error message based on error type
+    if (error.message && error.message.includes("overflow")) {
+      alert(
+        "⚠️ QR Code Error: URL too long for selected version!\n\n" +
+        "Solutions:\n" +
+        "1. Set 'QR Code Version' to Auto (0) - Recommended\n" +
+        "2. Use a higher version number (10-40)\n" +
+        "3. Shorten your URL or remove some UTM parameters\n\n" +
+        `Current URL length: ${url.length} characters`
+      );
+    } else {
+      alert("Error generating QR code. Please check your inputs and try again.");
+    }
   }
 }
 
@@ -461,6 +498,7 @@ function downloadSVG() {
   const marginEl = document.getElementById("margin");
   const foregroundColorEl = document.getElementById("foregroundColor");
   const backgroundColorEl = document.getElementById("backgroundColor");
+  const typeNumberEl = document.getElementById("typeNumber");
 
   const cellSize = cellSizeEl ? parseInt(cellSizeEl.value) : 32;
   const marginModules = marginEl ? parseInt(marginEl.value) : 4;
@@ -470,12 +508,28 @@ function downloadSVG() {
   const backgroundColor = backgroundColorEl
     ? backgroundColorEl.value
     : "#ffffff";
+  const typeNumber = typeNumberEl ? parseInt(typeNumberEl.value) : 0;
 
   try {
     const errorLevel = getErrorCorrectionLevel();
-    const qr = qrcode(0, errorLevel);
-    qr.addData(url);
-    qr.make();
+    let finalTypeNumber = typeNumber;
+    let qr = qrcode(finalTypeNumber, errorLevel);
+
+    try {
+      qr.addData(url);
+      qr.make();
+    } catch (overflowError) {
+      // If data is too long for the selected typeNumber, try auto mode
+      if (overflowError.message && overflowError.message.includes("overflow")) {
+        console.warn(`TypeNumber ${finalTypeNumber} too small for data. Trying auto mode (0)...`);
+        finalTypeNumber = 0;
+        qr = qrcode(finalTypeNumber, errorLevel);
+        qr.addData(url);
+        qr.make();
+      } else {
+        throw overflowError;
+      }
+    }
 
     const modules = qr.getModuleCount();
     const qrSize = (modules + marginModules * 2) * cellSize;
@@ -541,7 +595,19 @@ function downloadSVG() {
     );
   } catch (error) {
     console.error("Error downloading SVG:", error);
-    alert("Error downloading SVG. Please try again.");
+
+    // Provide helpful error message based on error type
+    if (error.message && error.message.includes("overflow")) {
+      alert(
+        "⚠️ SVG Export Error: URL too long for selected version!\n\n" +
+        "Solutions:\n" +
+        "1. Set 'QR Code Version' to Auto (0) - Recommended\n" +
+        "2. Use a higher version number (10-40)\n" +
+        "3. Shorten your URL or remove some UTM parameters"
+      );
+    } else {
+      alert("Error downloading SVG. Please try again.");
+    }
   }
 }
 
@@ -655,14 +721,14 @@ function handleResize() {
 // Initialize application
 window.addEventListener("load", function () {
   // Initialize range value displays
-  ["cellSize", "margin", "logoSize"].forEach(
+  ["cellSize", "margin", "logoSize", "typeNumber"].forEach(
     (id) => {
       updateRangeValue(id);
     }
   );
 
   // Apply debounced generation to range inputs
-  ["cellSize", "margin", "logoSize"].forEach(
+  ["cellSize", "margin", "logoSize", "typeNumber"].forEach(
     (id) => {
       const input = document.getElementById(id);
       if (input) {

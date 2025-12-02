@@ -254,15 +254,11 @@ function generateQRCode() {
 
   const cellSizeEl = document.getElementById("cellSize");
   const marginEl = document.getElementById("margin");
-  const positionBoostEl = document.getElementById("positionBoost");
-  const timingBoostEl = document.getElementById("timingBoost");
   const foregroundColorEl = document.getElementById("foregroundColor");
   const backgroundColorEl = document.getElementById("backgroundColor");
 
   const cellSize = cellSizeEl ? parseInt(cellSizeEl.value) : 32;
-  const margin = marginEl ? parseInt(marginEl.value) : 20;
-  const positionBoost = positionBoostEl ? parseInt(positionBoostEl.value) : 12;
-  const timingBoost = timingBoostEl ? parseInt(timingBoostEl.value) : 8;
+  const marginModules = marginEl ? parseInt(marginEl.value) : 4;
   const foregroundColor = foregroundColorEl
     ? foregroundColorEl.value
     : "#000000";
@@ -281,7 +277,8 @@ function generateQRCode() {
     const ctx = canvas.getContext("2d");
     const modules = qr.getModuleCount();
 
-    canvas.width = canvas.height = modules * cellSize + margin * 2 * cellSize;
+    // Margin is now in module units (standard QR quiet zone)
+    canvas.width = canvas.height = (modules + marginModules * 2) * cellSize;
 
     ctx.fillStyle = backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -291,42 +288,11 @@ function generateQRCode() {
     for (let row = 0; row < modules; row++) {
       for (let col = 0; col < modules; col++) {
         if (qr.isDark(row, col)) {
-          const x = col * cellSize + margin * cellSize;
-          const y = row * cellSize + margin * cellSize;
+          const x = (col + marginModules) * cellSize;
+          const y = (row + marginModules) * cellSize;
 
-          const isPositionPattern =
-            (row < 9 && col < 9) ||
-            (row < 9 && col >= modules - 9) ||
-            (row >= modules - 9 && col < 9);
-
-          const isTimingPattern = row === 6 || col === 6;
-          const isAlignmentPattern = row >= modules - 9 && col >= modules - 9;
-
-          if (isPositionPattern) {
-            ctx.fillRect(
-              x - positionBoost / 2,
-              y - positionBoost / 2,
-              cellSize + positionBoost,
-              cellSize + positionBoost
-            );
-          } else if (isTimingPattern) {
-            ctx.fillRect(
-              x - timingBoost / 2,
-              y - timingBoost / 2,
-              cellSize + timingBoost,
-              cellSize + timingBoost
-            );
-          } else if (isAlignmentPattern) {
-            const alignBoost = Math.min(positionBoost, timingBoost);
-            ctx.fillRect(
-              x - alignBoost / 2,
-              y - alignBoost / 2,
-              cellSize + alignBoost,
-              cellSize + alignBoost
-            );
-          } else {
-            ctx.fillRect(x, y, cellSize, cellSize);
-          }
+          // Draw standard QR modules without artificial boosts
+          ctx.fillRect(x, y, cellSize, cellSize);
         }
       }
     }
@@ -493,15 +459,11 @@ function downloadSVG() {
 
   const cellSizeEl = document.getElementById("cellSize");
   const marginEl = document.getElementById("margin");
-  const positionBoostEl = document.getElementById("positionBoost");
-  const timingBoostEl = document.getElementById("timingBoost");
   const foregroundColorEl = document.getElementById("foregroundColor");
   const backgroundColorEl = document.getElementById("backgroundColor");
 
   const cellSize = cellSizeEl ? parseInt(cellSizeEl.value) : 32;
-  const margin = marginEl ? parseInt(marginEl.value) : 20;
-  const positionBoost = positionBoostEl ? parseInt(positionBoostEl.value) : 12;
-  const timingBoost = timingBoostEl ? parseInt(timingBoostEl.value) : 8;
+  const marginModules = marginEl ? parseInt(marginEl.value) : 4;
   const foregroundColor = foregroundColorEl
     ? foregroundColorEl.value
     : "#000000";
@@ -516,10 +478,10 @@ function downloadSVG() {
     qr.make();
 
     const modules = qr.getModuleCount();
-    const qrSize = modules * cellSize + margin * 2 * cellSize;
+    const qrSize = (modules + marginModules * 2) * cellSize;
     const totalSize = getSelectedResolution();
 
-    // 여백을 최소화 - QR 코드가 전체 크기의 95%를 차지하도록
+    // Scale QR code to 95% of total size
     const scaleFactor = (totalSize * 0.95) / qrSize;
     const scaledQrSize = qrSize * scaleFactor;
     const qrOffset = (totalSize - scaledQrSize) / 2;
@@ -532,39 +494,11 @@ function downloadSVG() {
     for (let row = 0; row < modules; row++) {
       for (let col = 0; col < modules; col++) {
         if (qr.isDark(row, col)) {
-          const x = col * cellSize + margin * cellSize;
-          const y = row * cellSize + margin * cellSize;
+          const x = (col + marginModules) * cellSize;
+          const y = (row + marginModules) * cellSize;
 
-          const isPositionPattern =
-            (row < 9 && col < 9) ||
-            (row < 9 && col >= modules - 9) ||
-            (row >= modules - 9 && col < 9);
-
-          const isTimingPattern = row === 6 || col === 6;
-          const isAlignmentPattern = row >= modules - 9 && col >= modules - 9;
-
-          if (isPositionPattern) {
-            svgContent += `\n    <rect x="${x - positionBoost / 2}" y="${
-              y - positionBoost / 2
-            }" width="${cellSize + positionBoost}" height="${
-              cellSize + positionBoost
-            }" fill="${foregroundColor}"/>`;
-          } else if (isTimingPattern) {
-            svgContent += `\n    <rect x="${x - timingBoost / 2}" y="${
-              y - timingBoost / 2
-            }" width="${cellSize + timingBoost}" height="${
-              cellSize + timingBoost
-            }" fill="${foregroundColor}"/>`;
-          } else if (isAlignmentPattern) {
-            const alignBoost = Math.min(positionBoost, timingBoost);
-            svgContent += `\n    <rect x="${x - alignBoost / 2}" y="${
-              y - alignBoost / 2
-            }" width="${cellSize + alignBoost}" height="${
-              cellSize + alignBoost
-            }" fill="${foregroundColor}"/>`;
-          } else {
-            svgContent += `\n    <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${foregroundColor}"/>`;
-          }
+          // Draw standard QR modules without artificial boosts
+          svgContent += `\n    <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${foregroundColor}"/>`;
         }
       }
     }
@@ -721,14 +655,14 @@ function handleResize() {
 // Initialize application
 window.addEventListener("load", function () {
   // Initialize range value displays
-  ["cellSize", "margin", "positionBoost", "timingBoost", "logoSize"].forEach(
+  ["cellSize", "margin", "logoSize"].forEach(
     (id) => {
       updateRangeValue(id);
     }
   );
 
   // Apply debounced generation to range inputs
-  ["cellSize", "margin", "positionBoost", "timingBoost", "logoSize"].forEach(
+  ["cellSize", "margin", "logoSize"].forEach(
     (id) => {
       const input = document.getElementById(id);
       if (input) {

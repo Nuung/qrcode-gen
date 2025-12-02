@@ -557,19 +557,19 @@
               class="form-input"
               onchange="generateQRCode()"
             >
-              <option value="L">Low (7% recovery) - Smallest size</option>
+              <option value="L">Low (7% recovery) - Less dense, faster scan</option>
               <option value="M" selected>
-                Medium (15% recovery) - Balanced
+                Medium (15% recovery) - Balanced (Recommended)
               </option>
               <option value="Q">
-                Quartile (25% recovery) - Good for print
+                Quartile (25% recovery) - Good with small logos
               </option>
               <option value="H">
-                High (30% recovery) - Best for damaged codes
+                High (30% recovery) - Required for large logos
               </option>
             </select>
             <div class="form-help">
-              Higher levels create more robust QR codes but increase size
+              ⚠️ Higher levels make QR codes more dense. Use Low/Medium for cleaner codes without logos.
             </div>
           </div>
 
@@ -585,22 +585,25 @@
                     d="M3,3H21V21H3V3M5,5V19H19V5H5M7,7H9V9H7V7M11,7H13V9H11V7M15,7H17V9H15V7M7,11H9V13H7V11M11,11H13V13H11V11M15,11H17V13H15V11M7,15H9V17H7V15M11,15H13V17H11V15M15,15H17V17H15V15Z"
                   />
                 </svg>
-                Cell Size
+                Cell Size (Module Size)
               </label>
               <div class="range-container">
                 <input
                   type="range"
                   id="cellSize"
                   class="range-input"
-                  min="16"
+                  min="20"
                   max="48"
                   value="32"
                   oninput="updateRangeValue('cellSize'); generateQRCode()"
-                  aria-label="Adjust cell size from 16 to 48 pixels"
+                  aria-label="Adjust cell size from 20 to 48 pixels"
                 />
                 <span class="range-value" id="cellSizeValue" aria-live="polite"
                   >32</span
                 >
+              </div>
+              <div class="form-help">
+                Larger cells improve long-distance scanning. Recommended: 28-36px
               </div>
             </div>
 
@@ -615,73 +618,22 @@
                     d="M3,3H21V5H3V3M3,19H21V21H3V19M3,7H5V17H3V7M19,7H21V17H19V7M7,7H17V9H7V7M7,15H17V17H7V15M7,11H9V13H7V11M15,11H17V13H15V11Z"
                   />
                 </svg>
-                Margin
+                Margin (Quiet Zone)
               </label>
               <div class="range-container">
                 <input
                   type="range"
                   id="margin"
                   class="range-input"
-                  min="0"
-                  max="32"
-                  value="20"
+                  min="2"
+                  max="8"
+                  value="4"
                   oninput="updateRangeValue('margin'); generateQRCode()"
                 />
-                <span class="range-value" id="marginValue">20</span>
+                <span class="range-value" id="marginValue">4</span>
               </div>
-            </div>
-
-            <div class="form-group">
-              <label for="positionBoost" class="form-label">
-                <svg
-                  style="width: 16px; height: 16px; margin-right: 0.5rem"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M5,5H9V9H5V5M10,5H14V9H10V5M15,5H19V9H15V5M5,10H9V14H5V10M10,10H14V14H10V10M15,10H19V14H15V10M5,15H9V19H5V15M10,15H14V19H10V15M15,15H19V19H15V15Z"
-                  />
-                </svg>
-                Position Pattern Boost
-              </label>
-              <div class="range-container">
-                <input
-                  type="range"
-                  id="positionBoost"
-                  class="range-input"
-                  min="0"
-                  max="20"
-                  value="12"
-                  oninput="updateRangeValue('positionBoost'); generateQRCode()"
-                />
-                <span class="range-value" id="positionBoostValue">12</span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="timingBoost" class="form-label">
-                <svg
-                  style="width: 16px; height: 16px; margin-right: 0.5rem"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"
-                  />
-                </svg>
-                Timing Pattern Boost
-              </label>
-              <div class="range-container">
-                <input
-                  type="range"
-                  id="timingBoost"
-                  class="range-input"
-                  min="0"
-                  max="16"
-                  value="8"
-                  oninput="updateRangeValue('timingBoost'); generateQRCode()"
-                />
-                <span class="range-value" id="timingBoostValue">8</span>
+              <div class="form-help">
+                QR standard recommends 4 modules. Increase for better scanning at distance.
               </div>
             </div>
           </div>

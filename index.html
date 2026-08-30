@@ -175,7 +175,7 @@
                 "name": "Why does my QR code not scan after adding a logo?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "The logo is covering more of the code than the error correction can recover. Switch the error correction level to H and reduce the logo size until it scans again."
+                  "text": "Usually the logo covers more modules than the error correction can recover, or it sits too close to the finder squares in the corners. Switch the error correction level to H, reduce the logo size, and keep a clear margin around the code."
                 }
               },
               {
@@ -277,7 +277,7 @@
       </p>
     </section>
 
-    <main id="main">
+    <main id="main" tabindex="-1">
     <div class="main-container">
       <div class="form-panel">
         <div class="tabs" role="tablist" aria-label="QR Code Settings">
@@ -989,7 +989,8 @@
         <li>Download the result as a PNG (300 to 1200 px) or as an SVG.</li>
       </ol>
 
-      <h3>Tips</h3>
+      <h3>Logo image tips</h3>
+      <p>If you upload a logo, these guidelines keep the code scannable.</p>
       <ul>
         <li>
           <strong>Aspect Ratio:</strong> 1:1 (square) recommended for optimal
@@ -1076,8 +1077,8 @@
       </h2>
       <p>
         A QR code carries redundant data so it still reads when part of it is
-        damaged or covered. The QR standard, as published by DENSO WAVE,
-        defines four levels.
+        damaged or covered. The QR standard (ISO/IEC 18004, originally developed
+        by DENSO WAVE) defines four levels.
       </p>
       <div
         class="table-wrap"
@@ -1102,7 +1103,7 @@
             <tr>
               <td>M</td>
               <td>~15%</td>
-              <td>The usual default; least dense of the practical levels.</td>
+              <td>The common default; balances code size and resilience.</td>
             </tr>
             <tr>
               <td>Q</td>
@@ -1118,8 +1119,9 @@
         </table>
       </div>
       <p>
-        Use H when you place a logo over the code, and keep the logo well under
-        a quarter of the code area so enough modules stay readable.
+        Use H when you place a logo over the code, and keep the logo size
+        slider low (it sets the logo width as a share of the code) so enough
+        modules stay readable.
       </p>
     </section>
 
@@ -1138,9 +1140,10 @@
       <details class="faq-item">
         <summary>Why does my QR code not scan after adding a logo?</summary>
         <p>
-          The logo is covering more of the code than the error correction can
-          recover. Switch the error correction level to H and reduce the logo
-          size until it scans again.
+          Usually the logo covers more modules than the error correction can
+          recover, or it sits too close to the finder squares in the corners.
+          Switch the error correction level to H, reduce the logo size, and keep
+          a clear margin around the code.
         </p>
       </details>
 

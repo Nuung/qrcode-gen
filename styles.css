@@ -119,6 +119,10 @@ body {
   font-weight: 600;
 }
 
+#main:focus {
+  outline: none;
+}
+
 .skip-link:focus {
   top: 16px;
   box-shadow: var(--focus-ring);

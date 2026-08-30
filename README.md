@@ -84,7 +84,7 @@
 - Built with Vanilla JavaScript – lightweight and fast  
 - Selectable error correction level (L / M / Q / H)  
 - Entirely client-side processing  
-- PWA ready – installable on desktop and mobile  
+- Web app manifest and icons included  
 
 ## Why Use This Tool?
 

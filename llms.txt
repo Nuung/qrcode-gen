@@ -13,7 +13,7 @@
 - UTM parameters supported: utm_source, utm_medium, utm_campaign, utm_content, utm_term
 - Error correction levels: L (~7%), M (~15%), Q (~25%), H (~30%)
 - Export: PNG at 300, 600, 900 or 1200 px; SVG
-- Runs 100% client-side; no accounts, no tracking of generated codes
+- QR codes are generated in the browser; your URLs and logos never leave your device. No accounts, no tracking of generated codes (the page itself loads Google Analytics)
 - License: MIT
 
 ## Links

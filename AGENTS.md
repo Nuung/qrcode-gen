@@ -106,7 +106,7 @@ If the user wants to see the page ("open the browser and check", "how does it lo
 ### Constants
 
 - Canonical URL: `https://nuung.github.io/qrcode-gen/`, with the trailing slash, used everywhere.
-- GA4 id `G-2NS7NFGKPS`, loaded `async` after `<meta charset>` and the viewport tag.
+- GA4 id `G-2NS7NFGKPS`. The inline `gtag` bootstrap sits after `<meta charset>`, viewport, and the CSP meta; the tag script itself is appended on `window.load` so it does not compete with LCP. The CSP allows the Google signals origins (`*.google.com`, `*.google.co.kr`, `*.doubleclick.net`, `*.googleadservices.com`) in `img-src`/`connect-src`.
 - Search Console verification file `google3ce3045d652a25a6.html` stays.
 - OG image `og-image.png`, 1200×630 PNG. The `og:image:width/height` values match the file.
 - `theme-color` is `#1B8757`.

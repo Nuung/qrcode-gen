@@ -223,7 +223,7 @@ Animate `transform`, `opacity`, `background-color`, `border-color`, and `box-sha
 | `og-image.png` | 1200×630 PNG, 200KB or less | made with these tokens: title, one-line description, a QR mark |
 | `pre-view.png` | any | README screenshot; not the OG image |
 
-Favicon `<link>` tags use the full `https://nuung.github.io/qrcode-gen/...` URL. `site.webmanifest` sets `theme_color` to `#1B8757`; the reference's `#6366f1` is not carried over. The logo appears once, in the hero; beyond the favicon and footer there is no other brand exposure.
+Favicon and manifest `<link>` tags use relative paths (`favicon-32x32.png`, `site.webmanifest`), which resolve under `/qrcode-gen/`. `site.webmanifest` sets `theme_color` to `#1B8757`; the reference's `#6366f1` is not carried over. The logo appears once, in the hero; beyond the favicon and footer there is no other brand exposure.
 
 ---
 

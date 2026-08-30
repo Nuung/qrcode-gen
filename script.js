@@ -7,7 +7,9 @@ let qrGenerated = false;
 
 // Success message function
 let toastTimer = null;
+let suppressToast = false; // true only while rendering the initial code on page load
 function showSuccessMessage(message) {
+  if (suppressToast) return;
   const successEl = document.getElementById("successMessage");
   const textEl = document.getElementById("successText");
   textEl.textContent = message;
@@ -842,7 +844,9 @@ window.addEventListener("load", function () {
   }
 
   // Generate initial QR code
+  suppressToast = true;
   generateQRCode();
+  suppressToast = false;
 });
 
 // Handle visibility change to update logo overlay when tab becomes visible

@@ -15,7 +15,7 @@ Super Easy QR Code Generator is a client-side QR generator with logo overlay and
 
 It is Nuung's personal open-source project under MIT. The title, author, contact address (`hyeon.wo.dev@gmail.com`), GitHub repo (`Nuung/qrcode-gen`), and license stay as they are. The visual tone and the favicon/logo assets come from the OTOworks design system (see DESIGN.md); the brand does not.
 
-The source is three files plus static assets: `index.html`, `styles.css`, `script.js`. The only external dependency is `qrcode-generator@1.4.4` from cdnjs (2.x exists on npm but is not on cdnjs, so the pin stays). Inter is self-hosted as woff2 files in `fonts/`; there is no font CDN.
+The source is three pages (`index.html`, `guide.html`, `faq.html`), one stylesheet (`styles.css`), one script (`script.js`), and static assets. The `<head>` recipe, the navbar, the skip link, and the footer are duplicated by hand in every page: when you change one of them, change all three pages in the same commit and diff them against each other. The only external dependency is `qrcode-generator@1.4.4` from cdnjs (2.x exists on npm but is not on cdnjs, so the pin stays). Inter is self-hosted as woff2 files in `fonts/`; there is no font CDN.
 
 It deploys as a GitHub Pages project site at `https://nuung.github.io/qrcode-gen/`. Because `.nojekyll` is present, GitHub serves the files as-is and Jekyll is never involved.
 
@@ -47,7 +47,7 @@ There is no build. For a local preview run `python3 -m http.server 8080` in the 
 Status codes on the live site:
 
 ```bash
-for p in "" robots.txt llms.txt sitemap.xml site.webmanifest og-image.png favicon.ico apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png; do
+for p in "" guide.html faq.html robots.txt llms.txt sitemap.xml site.webmanifest og-image.png logo.webp favicon.ico apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png; do
   printf "%-32s " "/$p"; curl -s -o /dev/null -w '%{http_code}\n' "https://nuung.github.io/qrcode-gen/$p"; done
 ```
 
@@ -89,7 +89,7 @@ Run the gates that apply to the change before calling it done, and say which one
 | performance | Lighthouse mobile: Performance ≥ 90, Accessibility ≥ 95, SEO 100 |
 | documents | plan.md leakage grep is empty |
 
-Regression checklist: enter a URL, apply each of the four presets, confirm the preview updates and click-to-copy works, upload a logo by click and by drag, resize it, remove it, change both colors, move the cell/margin/version sliders, try all four error-correction levels, download PNG at 300/600/900/1200 and SVG, press Escape to close the toast, confirm the download buttons sit beside the preview on desktop and above the form on mobile, and check the layout on a phone-width viewport.
+Regression checklist: enter a URL, apply each of the four presets, confirm the preview updates and click-to-copy works, upload a logo by click and by drag, resize it, remove it, change both colors, move the cell/margin/version sliders, try all four error-correction levels, download PNG at 300/600/900/1200 and SVG, press Escape to close the toast, confirm the download buttons sit beside the preview on desktop and above the form on mobile, click through the navbar (Generator, Guide, FAQ, GitHub) on each page and confirm the current page is highlighted, and check the layout on a phone-width viewport.
 
 ## Visual QA with cmux
 
@@ -105,29 +105,29 @@ If the user wants to see the page ("open the browser and check", "how does it lo
 
 ### Constants
 
-- Canonical URL: `https://nuung.github.io/qrcode-gen/`, with the trailing slash, used everywhere.
+- Canonical URLs: `https://nuung.github.io/qrcode-gen/` (generator, with the trailing slash), `https://nuung.github.io/qrcode-gen/guide.html`, `https://nuung.github.io/qrcode-gen/faq.html`. Each page declares its own canonical, title, description, and `og:url`; all three share `og-image.png`.
 - GA4 id `G-2NS7NFGKPS`. The inline `gtag` bootstrap sits after `<meta charset>`, viewport, and the CSP meta; the tag script itself is appended on `window.load` so it does not compete with LCP. The CSP allows the Google signals origins (`*.google.com`, `*.google.co.kr`, `*.doubleclick.net`, `*.googleadservices.com`) in `img-src`/`connect-src`.
 - Search Console verification file `google3ce3045d652a25a6.html` stays.
 - OG image `og-image.png`, 1200×630 PNG. The `og:image:width/height` values match the file.
 - `theme-color` is `#1B8757`.
 - `lang="en"`, single language.
-- JSON-LD: keep the existing `WebApplication`; add `FAQPage`, `HowTo`, and `Person` (Nuung, `@id` referenced from `author`, sameAs GitHub and Medium). Inline `<script type="application/ld+json">`, no builder. No invented ratings or reviews. Google retired FAQ and HowTo rich results (2026-05 and 2023-09), and WebApplication needs a rating to qualify, so none of this is expected to produce rich results; the markup is there for AI readers and semantic clarity.
+- JSON-LD per page: `WebApplication` + `Person` (`@id` referenced from `author`, sameAs GitHub and Medium) on the generator; `HowTo` on the guide; `FAQPage` on the FAQ page. Text in the schema matches the visible text on the same page. Inline `<script type="application/ld+json">`, no builder. No invented ratings or reviews. Google retired FAQ and HowTo rich results (2026-05 and 2023-09), and WebApplication needs a rating to qualify, so none of this is expected to produce rich results; the markup is there for AI readers and semantic clarity.
 - `robots.txt` (exact filename) allows everyone, points to the sitemap with an absolute URL, and carries the AI-crawler policy: allow GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User, Google-Extended, Applebot-Extended; disallow Bytespider, CCBot; plus `Content-Signal: search=yes, ai-train=yes, ai-input=yes`. Google-Extended governs Gemini training only; AI Overviews follow normal indexing. The effective copy is the one at the origin root (see constraint 5); keep both copies identical.
 - `llms.txt` follows the llmstxt.org layout: H1, a `>` summary, What it does, Key facts, Links. Its facts must agree with the page.
-- `sitemap.xml` has one URL and `lastmod` equals the date of the last content change, updated by hand (see Commands). No `priority`.
+- `sitemap.xml` lists the three pages; each `lastmod` equals the date of that page's last content change, updated by hand (see Commands). No `priority`.
 - IndexNow: key file at the site root, manual ping after deploys that change content. Bing's index feeds ChatGPT search and Copilot; Google does not use IndexNow.
 - `site.webmanifest` has a real name and short_name; icons, start_url, and scope sit under `/qrcode-gen/`.
 
 ### Rules
 
 - Title 50–60 characters, description 120–160, with "QR code generator", "logo", and "UTM" near the front.
-- One `<h1>`; `h2` then `h3` with no skipped levels. Use `<main>`, `<section>`, `<table>`, `<details>` where they fit.
+- One `<h1>` per page; `h2` then `h3` with no skipped levels. The navbar marks the current page with `aria-current="page"`. Use `<main>`, `<section>`, `<table>`, `<details>` where they fit.
 - Write for AI readers the way you would for a hurried human: conclusion first, then the evidence, then the detail. Put numbers and definitions in tables. Visible FAQ text matters more than the FAQPage schema that accompanies it.
 - Fonts: Inter 400/600/700/800 as self-hosted woff2 with `font-display: swap`, the 400 and 800 weights preloaded, no Google Fonts link or preconnect. Images declare width and height. Animate only transform and opacity. Targets: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1.
 
 ### Checklist for head, content, or static-file changes
 
-- [ ] canonical, og:url, JSON-LD url, sitemap loc identical
+- [ ] canonical, og:url, JSON-LD url, sitemap loc identical for each page; navbar, head recipe, and footer identical across the three pages
 - [ ] new paths return 200 under `/qrcode-gen/`
 - [ ] OG image dimensions match the declared values
 - [ ] JSON-LD passes the Rich Results Test

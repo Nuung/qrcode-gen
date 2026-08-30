@@ -150,15 +150,27 @@ Inter, self-hosted from `fonts/inter-{400,600,700,800}.woff2` through `@font-fac
 
 Spacing steps are 4, 8, 12, 16, 24, 32, 48, 64, 96px. Inner padding is never larger than the space around the component. The container is 1200px wide at most, with 24px side padding (16px on mobile). Breakpoints: 1024, 768, 480 (max-width media queries); the tool area drops to one column at 1024 and below, and panel padding tightens at 768 and 480.
 
-Page order: hero, then `<main>` with the tool, then the explanatory sections (About, How it works, UTM parameters, Error correction, FAQ), then the footer. There is no navbar.
+The site is three static pages that share one navbar (§5.16), one `<head>` recipe, and one footer:
 
-Tool layout (`.main-container`): at 1024px and up, two columns — the form column (`1fr`) on the left and the preview column (`400px`) on the right, gap 32px, `align-items: start`. The preview panel is sticky (`top: 24px`, `max-height: calc(100vh - 48px)`, `overflow-y: auto`). Below 1024px the grid collapses to one column and the **preview comes first** (`order: -1`) and is no longer sticky, so the result and the download buttons are visible before the form.
+| Page | File | Contents | Structured data |
+|---|---|---|---|
+| Generator | `index.html` | navbar, hero, the tool (`<main>`), a four-step "How it works" strip, footer | `WebApplication` + `Person` |
+| Guide | `guide.html` | navbar, page header (h1 + one-line intro), How it works in full with logo tips, UTM parameters table, Error correction table, footer | `HowTo` |
+| FAQ | `faq.html` | navbar, page header, About paragraph, FAQ list, footer | `FAQPage` |
+
+Every page has its own `<title>`, description, canonical, and OG tags; the OG image is shared. The skip link, `<main id="main">`, footer, and CSP meta are identical on all pages.
+
+Tool layout (`.main-container`): at 1024px and up, two columns — the form column (`1fr`) on the left and the preview column (`400px`) on the right, gap 32px, `align-items: start`. The preview panel is sticky (`top: 80px` to clear the 56px navbar, `max-height: calc(100vh - 104px)`, `overflow-y: auto`). Below 1024px the grid collapses to one column and the **preview comes first** (`order: -1`) and is no longer sticky, so the result and the download buttons are visible before the form.
 
 The form column is not tabbed. It holds stacked section cards (§5.15), each fully expanded: 1) Link & tracking — URL, UTM fields, presets; 2) Logo — upload area and remove button; 3) Design — error correction, version, cell size, margin, colors, logo size. Download controls live in the preview panel (§5.10), not in the form.
 
 Field grid inside a card: short fields sit in a two-column grid (`grid-template-columns: 1fr 1fr`, column gap 16px, row gap 24px); a long field such as the URL spans both columns (`grid-column: 1 / -1`). Below 640px every field is full width. Label to input gap 6px. Helper text is shown only where it prevents a mistake, never longer than one line; examples go into placeholders instead. Cards are separated by 24px.
 
-Explanatory sections: paragraphs, lists and FAQ items keep a reading measure of 720px (`max-width: 720px`); tables may use the full 1200px container. Vertical rhythm: 64px between sections on desktop, 48px below 768px; 16px between a table and the paragraph that follows it.
+Explanatory content on the Guide and FAQ pages: paragraphs, lists and FAQ items keep a reading measure of 720px (`max-width: 720px`); tables may use the full 1200px container. Vertical rhythm: 64px between sections on desktop, 48px below 768px; 16px between a table and the paragraph that follows it. Sections alternate flat backgrounds (white, then `--bg-light`) to give the page a rhythm without decoration.
+
+The "How it works" strip on the Generator page is a `--bg-light` band with four equal cards in a row (one column below 768px): a 32px numbered circle (`--emerald-100` background, `--primary-dark` number at 600), a one-line title at `--text-body` 600, and one short sentence at `--text-body-sm` `--text-light`. It ends with a text link to the Guide page.
+
+Page header (Guide, FAQ): h1 at `--text-title-lg` 800 `--text-dark`, one intro line at `--text-body-lg` `--text-medium`, 48px top and 32px bottom padding on `--bg-light` with a 1px `--border-light` bottom edge — the same surface as the hero, without the logo.
 
 ---
 
@@ -208,6 +220,9 @@ Flat `--bg-light` with a 1px `--border-light` bottom edge, since the body backgr
 
 ### 5.15 Tool section cards (`.tool-section`)
 Each option group is a card per §5.1 (white, 1px `--border-light`, `--radius-lg`, `--shadow-lg`, 24px padding; 20px below 768px). Header: a 20px icon in `--primary-color` (`aria-hidden`), an h2 at `--text-title-sm` 700 `--text-dark`, and an optional one-line description at `--text-body-sm` `--text-light`; 16px between header and fields. No underline rule under the header. Cards stack with 24px gaps. Preset chips are a wrapped row (8px gaps) with the "Clear all" action as a text button pushed to the right (`margin-left: auto`, `--error-color` text, no border).
+
+### 5.16 Navbar (`.site-nav`)
+A slim, sticky top bar on every page: 56px tall, `--bg-white`, 1px `--border-light` bottom edge, `position: sticky; top: 0; z-index: 50`. Inside a 1200px container with 24px side padding (16px on mobile): left, the 28px logo mark (`logo.webp`, decorative) followed by the wordmark "QR Generator" at `--text-body` 700 `--text-dark`, linking to `index.html`; center/right, three links — Generator, Guide, FAQ — at `--text-body-sm` 600 `--text-medium`, 44px tall, 12px side padding; the current page's link is `--primary-dark` with a 2px `--primary-color` underline (`border-bottom`), and also carries `aria-current="page"`; far right, a "GitHub" link with a 16px icon, same style as the others. Hover: `--text-dark`. Focus: `--focus-ring`. Below 480px the wordmark text is hidden (the mark stays) so the three links and GitHub fit on one line; there is no hamburger menu. The sticky preview panel on the Generator page uses `top: 80px` (56px nav + 24px) so it never slides under the bar.
 
 ### 5.14 Footer
 `--bg-dark` background; headings white at 700; body text and links `--text-on-dark` (12.02:1); link hover `--secondary-color` (`--primary-color` on the dark surface is 3.95:1 and fails AA; `--secondary-color` measures 7.58:1). Three columns, one on mobile, 64px top padding, copyright row above a 1px `--divider-on-dark` line.

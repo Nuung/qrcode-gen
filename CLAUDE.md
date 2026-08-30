@@ -67,9 +67,9 @@ Other checks:
 3. Every path has to resolve under `/qrcode-gen/`. Root-absolute paths such as `/favicon.ico` return 404 on a project site. Use relative paths or the full `https://nuung.github.io/qrcode-gen/...` URL. This applies to the manifest, JSON-LD, OG tags, and the sitemap alike.
 4. `script.js` depends on these hooks; keep them stable or update the script in the same commit:
    - ids: `backgroundColor cellSize currentUrl downloadResolution errorCorrection foregroundColor hostUrl logoFile logoImage logoOverlay logoPreview logoSize margin pngBtn qrcode removeLogo successMessage successText svgBtn typeNumber utmCampaign utmContent utmMedium utmSource utmTerm`
-   - derived ids: `cellSizeValue logoSizeValue marginValue typeNumberValue` (built as `id + "Value"`), and the tab panels `basic-tab design-tab download-tab` (built as `${name}-tab`)
-   - classes: `.tab`, `.tab-content`, `.upload-area`; the `canvas` inside `#qrcode`
-   - the `data-tab` attribute and `tab-basic`/`tab-design`/`tab-download` ids on the tab buttons, which `switchTab` and the delegated click listener use
+   - derived ids: `cellSizeValue logoSizeValue marginValue typeNumberValue` (built as `id + "Value"`)
+   - classes: `.upload-area`; the `canvas` inside `#qrcode`
+   - layout hooks the stylesheet owns: the three `.tool-section` cards `section-link`, `section-logo`, `section-design`, plus `.field-grid` and `.download-actions`
 5. Keep `.nojekyll`. Do not add files GitHub Pages ignores (`_headers`, `_config.yaml`, `_redirects`). If someone asks for security headers, explain that `<meta http-equiv>` is the only lever, that `frame-ancestors`, `report-uri`, and `sandbox` cannot be set that way, and that `script-src` has to keep `'unsafe-inline'` because the page uses inline `onclick` handlers (adding a nonce or hash would disable `'unsafe-inline'` and kill the UI).
    Crawlers read `robots.txt` only at the origin root. `https://nuung.github.io/robots.txt` is served by the separate `Nuung/nuung.github.io` repository; the copy inside this repo is documentation and has no effect on crawlers.
 6. No functional regressions. The UTM builder, presets, logo overlay, error-correction levels, PNG/SVG export at each resolution, clipboard copy, and the Escape key closing the toast must work the same before and after a restyle. The page does not bind Ctrl/Cmd shortcuts (they would hijack browser find and bookmark keys).
@@ -85,11 +85,11 @@ Run the gates that apply to the change before calling it done, and say which one
 | static files, paths | every row of the status-code matrix is 200, and `robot.txt` is 404 |
 | styles.css | forbidden-color grep is 0; no hex, rgb(a), or `white` literal outside `:root` in `styles.css` (the QR default colors in `index.html` and `script.js` stay black and white and are not themed); nothing overflows at 375, 768, or 1280px |
 | markup, components | regression checklist passes; browser console shows no errors |
-| accessibility | one `<main>`, a skip link, a `prefers-reduced-motion` block; tab keys ←/→/Home/End work; focus rings visible; text contrast meets AA per DESIGN.md §8 |
+| accessibility | one `<main>`, a skip link, a `prefers-reduced-motion` block; focus rings visible; text contrast meets AA per DESIGN.md §8 |
 | performance | Lighthouse mobile: Performance ≥ 90, Accessibility ≥ 95, SEO 100 |
 | documents | plan.md leakage grep is empty |
 
-Regression checklist: enter a URL, apply each of the four presets, confirm the preview updates and click-to-copy works, upload a logo by click and by drag, resize it, remove it, change both colors, move the cell/margin/version sliders, try all four error-correction levels, download PNG at 300/600/900/1200 and SVG, press Escape to close the toast, and check the layout on a phone-width viewport.
+Regression checklist: enter a URL, apply each of the four presets, confirm the preview updates and click-to-copy works, upload a logo by click and by drag, resize it, remove it, change both colors, move the cell/margin/version sliders, try all four error-correction levels, download PNG at 300/600/900/1200 and SVG, press Escape to close the toast, confirm the download buttons sit beside the preview on desktop and above the form on mobile, and check the layout on a phone-width viewport.
 
 ## Visual QA with cmux
 
@@ -153,12 +153,12 @@ Commit messages must not contain AI attribution of any kind: no `Co-Authored-By:
 
 ## Code quality
 
-Remove duplication, name things for what they do, keep functions short, keep state minimal, and prefer the simplest thing that works. Do not add abstractions, helpers, or configuration on the chance they might be useful later. Splitting beyond the three source files needs the user's approval. Keep the existing function signatures in `script.js` (`switchTab`, `generateQRCode`, `downloadQR`, and so on). README claims have to match what the code does.
+Remove duplication, name things for what they do, keep functions short, keep state minimal, and prefer the simplest thing that works. Do not add abstractions, helpers, or configuration on the chance they might be useful later. Splitting beyond the three source files needs the user's approval. Keep the existing function signatures in `script.js` (`generateQRCode`, `downloadQR`, and so on). README claims have to match what the code does.
 
 ## Accessibility
 
 - Landmarks: one `<main>`, a skip link, and the existing `role="banner"` and `role="contentinfo"`.
-- Tabs use `role="tablist/tab/tabpanel"` with `aria-selected`, `aria-controls`, arrow/Home/End keys, and roving tabindex.
+- The tool has no tabs. Every option group is a visible `.tool-section` card with an `h2` heading, so nothing a user must fill in is hidden behind a control.
 - Decorative SVGs and images get `aria-hidden="true"` or an empty `alt`; meaningful images get a real one.
 - Every interactive element shows a focus ring (`--focus-ring` in DESIGN.md). `outline: none` on its own is not acceptable.
 - Transitions and animations are removed under `prefers-reduced-motion: reduce`.

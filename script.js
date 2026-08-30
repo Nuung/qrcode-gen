@@ -19,28 +19,6 @@ function showSuccessMessage(message) {
   toastTimer = setTimeout(() => successEl.classList.remove("show"), 3000);
 }
 
-// Tab switching functionality
-function switchTab(tabName) {
-  document.querySelectorAll(".tab").forEach((tab) => {
-    tab.classList.remove("active");
-    tab.setAttribute("aria-selected", "false");
-    tab.setAttribute("tabindex", "-1");
-  });
-  document
-    .querySelectorAll(".tab-content")
-    .forEach((content) => content.classList.remove("active"));
-
-  const selectedTab = document.querySelector(`[data-tab="${tabName}"]`);
-  const selectedContent = document.getElementById(`${tabName}-tab`);
-
-  if (selectedTab && selectedContent) {
-    selectedTab.classList.add("active");
-    selectedTab.setAttribute("aria-selected", "true");
-    selectedTab.setAttribute("tabindex", "0");
-    selectedContent.classList.add("active");
-  }
-}
-
 // Range value update
 function updateRangeValue(id) {
   const slider = document.getElementById(id);
@@ -363,7 +341,7 @@ function generateQRCode() {
     // Provide helpful error message based on error type
     if (error.message && error.message.includes("overflow")) {
       alert(
-        "⚠️ QR Code Error: URL too long for selected version!\n\n" +
+        "QR Code Error: URL too long for selected version!\n\n" +
         "Solutions:\n" +
         "1. Set 'QR Code Version' to Auto (0) - Recommended\n" +
         "2. Use a higher version number (10-40)\n" +
@@ -610,7 +588,7 @@ function downloadSVG() {
     // Provide helpful error message based on error type
     if (error.message && error.message.includes("overflow")) {
       alert(
-        "⚠️ SVG Export Error: URL too long for selected version!\n\n" +
+        "SVG Export Error: URL too long for selected version!\n\n" +
         "Solutions:\n" +
         "1. Set 'QR Code Version' to Auto (0) - Recommended\n" +
         "2. Use a higher version number (10-40)\n" +
@@ -731,50 +709,6 @@ function handleResize() {
 
 // Initialize application
 window.addEventListener("load", function () {
-  // Delegated tab click handling (tabs use data-tab instead of inline onclick)
-  const tabList = document.querySelector(".tabs");
-  if (tabList) {
-    tabList.addEventListener("click", function (e) {
-      const tab = e.target.closest("[data-tab]");
-      if (tab) switchTab(tab.dataset.tab);
-    });
-
-    // Keyboard navigation with roving tabindex
-    tabList.addEventListener("keydown", function (e) {
-      const tabs = Array.from(tabList.querySelectorAll("[data-tab]"));
-      const currentIndex = tabs.findIndex(
-        (tab) => tab === document.activeElement
-      );
-      if (currentIndex === -1) return;
-
-      let newIndex = null;
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-        newIndex = (currentIndex + 1) % tabs.length;
-      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-        newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
-      } else if (e.key === "Home") {
-        newIndex = 0;
-      } else if (e.key === "End") {
-        newIndex = tabs.length - 1;
-      } else {
-        return;
-      }
-
-      e.preventDefault();
-      const newTab = tabs[newIndex];
-      switchTab(newTab.dataset.tab);
-      newTab.focus();
-    });
-
-    // Initialize roving tabindex so only the active tab is in the tab order
-    tabList.querySelectorAll("[data-tab]").forEach((tab) => {
-      tab.setAttribute(
-        "tabindex",
-        tab.classList.contains("active") ? "0" : "-1"
-      );
-    });
-  }
-
   // Initialize range value displays
   ["cellSize", "margin", "logoSize", "typeNumber"].forEach(
     (id) => {

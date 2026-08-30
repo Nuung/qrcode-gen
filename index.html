@@ -285,105 +285,40 @@
     <main id="main" tabindex="-1">
     <div class="main-container">
       <div class="form-panel">
-        <div class="tabs" role="tablist" aria-label="QR Code Settings">
-          <button
-            class="tab active"
-            role="tab"
-            aria-selected="true"
-            aria-controls="basic-tab"
-            id="tab-basic"
-            data-tab="basic"
-          >
-            <svg aria-hidden="true" class="icon icon-sm"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-              />
-            </svg>
-            Basic Settings
-          </button>
-          <button
-            class="tab"
-            role="tab"
-            aria-selected="false"
-            aria-controls="design-tab"
-            id="tab-design"
-            data-tab="design"
-          >
-            <svg aria-hidden="true" class="icon icon-sm"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4Z"
-              />
-            </svg>
-            Design Options
-          </button>
-          <button
-            class="tab"
-            role="tab"
-            aria-selected="false"
-            aria-controls="download-tab"
-            id="tab-download"
-            data-tab="download"
-          >
-            <svg aria-hidden="true" class="icon icon-sm"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
-            </svg>
-            Download Options
-          </button>
-        </div>
-
-        <div
-          id="basic-tab"
-          class="tab-content active"
-          role="tabpanel"
-          aria-labelledby="tab-basic"
-        >
-          <h2 class="section-title">
+        <section class="tool-section" id="section-link">
+          <div class="tool-section-header">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
               <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                d="M3.9,12C3.9,10.29 5.29,8.9 7,8.9H11V7H7A5,5 0 0,0 2,12A5,5 0 0,0 7,17H11V15.1H7C5.29,15.1 3.9,13.71 3.9,12M8,13H16V11H8V13M17,7H13V8.9H17C18.71,8.9 20.1,10.29 20.1,12C20.1,13.71 18.71,15.1 17,15.1H13V17H17A5,5 0 0,0 22,12A5,5 0 0,0 17,7Z"
               />
             </svg>
-            Basic Configuration
-          </h2>
-
-          <div class="form-group">
-            <label for="hostUrl" class="form-label">
-              <span class="required-asterisk">*</span>
-              Landing Page URL
-            </label>
-            <input
-              type="url"
-              id="hostUrl"
-              class="form-input"
-              value="https://medium.com/@nuung"
-              placeholder="https://example.com"
-              required
-            />
-            <div class="form-help">
-              Enter your website (landing page) URL for traffic tracking.
-            </div>
+            <h2 class="tool-section-title">Link &amp; tracking</h2>
           </div>
+          <p class="tool-section-desc">
+            Enter the landing page and the UTM parameters you want in the QR
+            code.
+          </p>
 
-          <h3 class="section-title">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z"
+          <div class="field-grid">
+            <div class="form-group span-2">
+              <label for="hostUrl" class="form-label">
+                <span class="required-asterisk">*</span>
+                Landing Page URL
+              </label>
+              <input
+                type="url"
+                id="hostUrl"
+                class="form-input"
+                value="https://medium.com/@nuung"
+                placeholder="https://example.com"
+                required
               />
-            </svg>
-            UTM Parameters for Campaign Tracking
-          </h3>
+            </div>
 
-          <div class="utm-grid">
             <div class="form-group">
               <label for="utmSource" class="form-label">
                 <span class="required-asterisk">*</span>
-                utm_source (Traffic Source)
+                utm_source
               </label>
               <input
                 type="text"
@@ -394,14 +329,14 @@
                 required
               />
               <div class="form-help">
-                Where will customers discover your landing page?
+                Where the visitor comes from, e.g. newsletter
               </div>
             </div>
 
             <div class="form-group">
               <label for="utmMedium" class="form-label">
                 <span class="required-asterisk">*</span>
-                utm_medium (Traffic Medium)
+                utm_medium
               </label>
               <input
                 type="text"
@@ -410,15 +345,11 @@
                 value="qr"
                 placeholder="email, social, qr, print"
               />
-              <div class="form-help">
-                What medium brings visitors to your site?
-              </div>
+              <div class="form-help">The channel, e.g. email, social, print</div>
             </div>
 
             <div class="form-group">
-              <label for="utmCampaign" class="form-label"
-                >utm_campaign (Campaign Name)</label
-              >
+              <label for="utmCampaign" class="form-label">utm_campaign</label>
               <input
                 type="text"
                 id="utmCampaign"
@@ -426,13 +357,10 @@
                 value="qr_generator_tool"
                 placeholder="spring_sale, product_launch"
               />
-              <div class="form-help">Which campaign brings visitors?</div>
             </div>
 
             <div class="form-group">
-              <label for="utmContent" class="form-label"
-                >utm_content (Ad Content)</label
-              >
+              <label for="utmContent" class="form-label">utm_content</label>
               <input
                 type="text"
                 id="utmContent"
@@ -440,37 +368,21 @@
                 value="qr_code"
                 placeholder="banner_ad, text_link"
               />
-              <div class="form-help">
-                Distinguish different ads within the same campaign
-              </div>
             </div>
 
-            <div class="form-group">
-              <label for="utmTerm" class="form-label"
-                >utm_term (Target Keywords)</label
-              >
+            <div class="form-group span-2">
+              <label for="utmTerm" class="form-label">utm_term</label>
               <input
                 type="text"
                 id="utmTerm"
                 class="form-input"
                 placeholder="qr generator, marketing tools"
               />
-              <div class="form-help">Target keywords for search ads</div>
             </div>
           </div>
 
           <div class="utm-presets">
-            <div class="form-label">
-              <svg aria-hidden="true"
-                class="icon icon-sm"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M9,4V6H15V4H17V6H20A1,1 0 0,1 21,7V19A1,1 0 0,1 20,20H4A1,1 0 0,1 3,19V7A1,1 0 0,1 4,6H7V4H9M5,8V18H19V8H5M7,10H9V12H7V10M11,10H13V12H11V10M15,10H17V12H15V10Z"
-                />
-              </svg>
-              Quick Presets
-            </div>
+            <div class="form-label">Quick Presets</div>
             <div class="preset-buttons">
               <button
                 type="button"
@@ -538,31 +450,27 @@
               </button>
               <button
                 type="button"
-                class="preset-btn"
+                class="preset-btn preset-clear"
                 onclick="applyPreset('clear-all')"
               >
-                <svg aria-hidden="true"
-                  class="icon-xs"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
-                  />
-                </svg>
                 Clear All
               </button>
             </div>
           </div>
+        </section>
 
-          <h3 class="section-title">
+        <section class="tool-section" id="section-logo">
+          <div class="tool-section-header">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
               />
             </svg>
-            Logo Upload
-          </h3>
+            <h2 class="tool-section-title">Logo</h2>
+          </div>
+          <p class="tool-section-desc">
+            Optional. Use error correction H when you add one.
+          </p>
 
           <div
             class="upload-area"
@@ -602,91 +510,87 @@
             </svg>
             Remove Logo
           </button>
-        </div>
-        <div
-          id="design-tab"
-          class="tab-content"
-          role="tabpanel"
-          aria-labelledby="tab-design"
-        >
-          <h2 class="section-title">
+        </section>
+
+        <section class="tool-section" id="section-design">
+          <div class="tool-section-header">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4Z"
               />
             </svg>
-            Design Customization
-          </h2>
-
-          <div class="form-group">
-            <label for="errorCorrection" class="form-label">
-              <svg aria-hidden="true"
-                class="icon-sm"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,7H13V9H11V7M11,11H13V17H11V11Z"
-                />
-              </svg>
-              Error Correction Level
-            </label>
-            <select
-              id="errorCorrection"
-              class="form-input"
-              onchange="generateQRCode()"
-            >
-              <option value="L">Low (7% recovery) - Less dense, faster scan</option>
-              <option value="M" selected>
-                Medium (15% recovery) - Balanced (Recommended)
-              </option>
-              <option value="Q">
-                Quartile (25% recovery) - Good with small logos
-              </option>
-              <option value="H">
-                High (30% recovery) - Required for large logos
-              </option>
-            </select>
-            <div class="form-help">
-              ⚠️ Higher levels make QR codes more dense. Use Low/Medium for cleaner codes without logos.
-            </div>
+            <h2 class="tool-section-title">Design</h2>
           </div>
+          <p class="tool-section-desc">
+            Error correction, size and colors.
+          </p>
 
-          <div class="form-group">
-            <label for="typeNumber" class="form-label">
-              <svg aria-hidden="true"
-                class="icon-sm"
-                viewBox="0 0 24 24"
-                fill="currentColor"
+          <div class="field-grid">
+            <div class="form-group span-2">
+              <label for="errorCorrection" class="form-label">
+                <svg aria-hidden="true"
+                  class="icon-sm"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,7H13V9H11V7M11,11H13V17H11V11Z"
+                  />
+                </svg>
+                Error Correction Level
+              </label>
+              <select
+                id="errorCorrection"
+                class="form-input"
+                onchange="generateQRCode()"
               >
-                <path
-                  d="M9,4V6H15V4H17V6H20A1,1 0 0,1 21,7V19A1,1 0 0,1 20,20H4A1,1 0 0,1 3,19V7A1,1 0 0,1 4,6H7V4H9M5,8V18H19V8H5M7,10H9V12H7V10M11,10H13V12H11V10M15,10H17V12H15V10Z"
-                />
-              </svg>
-              QR Code Version (Density Control)
-            </label>
-            <div class="range-container">
-              <input
-                type="range"
-                id="typeNumber"
-                class="range-input"
-                min="0"
-                max="40"
-                value="0"
-                oninput="updateRangeValue('typeNumber'); generateQRCode()"
-                aria-label="QR code version from 0 (auto) to 40"
-              />
-              <span class="range-value" id="typeNumberValue" aria-live="polite">Auto</span>
+                <option value="L">Low (7% recovery) - Less dense, faster scan</option>
+                <option value="M" selected>
+                  Medium (15% recovery) - Balanced (Recommended)
+                </option>
+                <option value="Q">
+                  Quartile (25% recovery) - Good with small logos
+                </option>
+                <option value="H">
+                  High (30% recovery) - Required for large logos
+                </option>
+              </select>
+              <div class="form-help">
+                H recovers ~30% and is safest with a logo
+              </div>
             </div>
-            <div class="form-help">
-              <strong>0 = Auto (recommended)</strong> - Automatically selects optimal version for your URL length.<br>
-              1-10 = Less dense/simpler QR codes (for short URLs).<br>
-              11-40 = More dense/complex QR codes (for long URLs).<br>
-              ⚠️ If URL is too long for selected version, auto mode will be used instead.
-            </div>
-          </div>
 
-          <div class="customization-grid">
+            <div class="form-group span-2">
+              <label for="typeNumber" class="form-label">
+                <svg aria-hidden="true"
+                  class="icon-sm"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M9,4V6H15V4H17V6H20A1,1 0 0,1 21,7V19A1,1 0 0,1 20,20H4A1,1 0 0,1 3,19V7A1,1 0 0,1 4,6H7V4H9M5,8V18H19V8H5M7,10H9V12H7V10M11,10H13V12H11V10M15,10H17V12H15V10Z"
+                  />
+                </svg>
+                QR Code Version
+              </label>
+              <div class="range-container">
+                <input
+                  type="range"
+                  id="typeNumber"
+                  class="range-input"
+                  min="0"
+                  max="40"
+                  value="0"
+                  oninput="updateRangeValue('typeNumber'); generateQRCode()"
+                  aria-label="QR code version from 0 (auto) to 40"
+                />
+                <span class="range-value" id="typeNumberValue" aria-live="polite">Auto</span>
+              </div>
+              <div class="form-help">
+                0 = automatic; higher numbers add capacity and density
+              </div>
+            </div>
+
             <div class="form-group">
               <label for="cellSize" class="form-label">
                 <svg aria-hidden="true"
@@ -698,7 +602,7 @@
                     d="M3,3H21V21H3V3M5,5V19H19V5H5M7,7H9V9H7V7M11,7H13V9H11V7M15,7H17V9H15V7M7,11H9V13H7V11M11,11H13V13H11V11M15,11H17V13H15V11M7,15H9V17H7V15M11,15H13V17H11V15M15,15H17V17H15V15Z"
                   />
                 </svg>
-                Cell Size (Module Size)
+                Cell Size
               </label>
               <div class="range-container">
                 <input
@@ -715,9 +619,6 @@
                   >32</span
                 >
               </div>
-              <div class="form-help">
-                Controls the size of each QR module. Larger = bigger QR code. Recommended: 24-40px
-              </div>
             </div>
 
             <div class="form-group">
@@ -731,7 +632,7 @@
                     d="M3,3H21V5H3V3M3,19H21V21H3V19M3,7H5V17H3V7M19,7H21V17H19V7M7,7H17V9H7V7M7,15H17V17H7V15M7,11H9V13H7V11M15,11H17V13H15V11Z"
                   />
                 </svg>
-                Margin (Quiet Zone)
+                Margin
               </label>
               <div class="range-container">
                 <input
@@ -742,185 +643,93 @@
                   max="10"
                   value="4"
                   oninput="updateRangeValue('margin'); generateQRCode()"
+                  aria-label="Quiet zone in modules, from 0 to 10"
                 />
                 <span class="range-value" id="marginValue">4</span>
               </div>
-              <div class="form-help">
-                0 = No margin. QR standard recommends 4 modules. Increase for better scanning at distance.
+            </div>
+
+            <div class="form-group span-2">
+              <div class="form-label">
+                <svg aria-hidden="true"
+                  class="icon-sm"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12,3C7.58,3 4,6.58 4,11C4,16.55 11.05,23.74 11.35,24C11.55,24.22 11.78,24.22 12,24.22C12.22,24.22 12.45,24.22 12.65,24C12.95,23.74 20,16.55 20,11C20,6.58 16.42,3 12,3M12,13.5A2.5,2.5 0 0,1 9.5,11A2.5,2.5 0 0,1 12,8.5A2.5,2.5 0 0,1 14.5,11A2.5,2.5 0 0,1 12,13.5Z"
+                  />
+                </svg>
+                QR Code Colors
+              </div>
+              <div class="color-picker-container">
+                <div class="color-picker-group">
+                  <label for="foregroundColor" class="form-label"
+                    >Foreground</label
+                  >
+                  <input
+                    type="color"
+                    id="foregroundColor"
+                    class="color-picker"
+                    value="#000000"
+                    onchange="generateQRCode()"
+                  />
+                </div>
+                <div class="color-picker-group">
+                  <label for="backgroundColor" class="form-label"
+                    >Background</label
+                  >
+                  <input
+                    type="color"
+                    id="backgroundColor"
+                    class="color-picker"
+                    value="#ffffff"
+                    onchange="generateQRCode()"
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="form-group">
-            <div class="form-label">
-              <svg aria-hidden="true"
-                class="icon-sm"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M12,3C7.58,3 4,6.58 4,11C4,16.55 11.05,23.74 11.35,24C11.55,24.22 11.78,24.22 12,24.22C12.22,24.22 12.45,24.22 12.65,24C12.95,23.74 20,16.55 20,11C20,6.58 16.42,3 12,3M12,13.5A2.5,2.5 0 0,1 9.5,11A2.5,2.5 0 0,1 12,8.5A2.5,2.5 0 0,1 14.5,11A2.5,2.5 0 0,1 12,13.5Z"
-                />
-              </svg>
-              QR Code Colors
-            </div>
-            <div class="color-picker-container">
-              <div class="color-picker-group">
-                <label for="foregroundColor" class="form-label"
-                  >Foreground</label
+            <div class="form-group span-2">
+              <label for="logoSize" class="form-label">
+                <svg aria-hidden="true"
+                  class="icon-sm"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
                 >
+                  <path
+                    d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+                  />
+                </svg>
+                Logo Size (%)
+              </label>
+              <div class="range-container">
                 <input
-                  type="color"
-                  id="foregroundColor"
-                  class="color-picker"
-                  value="#000000"
-                  onchange="generateQRCode()"
+                  type="range"
+                  id="logoSize"
+                  class="range-input"
+                  min="5"
+                  max="20"
+                  value="10"
+                  oninput="updateRangeValue('logoSize'); generateQRCode()"
+                  aria-label="Logo size from 5 to 20 percent of the QR code"
                 />
-              </div>
-              <div class="color-picker-group">
-                <label for="backgroundColor" class="form-label"
-                  >Background</label
-                >
-                <input
-                  type="color"
-                  id="backgroundColor"
-                  class="color-picker"
-                  value="#ffffff"
-                  onchange="generateQRCode()"
-                />
+                <span class="range-value" id="logoSizeValue">10</span>
               </div>
             </div>
           </div>
-
-          <div class="form-group">
-            <label for="logoSize" class="form-label">
-              <svg aria-hidden="true"
-                class="icon-sm"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
-                />
-              </svg>
-              Logo Size (%)
-            </label>
-            <div class="range-container">
-              <input
-                type="range"
-                id="logoSize"
-                class="range-input"
-                min="5"
-                max="20"
-                value="10"
-                oninput="updateRangeValue('logoSize'); generateQRCode()"
-              />
-              <span class="range-value" id="logoSizeValue">10</span>
-            </div>
-          </div>
-        </div>
-
-        <div
-          id="download-tab"
-          class="tab-content"
-          role="tabpanel"
-          aria-labelledby="tab-download"
-        >
-          <h2 class="section-title">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
-            </svg>
-            Download Configuration
-          </h2>
-
-          <div class="form-group">
-            <label for="downloadResolution" class="form-label">
-              <svg aria-hidden="true"
-                class="icon-sm"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M3,3H21V21H3V3M5,5V19H19V5H5Z" />
-              </svg>
-              Download Resolution
-            </label>
-            <select id="downloadResolution" class="form-input">
-              <option value="300">300 x 300 px (Web Small)</option>
-              <option value="600">600 x 600 px (Web Standard)</option>
-              <option value="900">900 x 900 px (Print Medium)</option>
-              <option value="1200" selected>
-                1200 x 1200 px (Print High Quality)
-              </option>
-            </select>
-            <div class="form-help">
-              Choose resolution based on your intended use case
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="form-label">
-              <svg aria-hidden="true"
-                class="icon-sm"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"
-                />
-              </svg>
-              File Format Options
-            </div>
-            <div class="format-options">
-              <div class="format-card">
-                <h3>PNG Format</h3>
-                <p>
-                  Best for digital use, social media, and presentations.
-                  Supports transparency and high quality.
-                </p>
-                <button
-                  class="btn btn-primary"
-                  onclick="downloadQR('png')"
-                  id="pngBtn"
-                  disabled
-                >
-                  <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24">
-                    <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
-                  </svg>
-                  Download PNG
-                </button>
-              </div>
-              <div class="format-card">
-                <h3>SVG Format</h3>
-                <p>
-                  Vector format perfect for logos, print materials, and scalable
-                  designs. Infinite resolution.
-                </p>
-                <button
-                  class="btn btn-secondary"
-                  onclick="downloadQR('svg')"
-                  id="svgBtn"
-                  disabled
-                >
-                  <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24">
-                    <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
-                  </svg>
-                  Download SVG
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        </section>
       </div>
 
       <div class="qr-panel">
-        <h2 class="section-title">
+        <div class="tool-section-header">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
             <path
               d="M3,11H5V13H3V11M11,5H13V9H11V5M9,11H13V15H9V11M15,11H17V13H15V11M19,5H21V9H19V5M5,5H9V9H5V5M3,19H5V21H3V19M5,15H9V19H5V15M19,15H21V19H19V15M9,19H13V21H9V19M15,19H17V21H15V19Z"
             />
           </svg>
-          QR Code Preview
-        </h2>
+          <h2 class="tool-section-title">QR code</h2>
+        </div>
 
         <div class="qr-display">
           <div class="qr-wrapper">
@@ -940,14 +749,43 @@
           https://medium.com/@nuung?utm_source=github&utm_medium=qr&utm_campaign=qr_generator_tool&utm_content=qr_code
         </div>
 
-        <div class="button-group">
-          <button class="btn btn-outline" onclick="generateQRCode()">
+        <div class="form-group">
+          <label for="downloadResolution" class="form-label">Resolution</label>
+          <select id="downloadResolution" class="form-input">
+            <option value="300">300 x 300 px (Web Small)</option>
+            <option value="600">600 x 600 px (Web Standard)</option>
+            <option value="900">900 x 900 px (Print Medium)</option>
+            <option value="1200" selected>
+              1200 x 1200 px (Print High Quality)
+            </option>
+          </select>
+        </div>
+
+        <div class="download-actions">
+          <button
+            class="btn btn-primary btn-block"
+            onclick="downloadQR('png')"
+            id="pngBtn"
+            disabled
+          >
             <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24">
-              <path
-                d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
-              />
+              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
             </svg>
-            Generate QR Code
+            Download PNG
+          </button>
+          <button
+            class="btn btn-secondary btn-block"
+            onclick="downloadQR('svg')"
+            id="svgBtn"
+            disabled
+          >
+            <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24">
+              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+            </svg>
+            Download SVG
+          </button>
+          <button class="btn btn-text" onclick="generateQRCode()">
+            Regenerate
           </button>
         </div>
       </div>
@@ -1269,10 +1107,7 @@
         <div class="footer-bottom">
           <div class="footer-divider"></div>
           <div class="footer-copyright">
-            <p>
-              &copy; 2025 Nuung. Licensed under MIT License. Built with ❤️ for
-              marketers and creators.
-            </p>
+            <p>&copy; 2025 Nuung. MIT License.</p>
             <p class="footer-tech">
               No server required • 100% client-side processing • Privacy-first
               design

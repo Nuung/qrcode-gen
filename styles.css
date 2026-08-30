@@ -130,7 +130,7 @@ body {
 
 .hero-section {
   text-align: center;
-  padding: 3rem 2rem 2rem;
+  padding: 48px 24px 40px;
   background: var(--bg-light);
   border-bottom: 1px solid var(--border-light);
 }
@@ -167,43 +167,76 @@ body {
 .main-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 32px 24px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 32px;
   align-items: start;
 }
 
-.form-panel, .qr-panel {
+/* The form column is a plain wrapper; each .tool-section carries the card chrome. */
+.form-panel {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+
+.tool-section,
+.qr-panel {
   background: var(--bg-white);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 24px;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-light);
 }
 
 .qr-panel {
-  text-align: center;
   position: sticky;
-  top: 2rem;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
 }
 
-.section-title {
+.tool-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+/* No description under the preview heading, so the header owns the full gap. */
+.qr-panel .tool-section-header {
+  margin-bottom: 16px;
+}
+
+.tool-section-title {
   font-size: var(--text-title-sm);
   font-weight: 700;
   color: var(--text-dark);
   line-height: 1.35;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-light);
 }
 
-h3.section-title {
-  font-size: var(--text-body-lg);
-  font-weight: 600;
+/* Indent matches the icon width plus the header gap. */
+.tool-section-desc {
+  font-size: var(--text-body-sm);
+  color: var(--text-light);
+  line-height: 1.5;
+  margin: 0 0 16px 30px;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 24px;
+}
+
+.span-2 {
+  grid-column: 1 / -1;
+}
+
+.field-grid .form-group {
+  margin-bottom: 0;
 }
 
 .icon {
@@ -214,7 +247,7 @@ h3.section-title {
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
 }
 
 .form-label {
@@ -223,7 +256,7 @@ h3.section-title {
   font-weight: 600;
   color: var(--text-dark);
   line-height: 1.5;
-  margin-bottom: 0.5rem;
+  margin-bottom: 6px;
 }
 
 .form-input {
@@ -322,17 +355,11 @@ h3.section-title {
   font-size: var(--text-body-sm);
 }
 
-.utm-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
 
 .form-help {
   font-size: var(--text-label);
   color: var(--text-light);
-  margin-top: 0.25rem;
+  margin-top: 6px;
   line-height: 1.5;
 }
 
@@ -342,18 +369,15 @@ h3.section-title {
 }
 
 .utm-presets {
-  background: var(--bg-light);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius);
-  padding: 1rem;
-  margin-bottom: 1.5rem;
+  margin-top: 24px;
 }
 
 .preset-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
 }
 
 .preset-btn {
@@ -383,13 +407,17 @@ h3.section-title {
   box-shadow: var(--focus-ring);
 }
 
-.preset-btn:last-child {
+.preset-clear {
+  margin-left: auto;
+  padding: 0 8px;
+  border: none;
+  background: transparent;
   color: var(--error-color);
 }
 
-.preset-btn:last-child:hover {
-  background: var(--bg-light);
-  border-color: var(--error-color);
+.preset-clear:hover {
+  background: transparent;
+  text-decoration: underline;
 }
 
 .upload-area {
@@ -400,7 +428,6 @@ h3.section-title {
   cursor: pointer;
   transition: var(--transition);
   background: var(--bg-light);
-  margin-bottom: 1.5rem;
 }
 
 .upload-area:hover,
@@ -456,7 +483,8 @@ h3.section-title {
 }
 
 .qr-display {
-  margin-bottom: 2rem;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 .qr-wrapper {
@@ -471,7 +499,11 @@ h3.section-title {
   max-width: 100%;
 }
 
+/* Caps the displayed code at 280px so the download buttons stay above the fold.
+   The canvas keeps its full internal resolution for export. */
 #qrcode {
+  max-width: 280px;
+  margin: 0 auto;
   position: relative;
   display: flex;
   justify-content: center;
@@ -487,6 +519,7 @@ h3.section-title {
 }
 
 #qrcode canvas {
+  display: block;
   max-width: 100%;
   height: auto;
 }
@@ -571,11 +604,10 @@ h3.section-title {
   margin-right: 0.25rem;
 }
 
-.button-group {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+.download-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
 }
 
 .btn {
@@ -624,21 +656,22 @@ h3.section-title {
   border-color: var(--secondary-color);
 }
 
-.btn-outline {
-  background: var(--bg-white);
-  color: var(--primary-color);
-  border-color: var(--primary-color);
+.btn-block {
+  width: 100%;
+  justify-content: center;
 }
 
-.btn-outline:hover:not(:disabled) {
+.btn-text {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--primary-color);
+  min-height: 44px;
+  width: 100%;
+}
+
+.btn-text:hover:not(:disabled) {
   background: var(--emerald-50);
   color: var(--primary-dark);
-  border-color: var(--primary-dark);
-}
-
-.btn-outline:active:not(:disabled) {
-  color: var(--primary-pressed);
-  border-color: var(--primary-pressed);
 }
 
 .btn:disabled {
@@ -658,7 +691,7 @@ h3.section-title {
   color: var(--error-color);
   border-color: var(--border-medium);
   width: 100%;
-  margin-bottom: 1rem;
+  margin-top: 16px;
   justify-content: center;
 }
 
@@ -720,99 +753,7 @@ h3.section-title {
   border-radius: var(--radius-sm);
 }
 
-.tabs {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 2rem;
-  background: var(--bg-tertiary);
-  border-radius: var(--radius);
-  padding: 4px;
-}
 
-.tab {
-  flex: 1;
-  min-height: 44px;
-  padding: 4px 0.75rem;
-  background: transparent;
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: var(--transition);
-  font-weight: 600;
-  font-family: var(--font-primary);
-  color: var(--text-medium);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--text-body-sm);
-  text-align: center;
-}
-
-.tab.active {
-  background: var(--emerald-100);
-  color: var(--primary-dark);
-}
-
-.tab:hover:not(.active) {
-  color: var(--text-dark);
-}
-
-.tab:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-.customization-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.format-options {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.format-card {
-  background: var(--bg-white);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  padding: 32px;
-  text-align: center;
-  transition: var(--transition);
-}
-
-.format-card:hover {
-  border-color: var(--secondary-color);
-  box-shadow: var(--shadow-emerald);
-}
-
-.format-card h3 {
-  font-size: var(--text-body);
-  font-weight: 600;
-  color: var(--text-dark);
-  line-height: 1.35;
-  margin-bottom: 0.5rem;
-}
-
-.format-card p {
-  font-size: var(--text-body-sm);
-  color: var(--text-medium);
-  margin-bottom: 1rem;
-  line-height: 1.65;
-}
 
 .success-message {
   position: fixed;
@@ -848,7 +789,14 @@ h3.section-title {
 .content-section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: 64px 24px;
+}
+
+.content-section p,
+.content-section ol,
+.content-section ul,
+.content-section .faq-item {
+  max-width: 720px;
 }
 
 .content-title {
@@ -898,6 +846,10 @@ h3.section-title {
   outline: none;
   border-radius: var(--radius-sm);
   box-shadow: var(--focus-ring);
+}
+
+.table-wrap + p {
+  margin-top: 16px;
 }
 
 .table-wrap {
@@ -1094,25 +1046,20 @@ td code {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+  #qrcode {
+    max-width: 240px;
+  }
+
   .main-container {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 24px;
   }
 
+  /* Result and download buttons come before the form on narrow screens. */
   .qr-panel {
+    order: -1;
     position: static;
-  }
-
-  .customization-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .utm-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .format-options {
-    grid-template-columns: 1fr;
+    max-height: none;
   }
 }
 
@@ -1126,40 +1073,22 @@ td code {
     gap: 1rem;
   }
 
-  .form-panel,
-  .qr-panel,
-  .format-card {
+  .tool-section,
+  .qr-panel {
     padding: 20px;
   }
 
   .main-container {
-    padding: 1rem;
+    padding: 16px;
   }
 
   .content-section {
-    padding: 32px 16px;
-  }
-
-  .button-group {
-    flex-direction: column;
+    padding: 48px 16px;
   }
 
   .btn {
     width: 100%;
     min-width: auto;
-  }
-
-  .tabs {
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .tab {
-    text-align: center;
-  }
-
-  .customization-grid {
-    grid-template-columns: 1fr;
   }
 
   .color-picker-container {
@@ -1197,6 +1126,12 @@ td code {
   }
 }
 
+@media (max-width: 640px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 480px) {
 
   .success-message {
@@ -1230,7 +1165,7 @@ td code {
 
   .footer,
   .success-message,
-  .button-group {
+  .download-actions {
     display: none;
   }
 

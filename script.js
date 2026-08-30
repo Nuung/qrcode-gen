@@ -6,12 +6,15 @@ let logoDataUrl = null;
 let qrGenerated = false;
 
 // Success message function
+let toastTimer = null;
 function showSuccessMessage(message) {
   const successEl = document.getElementById("successMessage");
   const textEl = document.getElementById("successText");
   textEl.textContent = message;
   successEl.classList.add("show");
-  setTimeout(() => successEl.classList.remove("show"), 3000);
+  // Restart the timer so back-to-back messages do not get cut short
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => successEl.classList.remove("show"), 3000);
 }
 
 // Tab switching functionality

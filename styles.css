@@ -425,6 +425,7 @@ h3.section-title {
   width: 24px;
   height: 24px;
   margin: 0 auto 1rem;
+  fill: currentColor;
   color: var(--text-light);
   transition: var(--transition);
 }
@@ -517,11 +518,10 @@ h3.section-title {
 
 .url-preview {
   position: relative;
-  padding-right: 40px;
   background: var(--bg-tertiary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius);
-  padding: 12px 14px;
+  padding: 12px 40px 12px 14px; /* right gutter holds the copy glyph */
   font-family: var(--font-mono);
   font-size: var(--text-body-sm);
   color: var(--text-dark);

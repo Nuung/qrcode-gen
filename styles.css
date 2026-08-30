@@ -971,6 +971,11 @@ body {
   padding: 0 24px; /* the shared horizontal inset; bands only carry vertical padding */
 }
 
+/* Reading column for the Guide and FAQ pages */
+.content-inner--narrow {
+  max-width: 768px;
+}
+
 .content-section p,
 .content-section ol,
 .content-section ul,

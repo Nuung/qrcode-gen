@@ -826,6 +826,7 @@ h3.section-title {
   border-left: 4px solid var(--secondary-color);
   box-shadow: var(--shadow-lg);
   opacity: 0;
+  visibility: hidden; /* keeps the hidden toast out of the accessibility tree */
   transform: translateY(8px);
   pointer-events: none;
   transition: var(--transition);
@@ -840,6 +841,7 @@ h3.section-title {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  visibility: visible;
 }
 
 /* Explanatory sections (About, How it works, tables, FAQ) */

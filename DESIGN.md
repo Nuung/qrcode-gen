@@ -182,7 +182,7 @@ Track 6px tall, `--radius-full`, `--border-light`; the filled part is `--primary
 2px dashed `--border-medium`, `--radius-lg`, `--bg-light`, 32px padding, centered 24px icon (`fill: currentColor`) in `--text-light`, instruction in `--text-medium`, secondary line at `--text-label`. Hover and dragover: `--secondary-color` border, `--emerald-50` background, icon turns `--primary-color`. Keyboard focus shows `--focus-ring`. The uploaded preview gets `--radius` and a `--border-light` border.
 
 ### 5.8 Toast (`.success-message`)
-Fixed bottom-right with 24px offsets, at least 280px wide, `--bg-dark`, white text at `--text-body-sm` 600, 4px left border in `--secondary-color`, `--radius`, `--shadow-lg`, 14px 18px padding. Enters with translateY(8px) to 0 and a fade over `--duration-normal`; gone after 3s. Under reduced motion it simply appears and disappears.
+Fixed bottom-right with 24px offsets, at least 280px wide, `--bg-dark`, white text at `--text-body-sm` 600, 4px left border in `--secondary-color`, `--radius`, `--shadow-lg`, 14px 18px padding. Enters with translateY(8px) to 0 and a fade over `--duration-normal`; gone after 3s. While hidden it also sets `visibility: hidden` so assistive tech and contrast checks ignore it. Under reduced motion it simply appears and disappears.
 
 ### 5.9 URL preview (`.url-preview`, `#currentUrl`)
 `--bg-tertiary`, 1px `--border-light`, `--radius`, 12px 14px padding, `--font-mono`, text in `--text-dark`, `word-break: break-all`. The right padding is 40px to leave room for the glyph. Hover signals click-to-copy: `--secondary-color` border, pointer cursor, and a copy glyph (`⧉`, rendered by CSS so the JS-updated text is untouched) on the right in `--text-medium`.

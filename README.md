@@ -109,4 +109,4 @@ MIT License – free for personal and commercial use.
 
 ---
 
-**Built by [Nuung](https://medium.com/@nuung) — Made for marketers and creators**
+**Built by [Nuung](https://www.linkedin.com/in/hyeonwoo-jeong-nuung/) — Made for marketers and creators**

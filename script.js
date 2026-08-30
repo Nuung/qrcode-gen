@@ -818,14 +818,6 @@ window.addEventListener("load", function () {
     });
   }
 
-  // Auto-generate QR code when settings change
-  ["foregroundColor", "backgroundColor"].forEach((id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.addEventListener("change", generateQRCode);
-    }
-  });
-
   // Handle window resize for responsive logo positioning
   window.addEventListener("resize", debounce(handleResize, 100));
 

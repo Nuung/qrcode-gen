@@ -797,7 +797,7 @@ h3.section-title {
   box-shadow: var(--shadow-emerald);
 }
 
-.format-card h4 {
+.format-card h3 {
   font-size: var(--text-body);
   font-weight: 600;
   color: var(--text-dark);

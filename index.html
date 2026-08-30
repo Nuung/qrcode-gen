@@ -149,7 +149,7 @@
   <body>
     <section class="hero-section" role="banner">
       <h1 class="hero-title">
-        <svg
+        <svg aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           width="64"
           height="64"
@@ -191,9 +191,7 @@
             id="tab-basic"
             data-tab="basic"
           >
-            <svg
-              class="icon"
-              class="icon-sm"
+            <svg aria-hidden="true" class="icon icon-sm"
               viewBox="0 0 24 24"
             >
               <path
@@ -210,9 +208,7 @@
             id="tab-design"
             data-tab="design"
           >
-            <svg
-              class="icon"
-              class="icon-sm"
+            <svg aria-hidden="true" class="icon icon-sm"
               viewBox="0 0 24 24"
             >
               <path
@@ -229,9 +225,7 @@
             id="tab-download"
             data-tab="download"
           >
-            <svg
-              class="icon"
-              class="icon-sm"
+            <svg aria-hidden="true" class="icon icon-sm"
               viewBox="0 0 24 24"
             >
               <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
@@ -363,8 +357,8 @@
           </div>
 
           <div class="utm-presets">
-            <label class="form-label">
-              <svg
+            <div class="form-label">
+              <svg aria-hidden="true"
                 class="icon icon-sm"
                 viewBox="0 0 24 24"
               >
@@ -373,14 +367,14 @@
                 />
               </svg>
               Quick Presets
-            </label>
+            </div>
             <div class="preset-buttons">
               <button
                 type="button"
                 class="preset-btn"
                 onclick="applyPreset('social-facebook')"
               >
-                <svg
+                <svg aria-hidden="true"
                   class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -396,7 +390,7 @@
                 class="preset-btn"
                 onclick="applyPreset('email-newsletter')"
               >
-                <svg
+                <svg aria-hidden="true"
                   class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -412,7 +406,7 @@
                 class="preset-btn"
                 onclick="applyPreset('print-brochure')"
               >
-                <svg
+                <svg aria-hidden="true"
                   class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -428,7 +422,7 @@
                 class="preset-btn"
                 onclick="applyPreset('youtube-video')"
               >
-                <svg
+                <svg aria-hidden="true"
                   class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -444,7 +438,7 @@
                 class="preset-btn"
                 onclick="applyPreset('clear-all')"
               >
-                <svg
+                <svg aria-hidden="true"
                   class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -473,7 +467,6 @@
             role="button"
             tabindex="0"
             aria-label="Upload logo image"
-            onkeydown="if(event.key==='Enter'||event.key===' '){document.getElementById('logoFile').click()}"
           >
             <svg class="upload-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -501,7 +494,7 @@
           onclick="removeLogo()"
           style="display: none;"
         >
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+          <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
             <path
               d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
             />
@@ -525,7 +518,7 @@
 
           <div class="form-group">
             <label for="errorCorrection" class="form-label">
-              <svg
+              <svg aria-hidden="true"
                 class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
@@ -559,7 +552,7 @@
 
           <div class="form-group">
             <label for="typeNumber" class="form-label">
-              <svg
+              <svg aria-hidden="true"
                 class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
@@ -594,7 +587,7 @@
           <div class="customization-grid">
             <div class="form-group">
               <label for="cellSize" class="form-label">
-                <svg
+                <svg aria-hidden="true"
                   class="icon-sm"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -627,7 +620,7 @@
 
             <div class="form-group">
               <label for="margin" class="form-label">
-                <svg
+                <svg aria-hidden="true"
                   class="icon-sm"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -657,8 +650,8 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">
-              <svg
+            <div class="form-label">
+              <svg aria-hidden="true"
                 class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
@@ -668,7 +661,7 @@
                 />
               </svg>
               QR Code Colors
-            </label>
+            </div>
             <div class="color-picker-container">
               <div class="color-picker-group">
                 <label for="foregroundColor" class="form-label"
@@ -699,7 +692,7 @@
 
           <div class="form-group">
             <label for="logoSize" class="form-label">
-              <svg
+              <svg aria-hidden="true"
                 class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
@@ -740,7 +733,7 @@
 
           <div class="form-group">
             <label for="downloadResolution" class="form-label">
-              <svg
+              <svg aria-hidden="true"
                 class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
@@ -763,8 +756,8 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">
-              <svg
+            <div class="form-label">
+              <svg aria-hidden="true"
                 class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
@@ -774,10 +767,10 @@
                 />
               </svg>
               File Format Options
-            </label>
+            </div>
             <div class="format-options">
               <div class="format-card">
-                <h4>PNG Format</h4>
+                <h3>PNG Format</h3>
                 <p>
                   Best for digital use, social media, and presentations.
                   Supports transparency and high quality.
@@ -788,14 +781,14 @@
                   id="pngBtn"
                   disabled
                 >
-                  <svg class="btn-icon" viewBox="0 0 24 24">
+                  <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24">
                     <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
                   </svg>
                   Download PNG
                 </button>
               </div>
               <div class="format-card">
-                <h4>SVG Format</h4>
+                <h3>SVG Format</h3>
                 <p>
                   Vector format perfect for logos, print materials, and scalable
                   designs. Infinite resolution.
@@ -806,7 +799,7 @@
                   id="svgBtn"
                   disabled
                 >
-                  <svg class="btn-icon" viewBox="0 0 24 24">
+                  <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24">
                     <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
                   </svg>
                   Download SVG
@@ -818,7 +811,7 @@
 
         <div class="requirements">
           <div class="requirements-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
               />
@@ -880,7 +873,7 @@
 
         <div class="button-group">
           <button class="btn btn-outline" onclick="generateQRCode()">
-            <svg class="btn-icon" viewBox="0 0 24 24">
+            <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24">
               <path
                 d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
               />
@@ -913,7 +906,7 @@
                   rel="noopener noreferrer"
                   class="footer-link"
                 >
-                  <svg
+                  <svg aria-hidden="true"
                     class="footer-icon"
                     viewBox="0 0 24 24"
                     fill="currentColor"
@@ -932,7 +925,7 @@
                   rel="noopener noreferrer"
                   class="footer-link"
                 >
-                  <svg
+                  <svg aria-hidden="true"
                     class="footer-icon"
                     viewBox="0 0 24 24"
                     fill="currentColor"
@@ -952,7 +945,7 @@
             <ul class="footer-links">
               <li>
                 <a href="mailto:hyeon.wo.dev@gmail.com" class="footer-link">
-                  <svg
+                  <svg aria-hidden="true"
                     class="footer-icon"
                     viewBox="0 0 24 24"
                     fill="currentColor"
@@ -985,7 +978,7 @@
     </footer>
 
     <div id="successMessage" class="success-message">
-      <svg
+      <svg aria-hidden="true"
         style="width: 20px; height: 20px; margin-right: 0.5rem"
         viewBox="0 0 24 24"
         fill="currentColor"

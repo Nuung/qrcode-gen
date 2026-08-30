@@ -118,7 +118,6 @@ body {
   border-radius: var(--radius);
   display: inline-block;
   vertical-align: middle;
-  margin-right: 12px;
 }
 
 .hero-title {
@@ -167,7 +166,7 @@ body {
 }
 
 .section-title {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: var(--text-title-sm);
   font-weight: 700;
   color: var(--text-dark);
   line-height: 1.35;
@@ -177,6 +176,11 @@ body {
   gap: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-light);
+}
+
+h3.section-title {
+  font-size: var(--text-body-lg);
+  font-weight: 600;
 }
 
 .icon {
@@ -330,8 +334,8 @@ body {
 }
 
 .preset-btn {
-  padding: 0 0.75rem;
-  min-height: 36px;
+  padding: 0 12px;
+  min-height: 44px;
   background: var(--bg-white);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius);
@@ -395,8 +399,8 @@ body {
 }
 
 .upload-icon {
-  width: 48px;
-  height: 48px;
+  width: 24px;
+  height: 24px;
   margin: 0 auto 1rem;
   color: var(--text-light);
   transition: var(--transition);
@@ -515,6 +519,8 @@ body {
 }
 
 .url-preview {
+  position: relative;
+  padding-right: 40px;
   background: var(--bg-tertiary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius);
@@ -531,6 +537,36 @@ body {
 
 .url-preview:hover {
   border-color: var(--secondary-color);
+}
+
+/* Copy glyph drawn by CSS so JS can keep replacing the text content */
+.url-preview::after {
+  content: "\29C9";
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  color: var(--text-medium);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--easing);
+}
+
+.url-preview:hover::after {
+  opacity: 1;
+}
+
+/* Inline icon sizes (replaces per-element style attributes) */
+.icon-sm {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
+}
+
+.icon-xs {
+  width: 14px;
+  height: 14px;
+  margin-right: 0.25rem;
 }
 
 .button-group {
@@ -693,7 +729,7 @@ body {
 
 .tab {
   flex: 1;
-  min-height: 40px;
+  min-height: 44px;
   padding: 4px 0.75rem;
   background: transparent;
   border: none;
@@ -881,10 +917,9 @@ body {
   flex-shrink: 0;
 }
 
-/* Subtle divider on the dark surface; slate-700 reads as a hairline here. */
 .footer-divider {
   height: 1px;
-  background: var(--text-medium);
+  background: var(--divider-on-dark);
   margin: 2rem 0 1.5rem;
 }
 
@@ -938,10 +973,6 @@ body {
   .hero-title {
     flex-direction: column;
     gap: 1rem;
-  }
-
-  .hero-logo {
-    margin-right: 0;
   }
 
   .form-panel,
@@ -1016,7 +1047,7 @@ body {
   .form-panel,
   .qr-panel,
   .format-card {
-    padding: 1rem;
+    padding: 20px;
   }
 
   .success-message {
@@ -1040,8 +1071,8 @@ body {
   }
 
   .upload-icon {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
 }
 

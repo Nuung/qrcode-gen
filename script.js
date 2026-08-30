@@ -120,7 +120,7 @@ function handleLogoFile(file) {
       logoOverlay.style.display = "flex";
     }
 
-    // 제거 버튼 표시 - 이 부분을 추가하세요
+    // Show the remove button
     const removeBtn = document.getElementById("removeLogo");
     if (removeBtn) {
       removeBtn.style.display = "inline-flex";
@@ -378,14 +378,14 @@ function updateLogoOverlay() {
   const logoSizePercent = parseInt(logoSizeEl.value);
   const canvasRect = canvas.getBoundingClientRect();
 
-  // 프리뷰에서도 정확한 크기로 표시 (캔버스 실제 크기 기준)
+  // Match the preview size to the rendered canvas size
   const logoSize =
     Math.min(canvasRect.width, canvasRect.height) * (logoSizePercent / 100);
 
   logoOverlay.style.width = `${logoSize}px`;
   logoOverlay.style.height = `${logoSize}px`;
 
-  // 패딩도 비례적으로 조정
+  // Scale the padding proportionally
   const padding = logoSize * 0.15;
   logoOverlay.style.padding = `${padding}px`;
   logoOverlay.style.background = "white";
@@ -432,7 +432,7 @@ function downloadPNG() {
   ctx.fillStyle = backgroundColor;
   ctx.fillRect(0, 0, outputSize, outputSize);
 
-  // QR 코드를 여백 없이 거의 전체 캔버스에 그리기 (95% 사용)
+  // Draw the QR code across almost the whole canvas (95%)
   const qrSize = outputSize * 0.95;
   const qrX = (outputSize - qrSize) / 2;
   const qrY = (outputSize - qrSize) / 2;
@@ -446,12 +446,12 @@ function downloadPNG() {
       const logoSizeEl = document.getElementById("logoSize");
       const logoSizePercent = logoSizeEl ? parseInt(logoSizeEl.value) : 10;
 
-      // 로고 크기를 정확히 프리뷰와 같게 설정 (QR 코드 전체 크기 기준으로)
+      // Size the logo exactly as in the preview (relative to the full QR size)
       const logoSize = qrSize * (logoSizePercent / 100);
       const logoX = (outputSize - logoSize) / 2;
       const logoY = (outputSize - logoSize) / 2;
 
-      // 로고 뒤에 배경 추가 (로고보다 약간 크게)
+      // Add a backdrop slightly larger than the logo
       const padding = logoSize * 0.15;
       ctx.fillStyle = backgroundColor;
       ctx.fillRect(
@@ -461,7 +461,7 @@ function downloadPNG() {
         logoSize + padding * 2
       );
 
-      // 로고 그리기
+      // Draw the logo
       ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
 
       downloadCanvasAsPNG(canvas, outputSize);
@@ -563,12 +563,12 @@ function downloadSVG() {
       const logoSizeEl = document.getElementById("logoSize");
       const logoSizePercent = logoSizeEl ? parseInt(logoSizeEl.value) : 10;
 
-      // 로고 크기를 정확히 프리뷰와 같게 설정 (실제 QR 코드 크기 기준으로)
+      // Size the logo exactly as in the preview (relative to the actual QR size)
       const logoSize = scaledQrSize * (logoSizePercent / 100);
       const logoX = (totalSize - logoSize) / 2;
       const logoY = (totalSize - logoSize) / 2;
 
-      // 로고 배경 추가
+      // Add the logo backdrop
       const padding = logoSize * 0.15;
       svgContent += `
   <rect x="${logoX - padding}" y="${logoY - padding}" width="${
@@ -694,7 +694,7 @@ function removeLogo() {
     logoOverlay.style.display = "none";
   }
 
-  // hide remove button - 이 부분이 잘못되었습니다
+  // Hide the remove button
   const removeBtn = document.getElementById("removeLogo");
   if (removeBtn) {
     removeBtn.style.display = "none";

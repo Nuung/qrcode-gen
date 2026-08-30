@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#1B8757" />
     <link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/inter-800.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -26,21 +27,11 @@
     <!-- Primary Meta Tags -->
     <title>Free QR Code Generator with Logo & UTM Campaign Tracking</title>
     <meta
-      name="title"
-      content="Free QR Code Generator with Logo & UTM Campaign Tracking"
-    />
-    <meta
       name="description"
       content="Free browser-based QR code generator with logo overlay and UTM campaign tracking. Export PNG or SVG up to 1200px. Nothing is uploaded to a server."
     />
-    <meta
-      name="keywords"
-      content="QR code generator, UTM tracking, marketing QR codes, branded QR codes, logo QR generator, professional QR codes, campaign tracking, QR analytics, print QR codes, mobile QR scanner"
-    />
     <meta name="author" content="Nuung" />
     <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-    <meta name="revisit-after" content="7 days" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -86,10 +77,6 @@
     <link
       rel="icon"
       type="image/x-icon"
-      href="https://nuung.github.io/qrcode-gen/favicon.ico"
-    />
-    <link
-      rel="shortcut icon"
       href="https://nuung.github.io/qrcode-gen/favicon.ico"
     />
     <link
@@ -152,7 +139,6 @@
     </script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css" />
 
     <!-- QRCode Library -->
     <script
@@ -170,7 +156,7 @@
           viewBox="0 0 64 64"
           style="vertical-align: middle; margin: 12px"
         >
-          <!-- 흰색 원 + 검정 테두리 -->
+          <!-- White circle with dark outline -->
           <circle
             cx="32"
             cy="32"
@@ -180,7 +166,7 @@
             stroke-width="4"
           />
 
-          <!-- 좌상단, 우상단, 좌하단 사각형 -->
+          <!-- Finder-pattern squares: top-left, top-right, bottom-left -->
           <rect x="14" y="14" width="14" height="14" fill="#000000" rx="2" />
           <rect x="36" y="14" width="14" height="14" fill="#000000" rx="2" />
           <rect x="14" y="36" width="14" height="14" fill="#000000" rx="2" />
@@ -207,7 +193,7 @@
           >
             <svg
               class="icon"
-              style="width: 16px; height: 16px; margin-right: 0.5rem"
+              class="icon-sm"
               viewBox="0 0 24 24"
             >
               <path
@@ -226,7 +212,7 @@
           >
             <svg
               class="icon"
-              style="width: 16px; height: 16px; margin-right: 0.5rem"
+              class="icon-sm"
               viewBox="0 0 24 24"
             >
               <path
@@ -245,7 +231,7 @@
           >
             <svg
               class="icon"
-              style="width: 16px; height: 16px; margin-right: 0.5rem"
+              class="icon-sm"
               viewBox="0 0 24 24"
             >
               <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
@@ -379,8 +365,7 @@
           <div class="utm-presets">
             <label class="form-label">
               <svg
-                class="icon"
-                style="width: 16px; height: 16px; margin-right: 0.5rem"
+                class="icon icon-sm"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -396,7 +381,7 @@
                 onclick="applyPreset('social-facebook')"
               >
                 <svg
-                  style="width: 14px; height: 14px; margin-right: 0.25rem"
+                  class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -412,7 +397,7 @@
                 onclick="applyPreset('email-newsletter')"
               >
                 <svg
-                  style="width: 14px; height: 14px; margin-right: 0.25rem"
+                  class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -428,7 +413,7 @@
                 onclick="applyPreset('print-brochure')"
               >
                 <svg
-                  style="width: 14px; height: 14px; margin-right: 0.25rem"
+                  class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -444,7 +429,7 @@
                 onclick="applyPreset('youtube-video')"
               >
                 <svg
-                  style="width: 14px; height: 14px; margin-right: 0.25rem"
+                  class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -460,7 +445,7 @@
                 onclick="applyPreset('clear-all')"
               >
                 <svg
-                  style="width: 14px; height: 14px; margin-right: 0.25rem"
+                  class="icon-xs"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -541,7 +526,7 @@
           <div class="form-group">
             <label for="errorCorrection" class="form-label">
               <svg
-                style="width: 16px; height: 16px; margin-right: 0.5rem"
+                class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -575,7 +560,7 @@
           <div class="form-group">
             <label for="typeNumber" class="form-label">
               <svg
-                style="width: 16px; height: 16px; margin-right: 0.5rem"
+                class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -610,7 +595,7 @@
             <div class="form-group">
               <label for="cellSize" class="form-label">
                 <svg
-                  style="width: 16px; height: 16px; margin-right: 0.5rem"
+                  class="icon-sm"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -643,7 +628,7 @@
             <div class="form-group">
               <label for="margin" class="form-label">
                 <svg
-                  style="width: 16px; height: 16px; margin-right: 0.5rem"
+                  class="icon-sm"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -674,7 +659,7 @@
           <div class="form-group">
             <label class="form-label">
               <svg
-                style="width: 16px; height: 16px; margin-right: 0.5rem"
+                class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -715,7 +700,7 @@
           <div class="form-group">
             <label for="logoSize" class="form-label">
               <svg
-                style="width: 16px; height: 16px; margin-right: 0.5rem"
+                class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -756,7 +741,7 @@
           <div class="form-group">
             <label for="downloadResolution" class="form-label">
               <svg
-                style="width: 16px; height: 16px; margin-right: 0.5rem"
+                class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -780,7 +765,7 @@
           <div class="form-group">
             <label class="form-label">
               <svg
-                style="width: 16px; height: 16px; margin-right: 0.5rem"
+                class="icon-sm"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >

@@ -18,6 +18,7 @@
   --text-light: #64748B;         /* slate-500: on white or slate-50 only */
   --text-muted: #94A3B8;         /* slate-400: placeholders only */
   --text-on-dark: #CBD5E1;       /* slate-300: body text and links on --bg-dark (12.02:1) */
+  --divider-on-dark: rgba(255, 255, 255, 0.1); /* hairline on --bg-dark */
   /* surfaces */
   --bg-white: #FFFFFF;
   --bg-light: #F8FAFC;           /* slate-50 */
@@ -560,6 +561,12 @@ h3.section-title {
 .icon-sm {
   width: 16px;
   height: 16px;
+  margin-right: 0.5rem;
+}
+
+.icon-md {
+  width: 20px;
+  height: 20px;
   margin-right: 0.5rem;
 }
 

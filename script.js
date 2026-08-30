@@ -24,9 +24,7 @@ function switchTab(tabName) {
     .querySelectorAll(".tab-content")
     .forEach((content) => content.classList.remove("active"));
 
-  const selectedTab = document.querySelector(
-    `[onclick="switchTab('${tabName}')"]`
-  );
+  const selectedTab = document.querySelector(`[data-tab="${tabName}"]`);
   const selectedContent = document.getElementById(`${tabName}-tab`);
 
   if (selectedTab && selectedContent) {
@@ -720,6 +718,15 @@ function handleResize() {
 
 // Initialize application
 window.addEventListener("load", function () {
+  // Delegated tab click handling (tabs use data-tab instead of inline onclick)
+  const tabList = document.querySelector(".tabs");
+  if (tabList) {
+    tabList.addEventListener("click", function (e) {
+      const tab = e.target.closest("[data-tab]");
+      if (tab) switchTab(tab.dataset.tab);
+    });
+  }
+
   // Initialize range value displays
   ["cellSize", "margin", "logoSize", "typeNumber"].forEach(
     (id) => {

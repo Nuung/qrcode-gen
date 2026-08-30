@@ -69,7 +69,7 @@ Other checks:
    - ids: `backgroundColor cellSize currentUrl downloadResolution errorCorrection foregroundColor hostUrl logoFile logoImage logoOverlay logoPreview logoSize margin pngBtn qrcode removeLogo successMessage successText svgBtn typeNumber utmCampaign utmContent utmMedium utmSource utmTerm`
    - derived ids: `cellSizeValue logoSizeValue marginValue typeNumberValue` (built as `id + "Value"`), and the tab panels `basic-tab design-tab download-tab` (built as `${name}-tab`)
    - classes: `.tab`, `.tab-content`, `.upload-area`; the `canvas` inside `#qrcode`
-   - the `onclick="switchTab('…')"` attribute on tab buttons, which `switchTab` uses as a selector
+   - the `data-tab` attribute and `tab-basic`/`tab-design`/`tab-download` ids on the tab buttons, which `switchTab` and the delegated click listener use
 5. Keep `.nojekyll`. Do not add files GitHub Pages ignores (`_headers`, `_config.yaml`, `_redirects`). If someone asks for security headers, explain that `<meta http-equiv>` is the only lever, that `frame-ancestors`, `report-uri`, and `sandbox` cannot be set that way, and that `script-src` has to keep `'unsafe-inline'` because the page uses inline `onclick` handlers (adding a nonce or hash would disable `'unsafe-inline'` and kill the UI).
    Crawlers read `robots.txt` only at the origin root. `https://nuung.github.io/robots.txt` is served by the separate `Nuung/nuung.github.io` repository; the copy inside this repo is documentation and has no effect on crawlers.
 6. No functional regressions. The UTM builder, presets, logo overlay, error-correction levels, PNG/SVG export at each resolution, clipboard copy, and keyboard shortcuts must work the same before and after a restyle.

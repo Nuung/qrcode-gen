@@ -909,6 +909,7 @@ h3.section-title {
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 560px;
 }
 
 th {
@@ -931,6 +932,7 @@ td {
 }
 
 td code {
+  white-space: nowrap;
   font-family: var(--font-mono);
   font-size: var(--text-body-sm);
   color: var(--text-dark);

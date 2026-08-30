@@ -191,7 +191,7 @@ Fixed bottom-right with 24px offsets, at least 280px wide, `--bg-dark`, white te
 Centered in a white card, `--radius`, 1px `--border-light`, 16px padding. Before anything is generated, the placeholder is `--bg-tertiary` with a dashed icon.
 
 ### 5.11 Tables (UTM parameters, error correction)
-Full-width `<table>`. Header row: `--bg-tertiary` background, `--text-label` at 700, uppercase with 0.02em tracking, color `--text-medium` (slate-500 fails AA on slate-100). Rows divided by 1px `--border-light`; cells padded 12px 14px. On mobile the table sits in a horizontally scrolling container.
+Full-width `<table>`. Header row: `--bg-tertiary` background, `--text-label` at 700, uppercase with 0.02em tracking, color `--text-medium` (slate-500 fails AA on slate-100). Rows divided by 1px `--border-light`; cells padded 12px 14px. The table keeps a minimum width of 560px so narrow viewports scroll it horizontally inside its container instead of crushing the columns; `<code>` cells do not wrap.
 
 ### 5.12 FAQ
 Native `<details>`/`<summary>`. Summary: `--text-body` at 600 in `--text-dark`, chevron on the right that rotates when open. Body in `--text-medium`. Items separated by 1px `--border-light`.

@@ -1,0 +1,22 @@
+# Super Easy QR Code Generator
+
+> Free, browser-based QR code generator with logo overlay and UTM campaign tracking. Nothing is uploaded to a server. This file describes only the tool at https://nuung.github.io/qrcode-gen/.
+
+## What it does
+- Encodes any landing page URL into a QR code, previewed live in the page
+- Builds the UTM-tagged URL for you from the campaign fields, or from a preset (Facebook, Newsletter, Print, YouTube)
+- Places an uploaded logo over the middle of the code and lets you resize it
+- Lets you set the foreground and background colors, the module size, the quiet zone, and the QR version
+- Exports the finished code as a PNG or an SVG
+
+## Key facts
+- UTM parameters supported: utm_source, utm_medium, utm_campaign, utm_content, utm_term
+- Error correction levels: L (~7%), M (~15%), Q (~25%), H (~30%)
+- Export: PNG at 300, 600, 900 or 1200 px; SVG
+- Runs 100% client-side; no accounts, no tracking of generated codes
+- License: MIT
+
+## Links
+- [Generator](https://nuung.github.io/qrcode-gen/)
+- [Source code](https://github.com/Nuung/qrcode-gen)
+- [Author](https://medium.com/@nuung)

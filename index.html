@@ -127,14 +127,123 @@
         },
         "author": {
           "@type": "Person",
-          "name": "Nuung",
-          "url": "https://medium.com/@nuung"
+          "@id": "https://nuung.github.io/qrcode-gen/#person-nuung"
         },
+        "featureList": [
+          "Logo overlay",
+          "UTM campaign parameters with presets",
+          "Error correction levels L/M/Q/H",
+          "PNG export up to 1200×1200 px",
+          "SVG export",
+          "Runs entirely in the browser"
+        ],
         "datePublished": "2025-06-26",
         "inLanguage": "en",
         "isAccessibleForFree": true,
         "image": "https://nuung.github.io/qrcode-gen/og-image.png",
         "screenshot": "https://nuung.github.io/qrcode-gen/pre-view.png"
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://nuung.github.io/qrcode-gen/#person-nuung",
+            "name": "Nuung",
+            "url": "https://medium.com/@nuung",
+            "sameAs": [
+              "https://github.com/Nuung",
+              "https://medium.com/@nuung"
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is it free, and are my URLs uploaded anywhere?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is free, and nothing is uploaded. The page runs entirely in your browser, so your URL, your logo, and the generated image never leave your device."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why does my QR code not scan after adding a logo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The logo is covering more of the code than the error correction can recover. Switch the error correction level to H and reduce the logo size until it scans again."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which format should I download, PNG or SVG?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "PNG suits screens, social posts, and slides. SVG is a vector, so it stays sharp at any size; use it for print or whenever the code will be resized."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What resolution do I need for print?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Download at 1200 px for print, and keep the printed code large enough that a scanner can resolve the individual modules. The 300 px option is meant for small on-screen use."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the QR code expire?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. The URL is encoded directly into the code, so it keeps working as long as that URL does. There is no redirect service in between and nothing to renew."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I track scans?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Scans are tracked through the UTM parameters in your analytics tool, such as GA4, once the visitor opens the link. The generator itself stores nothing and counts nothing."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "HowTo",
+            "name": "How to create a QR code with a logo and UTM tracking",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "name": "Enter the landing page URL the QR code should open",
+                "text": "Enter the landing page URL the QR code should open."
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Fill in the UTM parameters, or pick one of the quick presets",
+                "text": "Fill in the UTM parameters, or pick one of the quick presets."
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Optionally upload a logo and choose the foreground and background colors",
+                "text": "Optionally upload a logo and choose the foreground and background colors."
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Choose an error correction level",
+                "text": "Choose an error correction level. H is recommended when you add a logo."
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Download the result as a PNG (300 to 1200 px) or as an SVG",
+                "text": "Download the result as a PNG (300 to 1200 px) or as an SVG."
+              }
+            ]
+          }
+        ]
       }
     </script>
 

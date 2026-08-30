@@ -135,6 +135,20 @@ If the user wants to see the page ("open the browser and check", "how does it lo
 - [ ] sitemap lastmod updated
 - [ ] robots.txt AI policy intact
 
+## Deploy checklist (MANDATORY after every push to `main`)
+
+GitHub Pages builds `main` automatically; there is no CI. After a push that changes content, run these in order and report the results:
+
+1. Wait until `gh api repos/Nuung/qrcode-gen/pages/builds/latest --jq .status` prints `built` and the live page contains the change.
+2. Run the status-code matrix from Commands; every path must be 200 and `robot.txt` must be 404.
+3. Confirm `sitemap.xml` `lastmod` matches the date of the change for each page you touched (update it before pushing, see Commands).
+4. Ping IndexNow so Bing, and through it ChatGPT search and Copilot, pick the change up quickly:
+   `curl "https://api.indexnow.org/indexnow?url=https://nuung.github.io/qrcode-gen/&key=7389563c42c748e29d784340d481f20d"`
+   For several pages send one batch POST to `https://api.indexnow.org/indexnow` with `host`, `key`, `keyLocation` (`https://nuung.github.io/7389563c42c748e29d784340d481f20d.txt`) and `urlList`. `202` means accepted. Google ignores IndexNow; Google picks up changes through the sitemap and Search Console.
+5. If `og-image.png` changed, re-scrape the URL in the Facebook Sharing Debugger so cached previews refresh (manual, needs a login).
+
+The origin root `https://nuung.github.io/` is served by the separate repository `Nuung/nuung.github.io`. It owns two things this project depends on: the effective `robots.txt` (crawlers only read the root copy; the `Sitemap:` lines in it point at each project site's sitemap, so add one line per new project site) and the IndexNow key file above (shared by every project site on this host). When the crawler policy changes, edit the root copy there and keep this repository's `robots.txt` identical.
+
 ## Tidy First
 
 A change is either structural (rename, reorganize CSS, refactor markup; behavior unchanged) or behavioral (features, content, metadata). Keep them in separate commits. When both are needed, do the structural part first and confirm with the regression checklist that nothing moved.

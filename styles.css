@@ -495,7 +495,6 @@ body {
   box-shadow: var(--shadow);
   border: 1px solid var(--border-light);
   position: relative;
-  margin-bottom: 1.5rem;
   max-width: 100%;
 }
 
@@ -1103,6 +1102,10 @@ td code {
     justify-content: center;
   }
 
+  .preset-clear {
+    flex: 0 0 auto;
+  }
+
   .footer-container {
     padding: 2rem 1rem 1rem;
   }
@@ -1115,11 +1118,6 @@ td code {
 
   .qr-wrapper {
     padding: 1rem;
-  }
-
-  .logo-overlay {
-    width: 60px;
-    height: 60px;
   }
 }
 
@@ -1172,6 +1170,11 @@ td code {
 
   .form-panel {
     page-break-after: always;
+  }
+  .qr-panel {
+    position: static;
+    max-height: none;
+    overflow: visible;
   }
 }
 

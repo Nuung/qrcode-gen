@@ -874,19 +874,6 @@ document.addEventListener("keydown", function (e) {
     }
   }
 
-  // Ctrl/Cmd + G to generate QR code
-  if ((e.ctrlKey || e.metaKey) && e.key === "g") {
-    e.preventDefault();
-    generateQRCode();
-  }
-
-  // Ctrl/Cmd + D to download PNG
-  if ((e.ctrlKey || e.metaKey) && e.key === "d") {
-    e.preventDefault();
-    if (qrGenerated) {
-      downloadQR("png");
-    }
-  }
 });
 
 // Touch device optimizations

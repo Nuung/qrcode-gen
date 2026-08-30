@@ -72,7 +72,7 @@ Other checks:
    - the `data-tab` attribute and `tab-basic`/`tab-design`/`tab-download` ids on the tab buttons, which `switchTab` and the delegated click listener use
 5. Keep `.nojekyll`. Do not add files GitHub Pages ignores (`_headers`, `_config.yaml`, `_redirects`). If someone asks for security headers, explain that `<meta http-equiv>` is the only lever, that `frame-ancestors`, `report-uri`, and `sandbox` cannot be set that way, and that `script-src` has to keep `'unsafe-inline'` because the page uses inline `onclick` handlers (adding a nonce or hash would disable `'unsafe-inline'` and kill the UI).
    Crawlers read `robots.txt` only at the origin root. `https://nuung.github.io/robots.txt` is served by the separate `Nuung/nuung.github.io` repository; the copy inside this repo is documentation and has no effect on crawlers.
-6. No functional regressions. The UTM builder, presets, logo overlay, error-correction levels, PNG/SVG export at each resolution, clipboard copy, and keyboard shortcuts must work the same before and after a restyle.
+6. No functional regressions. The UTM builder, presets, logo overlay, error-correction levels, PNG/SVG export at each resolution, clipboard copy, and the Escape key closing the toast must work the same before and after a restyle. The page does not bind Ctrl/Cmd shortcuts (they would hijack browser find and bookmark keys).
 7. Explanatory content (About, How it works, UTM table, error-correction table, FAQ) is static HTML so crawlers and AI engines can read it without running JavaScript.
 
 ## Verification gates
@@ -89,7 +89,7 @@ Run the gates that apply to the change before calling it done, and say which one
 | performance | Lighthouse mobile: Performance ≥ 90, Accessibility ≥ 95, SEO 100 |
 | documents | plan.md leakage grep is empty |
 
-Regression checklist: enter a URL, apply each of the four presets, confirm the preview updates and click-to-copy works, upload a logo by click and by drag, resize it, remove it, change both colors, move the cell/margin/version sliders, try all four error-correction levels, download PNG at 300/600/900/1200 and SVG, try the keyboard shortcuts, and check the layout on a phone-width viewport.
+Regression checklist: enter a URL, apply each of the four presets, confirm the preview updates and click-to-copy works, upload a logo by click and by drag, resize it, remove it, change both colors, move the cell/margin/version sliders, try all four error-correction levels, download PNG at 300/600/900/1200 and SVG, press Escape to close the toast, and check the layout on a phone-width viewport.
 
 ## Visual QA with cmux
 

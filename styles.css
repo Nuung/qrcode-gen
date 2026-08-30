@@ -106,6 +106,24 @@ body {
   letter-spacing: 0;
 }
 
+/* Skip link stays in the accessibility tree; it is moved off-screen, not hidden. */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--primary-color);
+  color: var(--bg-white);
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 16px;
+  box-shadow: var(--focus-ring);
+}
+
 .hero-section {
   text-align: center;
   padding: 3rem 2rem 2rem;

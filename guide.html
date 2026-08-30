@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; default-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.google.com https://*.google.co.kr https://*.doubleclick.net https://*.googleadservices.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.google.com https://*.google.co.kr https://*.doubleclick.net https://*.googleadservices.com; manifest-src 'self'" />
+    <meta name="theme-color" content="#1B8757" />
+    <link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/inter-800.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Google tag (gtag.js) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-2NS7NFGKPS");
+      // Load the tag after the page is interactive so it does not compete with LCP
+      window.addEventListener("load", function () {
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=G-2NS7NFGKPS";
+        document.head.appendChild(s);
+      });
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>How to Make a QR Code with a Logo and UTM Tracking</title>
+    <meta
+      name="description"
+      content="Step-by-step guide to creating a QR code with a logo and UTM campaign parameters, plus the UTM and error correction tables you need to get it right."
+    />
+    <meta name="author" content="Nuung" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nuung.github.io/qrcode-gen/guide.html" />
+    <meta
+      property="og:title"
+      content="How to Make a QR Code with a Logo and UTM Tracking"
+    />
+    <meta
+      property="og:description"
+      content="Step-by-step guide to creating a QR code with a logo and UTM campaign parameters, plus the UTM and error correction tables you need to get it right."
+    />
+    <meta
+      property="og:image"
+      content="https://nuung.github.io/qrcode-gen/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Super Easy QR Code Generator" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:url"
+      content="https://nuung.github.io/qrcode-gen/guide.html"
+    />
+    <meta
+      name="twitter:title"
+      content="How to Make a QR Code with a Logo and UTM Tracking"
+    />
+    <meta
+      name="twitter:description"
+      content="Step-by-step guide to creating a QR code with a logo and UTM campaign parameters, plus the UTM and error correction tables you need to get it right."
+    />
+    <meta
+      name="twitter:image"
+      content="https://nuung.github.io/qrcode-gen/og-image.png"
+    />
+    <meta name="twitter:creator" content="@nuung" />
+
+    <!-- Favicon and Icons-->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="favicon.ico"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon-16x16.png"
+    />
+    <link
+      rel="manifest"
+      href="site.webmanifest"
+    />
+
+    <!-- Canonical URL -->
+    <link
+      rel="canonical"
+      href="https://nuung.github.io/qrcode-gen/guide.html"
+    />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to create a QR code with a logo and UTM tracking",
+        "url": "https://nuung.github.io/qrcode-gen/guide.html",
+        "inLanguage": "en",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Enter the landing page URL the QR code should open",
+            "text": "Enter the landing page URL the QR code should open."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Fill in the UTM parameters, or pick one of the quick presets",
+            "text": "Fill in the UTM parameters, or pick one of the quick presets."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Optionally upload a logo and choose the foreground and background colors",
+            "text": "Optionally upload a logo and choose the foreground and background colors."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Choose an error correction level",
+            "text": "Choose an error correction level. H is recommended when you add a logo."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Download the result as a PNG (300 to 1200 px) or as an SVG",
+            "text": "Download the result as a PNG (300 to 1200 px) or as an SVG."
+          }
+        ]
+      }
+    </script>
+
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-nav" role="banner">
+      <nav class="site-nav-inner" aria-label="Primary">
+        <a class="site-nav-brand" href="index.html">
+          <img
+            src="logo.webp"
+            width="28"
+            height="28"
+            alt=""
+            aria-hidden="true"
+            decoding="async"
+          />
+          <span class="site-nav-wordmark">QR Generator</span>
+        </a>
+        <ul class="site-nav-links">
+          <li>
+            <a class="site-nav-link" href="index.html">Generator</a>
+          </li>
+          <li>
+            <a class="site-nav-link is-current" aria-current="page" href="guide.html">Guide</a>
+          </li>
+          <li>
+            <a class="site-nav-link" href="faq.html">FAQ</a>
+          </li>
+          <li>
+            <a
+              class="site-nav-link"
+              href="https://github.com/Nuung/qrcode-gen"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                class="site-nav-icon"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
+                />
+              </svg>
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">
+    <div class="page-header">
+      <div class="content-inner">
+        <h1 class="page-title">How it works</h1>
+        <p class="page-intro">
+          The full walkthrough: the five steps, the UTM parameters that tag your
+          link, and the error correction levels that keep a code with a logo
+          scannable.
+        </p>
+      </div>
+    </div>
+
+    <section class="content-section" id="how-it-works">
+      <div class="content-inner">
+        <h2 class="content-title">Step by step</h2>
+        <ol>
+          <li>Enter the landing page URL the QR code should open.</li>
+          <li>
+            Fill in the UTM parameters, or pick one of the quick presets.
+          </li>
+          <li>
+            Optionally upload a logo and choose the foreground and background
+            colors.
+          </li>
+          <li>
+            Choose an error correction level. H is recommended when you add a
+            logo.
+          </li>
+          <li>Download the result as a PNG (300 to 1200 px) or as an SVG.</li>
+        </ol>
+
+        <h3>Logo image tips</h3>
+        <p>If you upload a logo, these guidelines keep the code scannable.</p>
+        <ul>
+          <li>
+            <strong>Aspect Ratio:</strong> 1:1 (square) recommended for optimal
+            logo display
+          </li>
+          <li>
+            <strong>Resolution:</strong> Minimum 200×200px for reliable scanning
+            across devices
+          </li>
+          <li>
+            <strong>Format:</strong> PNG with transparent background preferred,
+            JPG/SVG also supported
+          </li>
+          <li>
+            <strong>Design:</strong> Simple, high-contrast logos work best for
+            scanner recognition
+          </li>
+          <li>
+            <strong>Testing:</strong> Always test with multiple devices and QR
+            scanner apps
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="content-section band-light" id="utm-parameters">
+      <div class="content-inner">
+        <h2 class="content-title" id="utm-parameters-title">UTM parameters</h2>
+        <p>
+          UTM parameters are tags appended to a link. Analytics tools read them
+          to group visits by where the link was placed and which campaign it
+          belonged to.
+        </p>
+        <div
+          class="table-wrap"
+          role="region"
+          aria-labelledby="utm-parameters-title"
+          tabindex="0"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col">What it identifies</th>
+                <th scope="col">Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>utm_source</code></td>
+                <td>The referrer that sent the visit.</td>
+                <td><code>newsletter</code>, <code>facebook</code></td>
+              </tr>
+              <tr>
+                <td><code>utm_medium</code></td>
+                <td>The marketing medium the link appeared in.</td>
+                <td>
+                  <code>email</code>, <code>social</code>, <code>print</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>utm_campaign</code></td>
+                <td>The name of the campaign the link belongs to.</td>
+                <td><code>spring_sale</code></td>
+              </tr>
+              <tr>
+                <td><code>utm_content</code></td>
+                <td>
+                  Tells apart similar content, or two links inside the same ad.
+                </td>
+                <td><code>qr_code</code></td>
+              </tr>
+              <tr>
+                <td><code>utm_term</code></td>
+                <td>The keyword you bid on in a paid search campaign.</td>
+                <td><code>qr generator</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="error-correction">
+      <div class="content-inner">
+        <h2 class="content-title" id="error-correction-title">
+          Error correction levels
+        </h2>
+        <p>
+          A QR code carries redundant data so it still reads when part of it is
+          damaged or covered. The QR standard (ISO/IEC 18004, originally developed
+          by DENSO WAVE) defines four levels.
+        </p>
+        <div
+          class="table-wrap"
+          role="region"
+          aria-labelledby="error-correction-title"
+          tabindex="0"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Level</th>
+                <th scope="col">Recoverable damage</th>
+                <th scope="col">When to use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>L</td>
+                <td>~7%</td>
+                <td>Plain codes with no logo, shown on a clean surface.</td>
+              </tr>
+              <tr>
+                <td>M</td>
+                <td>~15%</td>
+                <td>The common default; balances code size and resilience.</td>
+              </tr>
+              <tr>
+                <td>Q</td>
+                <td>~25%</td>
+                <td>Small logos, or print that may pick up wear or dirt.</td>
+              </tr>
+              <tr>
+                <td>H</td>
+                <td>~30%</td>
+                <td>Codes with a logo, and print that will be handled.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Use H when you place a logo over the code, and keep the logo size
+          slider low (it sets the logo width as a share of the code) so enough
+          modules stay readable.
+        </p>
+        <a class="text-link" href="index.html"
+          >Try the generator <span aria-hidden="true">&rarr;</span></a
+        >
+      </div>
+    </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3 class="footer-title">Super Easy QR Code Generator</h3>
+            <p class="footer-description">
+              Professional QR code generation with UTM tracking and custom
+              branding for marketing campaigns.
+            </p>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-subtitle">Resources</h4>
+            <ul class="footer-links">
+              <li>
+                <a href="guide.html" class="footer-link">
+                  <svg aria-hidden="true"
+                    class="footer-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M12,21.5C10.65,20.65 8.2,20 6.5,20C4.85,20 3.15,20.3 1.75,21.05C1.65,21.1 1.6,21.1 1.5,21.1C1.25,21.1 1,20.85 1,20.6V6C1.6,5.55 2.25,5.25 3,5C4.11,4.65 5.33,4.5 6.5,4.5C8.45,4.5 10.55,4.9 12,6C13.45,4.9 15.55,4.5 17.5,4.5C18.67,4.5 19.89,4.65 21,5C21.75,5.25 22.4,5.55 23,6V20.6C23,20.85 22.75,21.1 22.5,21.1C22.4,21.1 22.35,21.1 22.25,21.05C20.85,20.3 19.15,20 17.5,20C15.8,20 13.35,20.65 12,21.5M12,8V19.5C13.35,18.65 15.8,18 17.5,18C18.7,18 19.9,18.15 21,18.5V7C19.9,6.65 18.7,6.5 17.5,6.5C15.8,6.5 13.35,7.15 12,8Z"
+                    />
+                  </svg>
+                  Guide
+                </a>
+              </li>
+              <li>
+                <a href="faq.html" class="footer-link">
+                  <svg aria-hidden="true"
+                    class="footer-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                    />
+                  </svg>
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/Nuung/qrcode-gen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="footer-link"
+                >
+                  <svg aria-hidden="true"
+                    class="footer-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
+                    />
+                  </svg>
+                  GitHub Repository
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://medium.com/@nuung"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="footer-link"
+                >
+                  <svg aria-hidden="true"
+                    class="footer-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.54,12A6.8,6.8 0 0,1 6.77,5.22A6.8,6.8 0 0,1 13.54,12A6.8,6.8 0 0,1 6.77,18.78A6.8,6.8 0 0,1 13.54,12M20.96,12A3.5,3.5 0 0,1 18.24,8.5A3.5,3.5 0 0,1 20.96,12A3.5,3.5 0 0,1 18.24,15.5A3.5,3.5 0 0,1 20.96,12M22,12A1.21,1.21 0 0,1 21.79,13.21A1.21,1.21 0 0,1 20.58,12A1.21,1.21 0 0,1 21.79,10.79A1.21,1.21 0 0,1 22,12Z"
+                    />
+                  </svg>
+                  Medium Blog
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-subtitle">Contact</h4>
+            <ul class="footer-links">
+              <li>
+                <a href="mailto:hyeon.wo.dev@gmail.com" class="footer-link">
+                  <svg aria-hidden="true"
+                    class="footer-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"
+                    />
+                  </svg>
+                  hyeon.wo.dev@gmail.com
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-divider"></div>
+          <div class="footer-copyright">
+            <p>&copy; 2025 Nuung. MIT License.</p>
+            <p class="footer-tech">
+              No server required • 100% client-side processing • Privacy-first
+              design
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

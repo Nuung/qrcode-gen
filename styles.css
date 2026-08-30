@@ -128,6 +128,93 @@ body {
   box-shadow: var(--focus-ring);
 }
 
+/* Site navbar: the same slim bar on all three pages. */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.site-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.site-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+  padding-right: 12px;
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.site-nav-brand img {
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.site-nav-brand:focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--focus-ring);
+}
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 12px;
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--text-medium);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.site-nav-link:hover {
+  color: var(--text-dark);
+}
+
+.site-nav-link:focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--focus-ring);
+}
+
+/* Current page: color plus an underline, so it does not rely on color alone. */
+.site-nav-link.is-current {
+  color: var(--primary-dark);
+  border-bottom-color: var(--primary-color);
+}
+
+.site-nav-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
 .hero-section {
   text-align: center;
   padding: 48px 24px 40px;
@@ -190,10 +277,11 @@ body {
   border: 1px solid var(--border-light);
 }
 
+/* 56px navbar + 24px breathing room, so the panel never slides under the bar. */
 .qr-panel {
   position: sticky;
-  top: 24px;
-  max-height: calc(100vh - 48px);
+  top: 80px;
+  max-height: calc(100vh - 104px);
   overflow-y: auto;
 }
 
@@ -781,11 +869,108 @@ body {
   visibility: visible;
 }
 
+/* Page header on the Guide and FAQ pages: the hero surface without the logo. */
+.page-header {
+  padding: 48px 24px 32px;
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--border-light);
+  text-align: center;
+}
+
+.page-title {
+  font-size: var(--text-title-lg);
+  font-weight: 800;
+  line-height: 1.14;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.page-intro {
+  font-size: var(--text-body-lg);
+  color: var(--text-medium);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* "How it works" strip on the Generator page */
+.steps-band {
+  padding: 64px 24px;
+  background: var(--bg-light);
+  border-top: 1px solid var(--border-light);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+  list-style: none;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 12px;
+  border-radius: var(--radius-full);
+  background: var(--emerald-100);
+  color: var(--primary-dark);
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+}
+
+.step-title {
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.step-text {
+  font-size: var(--text-body-sm);
+  line-height: 1.5;
+  color: var(--text-light);
+}
+
+/* Standalone text link that closes a band or a section */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 32px;
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.text-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.text-link:focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--focus-ring);
+}
+
 /* Explanatory sections (About, How it works, tables, FAQ) */
 .content-section {
+  padding: 64px 24px;
+}
+
+/* Sections alternate white and slate-50 bands across the full viewport width. */
+.band-light {
+  background: var(--bg-light);
+}
+
+.content-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 64px 24px;
 }
 
 .content-section p,
@@ -1060,8 +1245,24 @@ td code {
 }
 
 @media (max-width: 768px) {
+  .site-nav-inner {
+    padding: 0 16px;
+  }
+
   .hero-section {
     padding: 2rem 1rem;
+  }
+
+  .page-header {
+    padding: 32px 16px 24px;
+  }
+
+  .steps-band {
+    padding: 48px 16px;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
   }
 
   .hero-title {
@@ -1128,6 +1329,14 @@ td code {
 }
 
 @media (max-width: 480px) {
+  /* The mark stays; dropping the wordmark keeps the four links on one line. */
+  .site-nav-wordmark {
+    display: none;
+  }
+
+  .site-nav-link {
+    padding: 0 8px;
+  }
 
   .success-message {
     left: 16px;
@@ -1158,6 +1367,7 @@ td code {
 /* Print Styles */
 @media print {
 
+  .site-nav,
   .footer,
   .success-message,
   .download-actions {

@@ -18,5 +18,7 @@
 
 ## Links
 - [Generator](https://nuung.github.io/qrcode-gen/)
+- [Guide](https://nuung.github.io/qrcode-gen/guide.html)
+- [FAQ](https://nuung.github.io/qrcode-gen/faq.html)
 - [Source code](https://github.com/Nuung/qrcode-gen)
 - [Author](https://medium.com/@nuung)

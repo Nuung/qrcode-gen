@@ -1,19 +1,22 @@
 {
-    "name": "",
-    "short_name": "",
-    "icons": [
-        {
-            "src": "/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "standalone"
+  "id": "/qrcode-gen/",
+  "name": "Super Easy QR Code Generator",
+  "short_name": "QR Gen",
+  "start_url": "/qrcode-gen/",
+  "scope": "/qrcode-gen/",
+  "display": "standalone",
+  "theme_color": "#1B8757",
+  "background_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "/qrcode-gen/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/qrcode-gen/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

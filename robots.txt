@@ -1,0 +1,47 @@
+# Note: crawlers read robots.txt only at the origin root (https://nuung.github.io/robots.txt).
+# This copy documents the policy for this project; the effective file lives in the user-site repository.
+
+User-agent: *
+Allow: /
+
+# AI search and assistant crawlers (allowed)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Bulk scrapers (blocked)
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+Content-Signal: search=yes, ai-train=yes, ai-input=yes
+
+Sitemap: https://nuung.github.io/qrcode-gen/sitemap.xml

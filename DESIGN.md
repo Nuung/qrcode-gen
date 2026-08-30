@@ -263,7 +263,7 @@ Measured pairings (WCAG 2.1, AA needs 4.5:1 for text):
 | `--text-light` #64748B | white | 4.76 | ok |
 | `--text-light` #64748B | `--bg-tertiary` #F1F5F9 | 4.34 | fails; use `--text-medium` there |
 | `--primary-color` #1B8757 | white | 4.52 | ok, button text and links |
-| `--primary-color` #1B8757 | `--bg-light` #F8FAFC | 4.31 | fails; text links on slate-50 use `--primary-dark` (6.3) |
+| `--primary-color` #1B8757 | `--bg-light` #F8FAFC | 4.31 | fails; all in-content text links use `--primary-dark` (6.3 on slate-50, 6.6 on white) |
 | `--primary-dark` #156A45 | `--emerald-100` #D9F7EA | 5.80 | ok, active tab |
 | `--text-on-dark` #CBD5E1 | `--bg-dark` #0F172A | 12.02 | ok, footer |
 | `--secondary-color` #26C07C | `--bg-dark` #0F172A | 7.58 | ok, footer link hover |

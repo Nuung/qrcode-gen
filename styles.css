@@ -1016,7 +1016,7 @@ body {
 }
 
 .content-section a {
-  color: var(--primary-color);
+  color: var(--primary-dark);
 }
 
 .content-section a:hover {

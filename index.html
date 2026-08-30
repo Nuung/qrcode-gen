@@ -797,39 +797,6 @@
             </div>
           </div>
         </div>
-
-        <div class="requirements">
-          <div class="requirements-title">
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-              />
-            </svg>
-            Best Practices & Recommendations
-          </div>
-          <ul>
-            <li>
-              <strong>Aspect Ratio:</strong> 1:1 (square) recommended for
-              optimal logo display
-            </li>
-            <li>
-              <strong>Resolution:</strong> Minimum 200×200px for reliable
-              scanning across devices
-            </li>
-            <li>
-              <strong>Format:</strong> PNG with transparent background
-              preferred, JPG/SVG also supported
-            </li>
-            <li>
-              <strong>Design:</strong> Simple, high-contrast logos work best for
-              scanner recognition
-            </li>
-            <li>
-              <strong>Testing:</strong> Always test with multiple devices and QR
-              scanner apps
-            </li>
-          </ul>
-        </div>
       </div>
 
       <div class="qr-panel">
@@ -872,6 +839,238 @@
         </div>
       </div>
     </div>
+
+    <section class="content-section" id="about">
+      <h2 class="content-title">About this tool</h2>
+      <p>
+        Super Easy QR Code Generator is a free QR code generator that places
+        your logo in the middle of the code and builds UTM-tagged URLs, so the
+        traffic a printed or shared code brings in shows up in your analytics
+        tool as its own campaign.
+      </p>
+      <p>
+        Everything runs in your browser. The URL you type, the logo you pick,
+        and the file you download stay on your device, and nothing is uploaded
+        to a server. It is an open-source project by Nuung, released under the
+        MIT license; the source is on
+        <a
+          href="https://github.com/Nuung/qrcode-gen"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
+        >.
+      </p>
+    </section>
+
+    <section class="content-section" id="how-it-works">
+      <h2 class="content-title">How it works</h2>
+      <ol>
+        <li>Enter the landing page URL the QR code should open.</li>
+        <li>
+          Fill in the UTM parameters, or pick one of the quick presets.
+        </li>
+        <li>
+          Optionally upload a logo and choose the foreground and background
+          colors.
+        </li>
+        <li>
+          Choose an error correction level. H is recommended when you add a
+          logo.
+        </li>
+        <li>Download the result as a PNG (300 to 1200 px) or as an SVG.</li>
+      </ol>
+
+      <h3>Tips</h3>
+      <ul>
+        <li>
+          <strong>Aspect Ratio:</strong> 1:1 (square) recommended for optimal
+          logo display
+        </li>
+        <li>
+          <strong>Resolution:</strong> Minimum 200×200px for reliable scanning
+          across devices
+        </li>
+        <li>
+          <strong>Format:</strong> PNG with transparent background preferred,
+          JPG/SVG also supported
+        </li>
+        <li>
+          <strong>Design:</strong> Simple, high-contrast logos work best for
+          scanner recognition
+        </li>
+        <li>
+          <strong>Testing:</strong> Always test with multiple devices and QR
+          scanner apps
+        </li>
+      </ul>
+    </section>
+
+    <section class="content-section" id="utm-parameters">
+      <h2 class="content-title" id="utm-parameters-title">UTM parameters</h2>
+      <p>
+        UTM parameters are tags appended to a link. Analytics tools read them
+        to group visits by where the link was placed and which campaign it
+        belonged to.
+      </p>
+      <div
+        class="table-wrap"
+        role="region"
+        aria-labelledby="utm-parameters-title"
+        tabindex="0"
+      >
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Parameter</th>
+              <th scope="col">What it identifies</th>
+              <th scope="col">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>utm_source</code></td>
+              <td>The referrer that sent the visit.</td>
+              <td><code>newsletter</code>, <code>facebook</code></td>
+            </tr>
+            <tr>
+              <td><code>utm_medium</code></td>
+              <td>The marketing medium the link appeared in.</td>
+              <td>
+                <code>email</code>, <code>social</code>, <code>print</code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>utm_campaign</code></td>
+              <td>The name of the campaign the link belongs to.</td>
+              <td><code>spring_sale</code></td>
+            </tr>
+            <tr>
+              <td><code>utm_content</code></td>
+              <td>
+                Tells apart similar content, or two links inside the same ad.
+              </td>
+              <td><code>qr_code</code></td>
+            </tr>
+            <tr>
+              <td><code>utm_term</code></td>
+              <td>The keyword you bid on in a paid search campaign.</td>
+              <td><code>qr generator</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="error-correction">
+      <h2 class="content-title" id="error-correction-title">
+        Error correction levels
+      </h2>
+      <p>
+        A QR code carries redundant data so it still reads when part of it is
+        damaged or covered. The QR standard, as published by DENSO WAVE,
+        defines four levels.
+      </p>
+      <div
+        class="table-wrap"
+        role="region"
+        aria-labelledby="error-correction-title"
+        tabindex="0"
+      >
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Level</th>
+              <th scope="col">Recoverable damage</th>
+              <th scope="col">When to use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>L</td>
+              <td>~7%</td>
+              <td>Plain codes with no logo, shown on a clean surface.</td>
+            </tr>
+            <tr>
+              <td>M</td>
+              <td>~15%</td>
+              <td>The usual default; least dense of the practical levels.</td>
+            </tr>
+            <tr>
+              <td>Q</td>
+              <td>~25%</td>
+              <td>Small logos, or print that may pick up wear or dirt.</td>
+            </tr>
+            <tr>
+              <td>H</td>
+              <td>~30%</td>
+              <td>Codes with a logo, and print that will be handled.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Use H when you place a logo over the code, and keep the logo well under
+        a quarter of the code area so enough modules stay readable.
+      </p>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2 class="content-title">FAQ</h2>
+
+      <details class="faq-item">
+        <summary>Is it free, and are my URLs uploaded anywhere?</summary>
+        <p>
+          It is free, and nothing is uploaded. The page runs entirely in your
+          browser, so your URL, your logo, and the generated image never leave
+          your device.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why does my QR code not scan after adding a logo?</summary>
+        <p>
+          The logo is covering more of the code than the error correction can
+          recover. Switch the error correction level to H and reduce the logo
+          size until it scans again.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Which format should I download, PNG or SVG?</summary>
+        <p>
+          PNG suits screens, social posts, and slides. SVG is a vector, so it
+          stays sharp at any size; use it for print or whenever the code will
+          be resized.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What resolution do I need for print?</summary>
+        <p>
+          Download at 1200 px for print, and keep the printed code large enough
+          that a scanner can resolve the individual modules. The 300 px option
+          is meant for small on-screen use.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does the QR code expire?</summary>
+        <p>
+          No. The URL is encoded directly into the code, so it keeps working as
+          long as that URL does. There is no redirect service in between and
+          nothing to renew.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I track scans?</summary>
+        <p>
+          Scans are tracked through the UTM parameters in your analytics tool,
+          such as GA4, once the visitor opens the link. The generator itself
+          stores nothing and counts nothing.
+        </p>
+      </details>
+    </section>
     </main>
 
     <!-- Footer Section -->

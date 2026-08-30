@@ -943,7 +943,7 @@ body {
   margin-top: 32px;
   font-size: var(--text-body-sm);
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--primary-dark); /* emerald-600 is only 4.31:1 on slate-50 */
   text-decoration: none;
 }
 

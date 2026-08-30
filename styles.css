@@ -502,8 +502,7 @@ body {
 /* Caps the displayed code at 280px so the download buttons stay above the fold.
    The canvas keeps its full internal resolution for export. */
 #qrcode {
-  width: min(280px, 100%); /* fixed footprint so the canvas insertion does not shift layout */
-  max-width: 280px;
+  width: 280px; /* fixed footprint: the wrapper is inline-block, so percentages resolve to auto */
   margin: 0 auto;
   position: relative;
   display: flex;
@@ -1045,8 +1044,7 @@ td code {
 /* Responsive Design */
 @media (max-width: 1024px) {
   #qrcode {
-    width: min(240px, 100%);
-    max-width: 240px;
+    width: 240px;
   }
 
   .main-container {

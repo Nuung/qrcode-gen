@@ -218,7 +218,7 @@ Animate `transform`, `opacity`, `background-color`, `border-color`, and `box-sha
 | `favicon-16x16.png`, `favicon-32x32.png` | 16², 32² | same filenames |
 | `apple-touch-icon.png` | 180² | same filename |
 | `android-chrome-192x192.png`, `android-chrome-512x512.png` | 192², 512² | same filenames |
-| `logo.webp` | 128² or smaller, transparent | `public/images/otoworks_logo_transparent.webp` (1080²), resized; the hero slot is 64px |
+| `logo.webp` | 128² or smaller, transparent | the square "O" mark from `public/android-chrome-512x512.png`, white background removed and resized; the hero slot is 64px. The wordmark (`public/images/otoworks_logo_transparent.webp`) is not used: it is unreadable at 64px |
 | `fonts/inter-400.woff2` … `inter-800.woff2` | latin subset, OFL license file alongside | official Inter release |
 | `og-image.png` | 1200×630 PNG, 200KB or less | made with these tokens: title, one-line description, a QR mark |
 | `pre-view.png` | any | README screenshot; not the OG image |

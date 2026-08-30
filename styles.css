@@ -511,6 +511,7 @@ body {
   min-height: 120px;
   background: var(--bg-tertiary);
   border-radius: var(--radius-sm);
+  aspect-ratio: 1 / 1; /* reserve the square before the canvas is drawn (CLS) */
 }
 
 #qrcode:has(canvas) {

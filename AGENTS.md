@@ -56,7 +56,7 @@ Other checks:
 - Forbidden colors: `grep -riE "667eea|5a67d8|764ba2|6366f1|102, ?126, ?234" styles.css index.html site.webmanifest | wc -l` should print 0.
 - Sitemap date after a content change: `sed -i '' "s|<lastmod>.*</lastmod>|<lastmod>$(date +%F)</lastmod>|" sitemap.xml`. Only run it when `index.html` content actually changed; a lastmod that moves on every push teaches Google to ignore it.
 - IndexNow ping after a deploy: `curl "https://api.indexnow.org/indexnow?url=https://nuung.github.io/qrcode-gen/&key=$INDEXNOW_KEY"` (the key file lives at the site root; Bing Webmaster Tools verification comes first).
-- plan.md leakage: `grep -rn "plan.md" --exclude=plan.md --exclude=AGENTS.md --exclude=CLAUDE.md --exclude-dir=.git --exclude-dir=.omc .` should print nothing.
+- plan.md leakage: `grep -rn "plan.md" --exclude=plan.md --exclude=AGENTS.md --exclude=CLAUDE.md --exclude=.gitignore --exclude-dir=.git --exclude-dir=.omc .` should print nothing.
 - Image size: `sips -g pixelWidth -g pixelHeight <file>`.
 - Lighthouse: `npx lighthouse https://nuung.github.io/qrcode-gen/ --preset=perf --form-factor=mobile --quiet`. A one-off `npx` run is fine; do not install anything.
 

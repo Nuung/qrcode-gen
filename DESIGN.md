@@ -155,7 +155,7 @@ Page order: hero, then `<main>` with the form panel and QR panel side by side, t
 
 ## 5. Components
 
-### 5.1 Cards and panels (`.form-panel`, `.qr-panel`, `.format-card`, explanatory sections)
+### 5.1 Cards and panels (`.form-panel`, `.qr-panel`, `.format-card`)
 White background, 1px `--border-light`, `--radius-lg`, `--shadow-lg`, 32px padding (20px on mobile). Only `.format-card` reacts to hover: `--shadow-emerald` and a `--secondary-color` border.
 
 ### 5.2 Buttons
@@ -197,7 +197,7 @@ Full-width `<table>`. Header row: `--bg-tertiary` background, `--text-label` at 
 Native `<details>`/`<summary>`. Summary: `--text-body` at 600 in `--text-dark`, chevron on the right that rotates when open. Body in `--text-medium`. Items separated by 1px `--border-light`.
 
 ### 5.13 Hero
-Flat `--bg-light` with a 1px `--border-light` bottom edge, since the body background is white and the hero would otherwise have no visible boundary. A 64px logo mark (`.hero-logo`, `--radius`, no border, `width`/`height` attributes set), the h1, and the subtitle. The logo is decorative: `alt=""` and `aria-hidden="true"`.
+Flat `--bg-light` with a 1px `--border-light` bottom edge, since the body background is white and the hero would otherwise have no visible boundary. A 64px logo mark (`.hero-logo`, `--radius`, no border, `width`/`height` attributes set) placed inside the h1 before its text, then the subtitle. Explanatory sections below the tool are full-width prose (`.content-section`, no card chrome). The logo is decorative: `alt=""` and `aria-hidden="true"`.
 
 ### 5.14 Footer
 `--bg-dark` background; headings white at 700; body text and links `--text-on-dark` (12.02:1); link hover `--secondary-color` (`--primary-color` on the dark surface is 3.95:1 and fails AA; `--secondary-color` measures 7.58:1). Three columns, one on mobile, 64px top padding, copyright row above a 1px `--divider-on-dark` line.

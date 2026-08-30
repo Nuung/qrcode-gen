@@ -24,8 +24,7 @@
 
 - Custom logos with smart positioning and sizing  
 - Brand colors with real-time color picker  
-- High-resolution output (1200x1200px) for print quality  
-- Modern UI with glassmorphism effects  
+- High-resolution output (up to 1200×1200 px) for print quality  
 
 ### 2) Complete UTM Tracking
 
@@ -36,16 +35,15 @@
 
 ### 3) Advanced Customization
 
-- Pattern enhancements for optimal scanner recognition  
+- Error correction levels L / M / Q / H (use H with a logo)  
 - Adjustable cell size & margins  
-- Optimized timing patterns for mobile scanning  
 - Export as SVG or PNG  
 
 ### 4) Production Ready
 
 - 100% client-side: no server, no data leakage  
 - Mobile-friendly and responsive  
-- Accessibility compliant (WCAG 2.1)  
+- Built to WCAG 2.1 AA targets (landmarks, keyboard tabs, focus rings)  
 - Cross-browser compatible  
 
 ## Ideal For
@@ -84,8 +82,7 @@
 ## Technical Highlights
 
 - Built with Vanilla JavaScript – lightweight and fast  
-- Error Correction Level L for dense data  
-- Mobile-optimized scanning patterns  
+- Selectable error correction level (L / M / Q / H)  
 - Entirely client-side processing  
 - PWA ready – installable on desktop and mobile  
 

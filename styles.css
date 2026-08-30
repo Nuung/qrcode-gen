@@ -1263,7 +1263,7 @@ td code {
   }
 
   .hero-section {
-    padding: 2rem 1rem;
+    padding: 32px 0 24px;
   }
 
   .page-header {
@@ -1298,7 +1298,6 @@ td code {
   }
 
   .color-picker-container {
-    flex-direction: row;
     gap: 1.5rem;
   }
 
@@ -1339,12 +1338,6 @@ td code {
     order: -1;
     position: static;
     max-height: none;
-  }
-}
-
-@media (max-width: 640px) {
-  .field-grid {
-    grid-template-columns: 1fr;
   }
 }
 

@@ -109,7 +109,13 @@ function handleLogoFile(file) {
 
     const preview = document.getElementById("logoPreview");
     if (preview) {
-      preview.innerHTML = `<img src="${logoDataUrl}" class="preview" alt="Logo Preview: ${file.name}">`;
+      // Build the node instead of innerHTML so the file name cannot inject markup
+      preview.textContent = "";
+      const previewImg = document.createElement("img");
+      previewImg.src = logoDataUrl;
+      previewImg.className = "preview";
+      previewImg.alt = `Logo Preview: ${file.name}`;
+      preview.appendChild(previewImg);
     }
 
     const logoImage = document.getElementById("logoImage");

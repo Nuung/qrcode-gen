@@ -19,6 +19,7 @@ function switchTab(tabName) {
   document.querySelectorAll(".tab").forEach((tab) => {
     tab.classList.remove("active");
     tab.setAttribute("aria-selected", "false");
+    tab.setAttribute("tabindex", "-1");
   });
   document
     .querySelectorAll(".tab-content")
@@ -30,6 +31,7 @@ function switchTab(tabName) {
   if (selectedTab && selectedContent) {
     selectedTab.classList.add("active");
     selectedTab.setAttribute("aria-selected", "true");
+    selectedTab.setAttribute("tabindex", "0");
     selectedContent.classList.add("active");
   }
 }
@@ -724,6 +726,41 @@ window.addEventListener("load", function () {
     tabList.addEventListener("click", function (e) {
       const tab = e.target.closest("[data-tab]");
       if (tab) switchTab(tab.dataset.tab);
+    });
+
+    // Keyboard navigation with roving tabindex
+    tabList.addEventListener("keydown", function (e) {
+      const tabs = Array.from(tabList.querySelectorAll("[data-tab]"));
+      const currentIndex = tabs.findIndex(
+        (tab) => tab === document.activeElement
+      );
+      if (currentIndex === -1) return;
+
+      let newIndex = null;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        newIndex = (currentIndex + 1) % tabs.length;
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      } else if (e.key === "Home") {
+        newIndex = 0;
+      } else if (e.key === "End") {
+        newIndex = tabs.length - 1;
+      } else {
+        return;
+      }
+
+      e.preventDefault();
+      const newTab = tabs[newIndex];
+      switchTab(newTab.dataset.tab);
+      newTab.focus();
+    });
+
+    // Initialize roving tabindex so only the active tab is in the tab order
+    tabList.querySelectorAll("[data-tab]").forEach((tab) => {
+      tab.setAttribute(
+        "tabindex",
+        tab.classList.contains("active") ? "0" : "-1"
+      );
     });
   }
 

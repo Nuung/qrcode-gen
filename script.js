@@ -812,9 +812,6 @@ document.addEventListener("keydown", function (e) {
 
 // Touch device optimizations
 if ("ontouchstart" in window) {
-  // Add touch-friendly styles
-  document.body.classList.add("touch-device");
-
   // Prevent zoom on double tap for buttons
   let lastTouchEnd = 0;
   document.addEventListener(

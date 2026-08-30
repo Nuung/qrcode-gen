@@ -3,6 +3,7 @@
 
 User-agent: *
 Allow: /
+Content-Signal: search=yes, ai-train=yes, ai-input=yes
 
 # AI search and assistant crawlers (allowed)
 User-agent: GPTBot
@@ -41,7 +42,5 @@ Disallow: /
 
 User-agent: CCBot
 Disallow: /
-
-Content-Signal: search=yes, ai-train=yes, ai-input=yes
 
 Sitemap: https://nuung.github.io/qrcode-gen/sitemap.xml

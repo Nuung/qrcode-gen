@@ -123,7 +123,7 @@ If the user wants to see the page ("open the browser and check", "how does it lo
 - Title 50–60 characters, description 120–160, with "QR code generator", "logo", and "UTM" near the front.
 - One `<h1>`; `h2` then `h3` with no skipped levels. Use `<main>`, `<section>`, `<table>`, `<details>` where they fit.
 - Write for AI readers the way you would for a hurried human: conclusion first, then the evidence, then the detail. Put numbers and definitions in tables. Visible FAQ text matters more than the FAQPage schema that accompanies it.
-- Fonts: Inter 400/600/700/800 as self-hosted woff2 with `font-display: swap`, the 400 weight preloaded, no Google Fonts link or preconnect. Images declare width and height. Animate only transform and opacity. Targets: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1.
+- Fonts: Inter 400/600/700/800 as self-hosted woff2 with `font-display: swap`, the 400 and 800 weights preloaded, no Google Fonts link or preconnect. Images declare width and height. Animate only transform and opacity. Targets: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1.
 
 ### Checklist for head, content, or static-file changes
 

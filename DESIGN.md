@@ -83,6 +83,7 @@ How it is implemented: there is no build step, so everything below maps to CSS c
   --text-light: #64748B;         /* slate-500: on white or slate-50 only */
   --text-muted: #94A3B8;         /* slate-400: placeholders only */
   --text-on-dark: #CBD5E1;       /* slate-300: body text and links on --bg-dark (12.02:1) */
+  --divider-on-dark: rgba(255, 255, 255, 0.1); /* hairline on --bg-dark */
   /* surfaces */
   --bg-white: #FFFFFF;
   --bg-light: #F8FAFC;           /* slate-50 */
@@ -127,13 +128,15 @@ Not allowed anywhere: `#667eea`, `#5a67d8`, `#764ba2` (the previous indigo/purpl
 
 ## 3. Type
 
-Inter, self-hosted from `fonts/inter-{400,600,700,800}.woff2` through `@font-face` with `font-display: swap`; the 400 weight is preloaded. No font CDN. The monospace stack is system fallback with no font file loaded. Letter-spacing is 0. Line heights: display 1.14, title 1.35, body 1.65, label 1.5.
+Inter, self-hosted from `fonts/inter-{400,600,700,800}.woff2` through `@font-face` with `font-display: swap`; the 400 (body) and 800 (h1) weights are preloaded. No font CDN. The monospace stack is system fallback with no font file loaded. Letter-spacing is 0. Line heights: display 1.14, title 1.35, body 1.65, label 1.5.
 
 | Role | Variable | Weight | Color |
 |---|---|---|---|
 | page title (h1) | `--text-display` | 800 | `--text-dark` |
 | hero subtitle | `--text-body-lg` | 400 | `--text-medium` |
-| section title (h2) | `--text-title` | 700 | `--text-dark` |
+| section title (h2, content sections) | `--text-title` | 700 | `--text-dark` |
+| panel heading (h2 inside a panel) | `--text-title-sm` | 700 | `--text-dark` |
+| panel subheading (h3 inside a panel) | `--text-body-lg` | 600 | `--text-dark` |
 | subheading (h3) | `--text-title-sm` | 600 | `--text-dark` |
 | body | `--text-body` | 400 | `--text-medium` |
 | form label | `--text-body-sm` | 600 | `--text-dark` |
@@ -158,14 +161,16 @@ White background, 1px `--border-light`, `--radius-lg`, `--shadow-lg`, 32px paddi
 ### 5.2 Buttons
 Primary: `--primary-color` background, white text at 600, `--radius`, 48px tall, 24px side padding. Hover `--primary-dark`, pressed `--primary-pressed`, focus `--focus-ring`.
 Secondary: white background, 1px `--border-medium`, `--text-dark` at 600. Hover: `--secondary-color` border and `--emerald-50` background.
+Outline (Generate QR Code): white background, 1px `--primary-color` border, `--primary-color` text at 600; hover `--emerald-50` background with `--primary-dark`.
 Danger (remove logo): secondary shape with `--error-color` text.
+Compact preset buttons: secondary style, min-height 44px (touch target), padding 0 12px, `--text-label` at 600.
 Disabled: opacity .5, `cursor: not-allowed`. Icons are 20px with an 8px gap.
 
 ### 5.3 Text inputs and selects (`.form-input`, `select`)
 44px tall, 14px side padding, 1px `--border-medium`, `--radius`, white background, `--text-dark`. Focus: `--secondary-color` border plus `--focus-ring`; `outline: none` is fine only alongside the ring. Error: `--error-color` border and help text. Placeholder `--text-muted`.
 
 ### 5.4 Tabs (`.tabs`, `.tab`)
-Container: `--bg-tertiary`, `--radius`, 4px padding, 4px gaps. Tab: 40px tall, `--radius-sm`, `--text-medium` at 600 (slate-500 would fail contrast on this background). Active: `--emerald-100` background with `--primary-dark` text (5.80:1). Inactive hover: `--text-dark`. Keyboard: ←/→/Home/End, roving tabindex, `--focus-ring`.
+Container: `--bg-tertiary`, `--radius`, 4px padding, 4px gaps. Tab: 44px tall (touch target), `--radius-sm`, `--text-medium` at 600 (slate-500 would fail contrast on this background). Active: `--emerald-100` background with `--primary-dark` text (5.80:1). Inactive hover: `--text-dark`. Keyboard: ←/→/Home/End, roving tabindex, `--focus-ring`.
 
 ### 5.5 Slider (`.range-input`)
 Track 6px tall, `--radius-full`, `--border-light`; the filled part is `--primary-color` where it can be drawn without JS, otherwise a plain track is acceptable. Thumb: 18px circle, white, 2px `--primary-color` border, `--shadow`; hover darkens the border to `--primary-dark`. Focus ring on the thumb. Value readout: `--text-body-sm` at 600 in `--primary-dark`.
@@ -180,7 +185,7 @@ Track 6px tall, `--radius-full`, `--border-light`; the filled part is `--primary
 Fixed bottom-right with 24px offsets, at least 280px wide, `--bg-dark`, white text at `--text-body-sm` 600, 4px left border in `--secondary-color`, `--radius`, `--shadow-lg`, 14px 18px padding. Enters with translateY(8px) to 0 and a fade over `--duration-normal`; gone after 3s. Under reduced motion it simply appears and disappears.
 
 ### 5.9 URL preview (`.url-preview`, `#currentUrl`)
-`--bg-tertiary`, 1px `--border-light`, `--radius`, 12px 14px padding, `--font-mono`, text in `--text-dark`, `word-break: break-all`. Hover signals click-to-copy: `--secondary-color` border, pointer cursor, a copy icon on the right in `--text-medium`.
+`--bg-tertiary`, 1px `--border-light`, `--radius`, 12px 14px padding, `--font-mono`, text in `--text-dark`, `word-break: break-all`. Hover signals click-to-copy: `--secondary-color` border, pointer cursor, and a copy glyph (`⧉`, rendered by CSS so the JS-updated text is untouched) on the right in `--text-medium`.
 
 ### 5.10 QR preview (`#qrcode`, `.logo-overlay`)
 Centered in a white card, `--radius`, 1px `--border-light`, 16px padding. Before anything is generated, the placeholder is `--bg-tertiary` with a dashed icon.
@@ -195,7 +200,7 @@ Native `<details>`/`<summary>`. Summary: `--text-body` at 600 in `--text-dark`, 
 Flat `--bg-light` with a 1px `--border-light` bottom edge, since the body background is white and the hero would otherwise have no visible boundary. A 64px logo mark (`.hero-logo`, `--radius`, no border, `width`/`height` attributes set), the h1, and the subtitle. The logo is decorative: `alt=""` and `aria-hidden="true"`.
 
 ### 5.14 Footer
-`--bg-dark` background; headings white at 700; body text and links `--text-on-dark` (12.02:1); link hover `--secondary-color` (`--primary-color` on the dark surface is 3.95:1 and fails AA; `--secondary-color` measures 7.58:1). Three columns, one on mobile, 64px top padding, copyright row above a 1px `rgba(255,255,255,.1)` line.
+`--bg-dark` background; headings white at 700; body text and links `--text-on-dark` (12.02:1); link hover `--secondary-color` (`--primary-color` on the dark surface is 3.95:1 and fails AA; `--secondary-color` measures 7.58:1). Three columns, one on mobile, 64px top padding, copyright row above a 1px `--divider-on-dark` line.
 
 ---
 

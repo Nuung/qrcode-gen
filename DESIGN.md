@@ -147,7 +147,7 @@ Inter, self-hosted from `fonts/inter-{400,600,700,800}.woff2` through `@font-fac
 
 ## 4. Spacing and layout
 
-Spacing steps are 4, 8, 12, 16, 24, 32, 48, 64, 96px. Inner padding is never larger than the space around the component. The container is 1200px wide at most, with 24px side padding (16px on mobile). Breakpoints: 640, 768, 1024, 1280; the tool area drops to one column below 768.
+Spacing steps are 4, 8, 12, 16, 24, 32, 48, 64, 96px. Inner padding is never larger than the space around the component. The container is 1200px wide at most, with 24px side padding (16px on mobile). Breakpoints: 1024, 768, 480 (max-width media queries); the tool area drops to one column at 1024 and below, and panel padding tightens at 768 and 480.
 
 Page order: hero, then `<main>` with the form panel and QR panel side by side, then the explanatory sections (About, How it works, UTM parameters, Error correction, FAQ), then the footer. There is no navbar.
 
@@ -179,13 +179,13 @@ Track 6px tall, `--radius-full`, `--border-light`; the filled part is `--primary
 44×44px wrapper, `--radius`, 1px `--border-medium`, 4px padding, white; inner swatch `--radius-sm`. Hover border `--secondary-color`. The hex value sits beside it in `--font-mono` at `--text-body-sm`.
 
 ### 5.7 Dropzone (`.upload-area`)
-2px dashed `--border-medium`, `--radius-lg`, `--bg-light`, 32px padding, centered 24px icon in `--text-light`, instruction in `--text-medium`, secondary line at `--text-label`. Hover and dragover: `--secondary-color` border, `--emerald-50` background, icon turns `--primary-color`. Keyboard focus shows `--focus-ring`. The uploaded preview gets `--radius` and a `--border-light` border.
+2px dashed `--border-medium`, `--radius-lg`, `--bg-light`, 32px padding, centered 24px icon (`fill: currentColor`) in `--text-light`, instruction in `--text-medium`, secondary line at `--text-label`. Hover and dragover: `--secondary-color` border, `--emerald-50` background, icon turns `--primary-color`. Keyboard focus shows `--focus-ring`. The uploaded preview gets `--radius` and a `--border-light` border.
 
 ### 5.8 Toast (`.success-message`)
 Fixed bottom-right with 24px offsets, at least 280px wide, `--bg-dark`, white text at `--text-body-sm` 600, 4px left border in `--secondary-color`, `--radius`, `--shadow-lg`, 14px 18px padding. Enters with translateY(8px) to 0 and a fade over `--duration-normal`; gone after 3s. Under reduced motion it simply appears and disappears.
 
 ### 5.9 URL preview (`.url-preview`, `#currentUrl`)
-`--bg-tertiary`, 1px `--border-light`, `--radius`, 12px 14px padding, `--font-mono`, text in `--text-dark`, `word-break: break-all`. Hover signals click-to-copy: `--secondary-color` border, pointer cursor, and a copy glyph (`⧉`, rendered by CSS so the JS-updated text is untouched) on the right in `--text-medium`.
+`--bg-tertiary`, 1px `--border-light`, `--radius`, 12px 14px padding, `--font-mono`, text in `--text-dark`, `word-break: break-all`. The right padding is 40px to leave room for the glyph. Hover signals click-to-copy: `--secondary-color` border, pointer cursor, and a copy glyph (`⧉`, rendered by CSS so the JS-updated text is untouched) on the right in `--text-medium`.
 
 ### 5.10 QR preview (`#qrcode`, `.logo-overlay`)
 Centered in a white card, `--radius`, 1px `--border-light`, 16px padding. Before anything is generated, the placeholder is `--bg-tertiary` with a dashed icon.

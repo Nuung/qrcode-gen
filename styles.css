@@ -481,8 +481,7 @@ h3.section-title {
   border-radius: var(--radius-sm);
 }
 
-#qrcode:has(canvas),
-#qrcode:has(svg) {
+#qrcode:has(canvas) {
   background: var(--bg-white);
   min-height: 0;
 }
@@ -1197,12 +1196,6 @@ td code {
 }
 
 @media (max-width: 480px) {
-
-  .form-panel,
-  .qr-panel,
-  .format-card {
-    padding: 20px;
-  }
 
   .success-message {
     left: 16px;

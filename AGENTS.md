@@ -107,7 +107,7 @@ If the user wants to see the page ("open the browser and check", "how does it lo
 
 - Canonical URLs: `https://nuung.github.io/qrcode-gen/` (generator, with the trailing slash), `https://nuung.github.io/qrcode-gen/guide.html`, `https://nuung.github.io/qrcode-gen/faq.html`. Each page declares its own canonical, title, description, and `og:url`; all three share `og-image.png`.
 - GA4 id `G-2NS7NFGKPS`. The inline `gtag` bootstrap sits after `<meta charset>`, viewport, and the CSP meta; the tag script itself is appended on `window.load` so it does not compete with LCP. The CSP allows the Google signals origins (`*.google.com`, `*.google.co.kr`, `*.doubleclick.net`, `*.googleadservices.com`) in `img-src`/`connect-src`.
-- Search Console verification file `google3ce3045d652a25a6.html` stays.
+- Verification files stay: `google3ce3045d652a25a6.html` (Google Search Console) and `BingSiteAuth.xml` (Bing Webmaster Tools; a copy also lives at the origin root in `Nuung/nuung.github.io`).
 - OG image `og-image.png`, 1200×630 PNG. The `og:image:width/height` values match the file.
 - `theme-color` is `#1B8757`.
 - `lang="en"`, single language.
